@@ -4,11 +4,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace BackEnd
 {
     public class HamsterDayCareContext : DbContext
     {
+        //private static event EventHandler<TickEventArgs> Tick; denna ska vara loggen
+        private Ticker ticker = new Ticker();
 
         public virtual DbSet<Hamster> Hamsters { get; set; }
         public virtual DbSet<Cage> Cages { get; set; }
@@ -66,6 +69,42 @@ namespace BackEnd
             SaveChanges();
             return dbHasData;
         }
+
+        public void StartSimulation(int days, int ticksPerSecond)
+        {
+            ticksPerSecond = 1000 / ticksPerSecond;
+            ticker.tick += StartThreads;
+            ticker.StartTick(ticksPerSecond, days);
+        }
+
+       
+
+        private void StartThreads(object sender, TickEventArgs e)
+        {
+            Console.SetCursorPosition(5, 40);
+            Console.WriteLine(e.Date);
+        }
+
+        private async Task Tasks()
+        {
+            var addHamstersToCages = new Task(AddHamstersToCages);
+
+
+            addHamstersToCages.Start();
+
+            await Task.WhenAll(addHamstersToCages);
+        }
+        private  void AddHamstersToCages()
+        {
+            var maleHamsters = Hamsters.Where(x => x.IsFemale == false);
+            var femaleHamsters = Hamsters.Where(x => x.IsFemale == true);
+
+ 
+        }
+      
+
+
+
 
         public string Print()
         {

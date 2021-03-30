@@ -7,11 +7,13 @@ namespace FrontEnd
     class Program
     {
         static HamsterDayCareContext hamsterDayCare = new HamsterDayCareContext();
+        
         static void Main(string[] args)
         {
             InitializeDataBase();
             UI();
-            
+
+            hamsterDayCare.StartSimulation(1,10);
         }
 
         private static void UI()
@@ -23,7 +25,7 @@ namespace FrontEnd
             Console.WriteLine("2. Show logs from previous simulations");
             Console.WriteLine("3. Exit program\n");
 
-            Console.WriteLine(hamsterDayCare.Print());
+            //Console.WriteLine(hamsterDayCare.Print());
         }
 
         private static void Logo()
@@ -73,32 +75,32 @@ namespace FrontEnd
                 System.Threading.Thread.Sleep(500);
                 Console.Clear();
             }
-            else
-            {
-                Console.SetCursorPosition(10, 5);
-                string message = "Loading database...";
-                foreach (var m in message)
-                {
-                    Console.Write(m);
-                    System.Threading.Thread.Sleep(40);
-                }
-                System.Threading.Thread.Sleep(200);
+            //else
+            //{
+            //    Console.SetCursorPosition(10, 5);
+            //    string message = "Loading database...";
+            //    foreach (var m in message)
+            //    {
+            //        Console.Write(m);
+            //        System.Threading.Thread.Sleep(40);
+            //    }
+            //    System.Threading.Thread.Sleep(200);
 
-                Console.SetCursorPosition(13, 6);
-                Console.WriteLine("[          ]");
+            //    Console.SetCursorPosition(13, 6);
+            //    Console.WriteLine("[          ]");
 
-                for (int i = 0; i < 10; i++)
-                {
-                    Console.SetCursorPosition(14 + i, 6);
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.Write("█");
-                    System.Threading.Thread.Sleep(200);
-                }
+            //    for (int i = 0; i < 10; i++)
+            //    {
+            //        Console.SetCursorPosition(14 + i, 6);
+            //        Console.ForegroundColor = ConsoleColor.Green;
+            //        Console.Write("█");
+            //        System.Threading.Thread.Sleep(200);
+            //    }
 
-                System.Threading.Thread.Sleep(500);
-                Console.Clear();
-                Console.CursorVisible = true;
-            }
+            //    System.Threading.Thread.Sleep(500);
+            //    Console.Clear();
+            //    Console.CursorVisible = true;
+            //}
         }
     }
 }

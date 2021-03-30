@@ -10,13 +10,20 @@ namespace BackEnd
     {
         public int ID { get; private set; }
         public int Number { get; private set; }
-        public int MaxSize { get; private set; } = 3;
+        public int MaxSize { get; private set; }
         public int Size { get; private set; }
         public virtual IList<Hamster> Hamsters { get; private set; }
 
         public Cage()
         {
+            
+        }
 
+        public Cage(int number)
+        {
+            this.MaxSize = 3;
+            this.Number = number;
+            this.Size = 0;
         }
 
         public void AddHamster(Hamster hamster)

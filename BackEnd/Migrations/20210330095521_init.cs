@@ -13,7 +13,9 @@ namespace BackEnd.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Number = table.Column<int>(type: "int", nullable: false)
+                    Number = table.Column<int>(type: "int", nullable: false),
+                    MaxSize = table.Column<int>(type: "int", nullable: false),
+                    Size = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -26,7 +28,8 @@ namespace BackEnd.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MaxSlots = table.Column<int>(type: "int", nullable: false)
+                    MaxSize = table.Column<int>(type: "int", nullable: false),
+                    Size = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -45,8 +48,8 @@ namespace BackEnd.Migrations
                     IsFemale = table.Column<bool>(type: "bit", nullable: false),
                     CheckedInTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     LastExercise = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CageID = table.Column<int>(type: "int", nullable: false),
-                    ExerciseAreaID = table.Column<int>(type: "int", nullable: false)
+                    CageID = table.Column<int>(type: "int", nullable: true),
+                    ExerciseAreaID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -56,13 +59,13 @@ namespace BackEnd.Migrations
                         column: x => x.CageID,
                         principalTable: "Cages",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Hamsters_ExerciseArea_ExerciseAreaID",
                         column: x => x.ExerciseAreaID,
                         principalTable: "ExerciseArea",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

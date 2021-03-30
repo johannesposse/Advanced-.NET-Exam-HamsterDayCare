@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackEnd.Migrations
 {
     [DbContext(typeof(HamsterDayCareContext))]
-    [Migration("20210330085141_init")]
+    [Migration("20210330095521_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,7 +28,13 @@ namespace BackEnd.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("MaxSize")
+                        .HasColumnType("int");
+
                     b.Property<int>("Number")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Size")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
@@ -43,7 +49,10 @@ namespace BackEnd.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("MaxSlots")
+                    b.Property<int>("MaxSize")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Size")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
@@ -61,13 +70,13 @@ namespace BackEnd.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<int>("CageID")
+                    b.Property<int?>("CageID")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("CheckedInTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ExerciseAreaID")
+                    b.Property<int?>("ExerciseAreaID")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsFemale")
@@ -95,15 +104,11 @@ namespace BackEnd.Migrations
                 {
                     b.HasOne("BackEnd.Cage", "Cage")
                         .WithMany("Hamsters")
-                        .HasForeignKey("CageID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CageID");
 
                     b.HasOne("BackEnd.ExerciseArea", "ExerciseArea")
                         .WithMany("Hamsters")
-                        .HasForeignKey("ExerciseAreaID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ExerciseAreaID");
 
                     b.Navigation("Cage");
 

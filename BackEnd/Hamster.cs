@@ -16,10 +16,10 @@ namespace BackEnd
         public DateTime? CheckedInTime {get; private set; }
         public DateTime? LastExercise { get; private set; }
 
-        public int CageID { get; private set; }
+        public int? CageID { get; private set; }
         public virtual Cage Cage { get; private set; }
 
-        public int ExerciseAreaID { get; private set; }
+        public int? ExerciseAreaID { get; private set; }
         public virtual ExerciseArea ExerciseArea { get; private set; }
 
         public Hamster()
@@ -27,14 +27,14 @@ namespace BackEnd
 
         }
 
-        public Hamster(string name, string ownerName, int age, bool isFemale, DateTime checkedInTime, DateTime lastExercise)
+        public Hamster(string name, string ownerName, int age, bool isFemale) //DateTime checkedInTime, DateTime lastExercise
         {
             this.Name = name;
             this.Ownername = ownerName;
             this.Age = age;
             this.IsFemale = isFemale;
-            this.CheckedInTime = checkedInTime;
-            this.LastExercise = lastExercise;
+            //this.CheckedInTime = checkedInTime;
+            //this.LastExercise = lastExercise;
         }
     }
 }

@@ -6,14 +6,14 @@ namespace FrontEnd
 {
     class Program
     {
-        static HamsterDayCareContext hamsterDayCare = new HamsterDayCareContext();
+        static HamsterDayCare hamsterDayCare = new HamsterDayCare();
         
         static void Main(string[] args)
         {
             InitializeDataBase();
             UI();
 
-            hamsterDayCare.StartSimulation(1,10);
+            hamsterDayCare.StartSimulation(1,1);
         }
 
         private static void UI()

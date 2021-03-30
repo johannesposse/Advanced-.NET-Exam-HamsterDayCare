@@ -43,16 +43,61 @@ namespace FrontEnd
             }
             Console.ForegroundColor = ConsoleColor.White;
         }
-
-
         private static void InitializeDataBase()
         {
             bool dbHasData = true;
             hamsterDayCare.InitilizeDatabase(out dbHasData);
 
+            Console.CursorVisible = false;
             if (!dbHasData)
             {
-                Console.WriteLine("No data in database, generating database");
+                Console.SetCursorPosition(10, 5);
+                string message = "No data in database, generating database...";
+                foreach (var m in message)
+                {
+                    Console.Write(m);
+                    System.Threading.Thread.Sleep(40);
+                }
+
+                Console.SetCursorPosition(17, 6);
+                Console.WriteLine("[          ]");
+
+                for (int i = 0; i < 10; i++)
+                {
+                    Console.SetCursorPosition(18+i, 6);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write("█");
+                    System.Threading.Thread.Sleep(200);
+                }
+
+                System.Threading.Thread.Sleep(500);
+                Console.Clear();
+            }
+            else
+            {
+                Console.SetCursorPosition(10, 5);
+                string message = "Loading database...";
+                foreach (var m in message)
+                {
+                    Console.Write(m);
+                    System.Threading.Thread.Sleep(40);
+                }
+                System.Threading.Thread.Sleep(200);
+
+                Console.SetCursorPosition(13, 6);
+                Console.WriteLine("[          ]");
+
+                for (int i = 0; i < 10; i++)
+                {
+                    Console.SetCursorPosition(14 + i, 6);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write("█");
+                    System.Threading.Thread.Sleep(200);
+                }
+
+                System.Threading.Thread.Sleep(500);
+                Console.Clear();
+                Console.CursorVisible = true;
             }
         }
     }

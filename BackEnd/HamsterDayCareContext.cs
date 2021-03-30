@@ -81,6 +81,8 @@ namespace BackEnd
 
         private void StartThreads(object sender, TickEventArgs e)
         {
+            Tasks();
+            
             Console.SetCursorPosition(5, 40);
             Console.WriteLine(e.Date);
         }
@@ -98,7 +100,12 @@ namespace BackEnd
         {
             var maleHamsters = Hamsters.Where(x => x.IsFemale == false);
             var femaleHamsters = Hamsters.Where(x => x.IsFemale == true);
+            var cages = Cages;
 
+            foreach (var maleHamster in maleHamsters)
+            {
+                maleHamster.CageID = cages.Where(x => x.Size < 3).Select(x => x.ID).FirstOrDefault();
+            }
  
         }
       

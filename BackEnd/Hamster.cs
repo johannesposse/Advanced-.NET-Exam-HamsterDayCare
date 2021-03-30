@@ -16,10 +16,10 @@ namespace BackEnd
         public DateTime? CheckedInTime {get; private set; }
         public DateTime? LastExercise { get; private set; }
 
-        public int? CageID { get; private set; }
+        public int? CageID { get; set; }
         public virtual Cage Cage { get; private set; }
 
-        public int? ExerciseAreaID { get; private set; }
+        public int? ExerciseAreaID { get; set; }
         public virtual ExerciseArea ExerciseArea { get; private set; }
 
         public Hamster()

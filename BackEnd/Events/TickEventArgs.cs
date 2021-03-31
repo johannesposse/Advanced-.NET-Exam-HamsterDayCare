@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace BackEnd
 {
-    internal class TickEventArgs : EventArgs
+    public class TickEventArgs : EventArgs
     {
-        internal DateTime Date { get; set; }
-        internal bool isPaused { get; set; }
-        internal DateTime EndDate { get; set; }
+        public DateTime Date { get; set; }
+        public bool isPaused { get; set; }
+        public DateTime EndDate { get; set; }
 
-        internal TickEventArgs(DateTime startDate, DateTime endDate, bool isPaused = false)
+        public TickEventArgs(DateTime startDate, DateTime endDate, bool isPaused = false)
         {
             this.Date = startDate;
             this.EndDate = endDate;

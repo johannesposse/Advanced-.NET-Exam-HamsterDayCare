@@ -11,10 +11,9 @@ namespace BackEnd
     public class HamsterDayCare
     {
         private Ticker ticker = new Ticker();
-
+        public event EventHandler<PrintEventArgs> PrintEvent;
         private static HamsterDayCareContext HDCon = new HamsterDayCareContext();
-
-        private int counter = 0;
+        private DateTime Date;
 
         public bool InitilizeDatabase(out bool dbHasData)
         {
@@ -67,51 +66,36 @@ namespace BackEnd
         {
             ticksPerSecond = 1000 / ticksPerSecond;
             ticker.tick += StartThreads;
+            
             ticker.StartTick(ticksPerSecond, days);
-
-            //AddHamstersToCages();
-            //reset();
         }
 
         private void StartThreads(object sender, TickEventArgs e)
         {
-            TimeSpan start = new TimeSpan(07, 0, 0);
-            TimeSpan end = new TimeSpan(17, 0, 0);
-            bool openHours = TimeBetween(e.Date, start, end);
-            if (openHours)
+            
+            if (e.Date.Hour == 17)
             {
-                
+                Reset();
+                //e.isPaused = true;
             }
-            else
+            else if (e.Date.Hour > 17 & e.Date.Hour < 7)
             {
-                
+                Console.WriteLine(e.Date);
+            }
+            else if(e.Date.Hour >= 7 & e.Date.Hour <= 17)
+            {
+                Date = e.Date;
+                PrintEvent?.Invoke(this, new PrintEventArgs(Print(),e.Date));
+                AddHamstersToCages();
+                //AddHamstersToExerciseArea();
             }
 
-            Console.SetCursorPosition(50, 6);
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Date: " + e.Date);
-            Console.ForegroundColor = ConsoleColor.White;
-            //var a = StartTasks();
-
-
+            
         }
 
-        bool TimeBetween(DateTime datetime, TimeSpan start, TimeSpan end)
+        private void AddHamstersToExerciseArea()
         {
-            TimeSpan now = datetime.TimeOfDay;
-            if (start < end)
-                return start <= now && now <= end;
-
-            return !(end < now && now < start);
-        }
-
-        private async Task StartTasks()
-        {
-            counter++;
-            var Add = new Task(AddHamstersToCages);
-            Console.WriteLine(counter);
-            Add.Start();
-            await Task.WhenAll(Add);
+            throw new NotImplementedException();
         }
 
         public void AddHamstersToCages()
@@ -121,7 +105,7 @@ namespace BackEnd
 
             for (int i = 0; i < hamsters.Count(); i++)
             {
-                if(hamsters[i].ExerciseAreaID == null)
+                if(hamsters[i].ExerciseAreaID == null & hamsters[i].CageID == null)
                 {
                     var cage = cages.AsEnumerable().FirstOrDefault(x => x.Hamsters.Count < x.MaxSize & ((x.HasFemale == hamsters[i].IsFemale) | (x.Hamsters.Count < 1)));
 
@@ -129,13 +113,18 @@ namespace BackEnd
                     {
                         cage.Hamsters.Add(hamsters[i]);
                         cage.HasFemale = hamsters[i].IsFemale;
+
+                        if(hamsters[i].CheckedInTime == null)
+                        {
+                            hamsters[i].CheckedInTime = Date;
+                        }
                         HDCon.SaveChanges();
                     }
                 }
             }
         }
 
-        public void reset()
+        public void Reset()
         {
             foreach (var ham in HDCon.Hamsters)
             {
@@ -159,26 +148,18 @@ namespace BackEnd
 
             foreach (var cage in hamsters)
             {
-                print.Append("\nCage: " + cage.Key + "\n-------------------------------\n");
+                if(cage.Key != null)
+                    print.Append("\nCage: " + cage.Key + "\n-------------------------------\n");
+                else
+                    print.Append("\nNot in cage: " + "\n-------------------------------\n");
                 foreach (var hamster in cage)
                 {
                     string female = "Female";
                     if (!hamster.IsFemale)
                           female = "Male";
-                        print.Append($"{hamster.Name,-15}{hamster.Age,-10}{female,-10}{hamster.Ownername,-20}\n");
+                        print.Append($"{hamster.Name,-15}{hamster.Age,-10}{female,-10}{hamster.Ownername,-20}{hamster.CheckedInTime.ToString(),-20}{hamster.LastExercise.ToString(),-20}\n");
                 }
             }
-
-            //print.Append($"{"Name",-15}{"Age",-10}{"Kön",-10}{"Owner",-20}\n");
-            //print.Append("----------------------------------------------------------------------------\n\n");
-            //foreach (var hamster in hamsters)
-            //{
-            //    string female = "Female";
-            //    if (!hamster.IsFemale)
-            //        female = "Male";
-
-            //    print.Append($"{hamster.Name,-15}{hamster.Age,-10}{female,-10}{hamster.Ownername,-20}\n");
-            //}
 
             return print.ToString();
         }

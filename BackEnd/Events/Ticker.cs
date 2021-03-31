@@ -9,7 +9,6 @@ namespace BackEnd
     internal class Ticker
     {
         internal event EventHandler<TickEventArgs> tick;
-        
 
         internal void StartTick(int ticksPerSecond, int days)
         {

@@ -8,9 +8,13 @@ namespace FrontEnd
     {
         static HamsterDayCare hamsterDayCare = new HamsterDayCare();
         
+        
         static void Main(string[] args)
         {
+            hamsterDayCare.PrintEvent += Print;
+
             InitializeDataBase();
+
 
             try
             {
@@ -23,6 +27,29 @@ namespace FrontEnd
                 UI();
             }
         }
+
+        private static void Print(object sender, PrintEventArgs e)
+        {
+            Console.SetCursorPosition(0, 10);
+            Console.WriteLine(e.Date + "\n" + e.Data);
+        }
+
+        private static int GenerateNumber(string message)
+        {
+            int num;
+            bool intParse = int.TryParse(Console.ReadLine(), out num);
+
+            if (!intParse)
+            {
+                throw new ArgumentOutOfRangeException(message);
+            }
+            else
+            {
+                return num;
+            }
+
+
+        }
         private static void UI()
         {
             Console.Clear();
@@ -33,20 +60,10 @@ namespace FrontEnd
             Console.WriteLine("2. Show logs from previous simulations");
             Console.WriteLine("3. Exit program\n");
 
+            int num = GenerateNumber("Please enter a number between 1-3");
 
-            int menuChoise;
-            bool intParse = int.TryParse(Console.ReadLine(), out menuChoise);
+            MenuChoise(num);
 
-            if (!intParse)
-            {
-                throw new ArgumentOutOfRangeException("Please enter a number between 1-3");
-            }
-            else
-            {
-                MenuChoise(menuChoise);
-            }
-
-            
         }
         private static void MenuChoise(int menu)
         {
@@ -73,8 +90,16 @@ namespace FrontEnd
         }
         private static void StartNewSimulation()
         {
-            hamsterDayCare.StartSimulation(1, 4);
-            Console.WriteLine(hamsterDayCare.Print());
+            Console.Write("Enter number of days you want to simulate: ");
+            int days = GenerateNumber("Please only enter numbers");
+
+            Console.Write("Enter ticks per second: ");
+            int speed = GenerateNumber("Please only enter numbers");
+
+            Console.Clear();
+            Logo();
+            hamsterDayCare.StartSimulation(days, speed);
+            
         }
         private static void Logo()
         {
@@ -150,5 +175,6 @@ namespace FrontEnd
             //    Console.CursorVisible = true;
             //}
         }
+
     }
 }

@@ -14,7 +14,7 @@ namespace BackEnd
         public int Age { get; internal set; }
         public bool IsFemale { get; internal set; }
         public DateTime? CheckedInTime {get; internal set; }
-        public DateTime? LastExercise { get; internal set; }
+        public DateTime? LastExercise { get; set; }
 
         public int? CageID { get; internal set; }
         public virtual Cage Cage { get; internal set; }

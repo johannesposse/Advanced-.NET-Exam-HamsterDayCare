@@ -86,7 +86,7 @@ namespace BackEnd
                 PrintEvent?.Invoke(this, new PrintEventArgs(Print(), e.Date));
                 AddHamstersToCages();
                 AddHamstersToExerciseArea();
-                //RetreiveHamstersFromExtersiceArea();
+                RetreiveHamstersFromExtersiceArea();
             }
 
 
@@ -96,16 +96,19 @@ namespace BackEnd
         {
             var hamstersNotInCage = HDCon.Hamsters.Where(x => x.CageID == null & x.LastExercise == null).ToList();
 
-            var hamstersInCage = HDCon.Hamsters.Where(x => x.LastExercise == null & x.LastExercise != null).ToList();
+            var hamstersInCage = HDCon.Hamsters.Where(x => x.LastExercise == null & x.CageID != null).ToList();
             var exerciseArea = HDCon.ExerciseArea.First();
 
 
-            if (hamstersNotInCage != null)
+            if (hamstersNotInCage.Count > 0)
             {
                 for (int i = 0; i < hamstersNotInCage.Count(); i++)
                 {
                     if (exerciseArea.Hamsters.Count < exerciseArea.MaxSize)
                     {
+                        if (hamstersNotInCage[i].CheckedInTime == null)
+                            hamstersNotInCage[i].CheckedInTime = Date;
+
                         exerciseArea.Hamsters.Add(hamstersNotInCage[i]);
                         hamstersNotInCage[i].LastExercise = Date;
                         HDCon.SaveChanges();
@@ -123,6 +126,10 @@ namespace BackEnd
                         hamstersInCage[i].CageID = null;
                         HDCon.SaveChanges();
                     }
+                    else
+                    {
+                        break;
+                    }
                 }
             }
         }
@@ -130,11 +137,20 @@ namespace BackEnd
         private void RetreiveHamstersFromExtersiceArea()
         {
             var exerciseArea = HDCon.ExerciseArea.First();
-            var hamstersInExerciseArea = exerciseArea.Hamsters.Where(x => x.LastExercise.Value.AddHours(1) >= Date).ToList();
+            var hamstersInExerciseArea = exerciseArea.Hamsters.Where(x => x.LastExercise.Value.Hour + 1 == Date.Hour).ToList();
             var cages = HDCon.Cages;
 
-
-            //var cage = cages.AsEnumerable().FirstOrDefault(x => x.Hamsters.Count < x.MaxSize & ((x.HasFemale == hamstersInExerciseArea[i].IsFemale) | (x.Hamsters.Count < 1)));
+            for (int i = 0; i < hamstersInExerciseArea.Count(); i++)
+            {
+                var cage = cages.AsEnumerable().FirstOrDefault(x => x.Hamsters.Count < x.MaxSize & ((x.HasFemale == hamstersInExerciseArea[i].IsFemale) | (x.Hamsters.Count < 1)));
+                if(cage != null)
+                {
+                    cage.Hamsters.Add(hamstersInExerciseArea[i]);
+                    hamstersInExerciseArea[i].ExerciseAreaID = null;
+                    HDCon.SaveChanges();
+                }
+            }
+            
         }
 
         private void AddHamstersToCages()

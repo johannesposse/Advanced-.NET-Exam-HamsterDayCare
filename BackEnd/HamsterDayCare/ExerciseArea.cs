@@ -10,15 +10,11 @@ namespace BackEnd
     {
         public int ID { get; internal set; }
         public int MaxSize { get; internal set; } = 6;
-        public int Size { get; internal set; }
         public virtual IList<Hamster> Hamsters { get; internal set; }
 
         public ExerciseArea()
         {
-            this.Size = 0;
             this.MaxSize = 6;
         }
-
-        
     }
 }

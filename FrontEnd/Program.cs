@@ -58,9 +58,10 @@ namespace FrontEnd
 
             Console.WriteLine("1. Start new simulation");
             Console.WriteLine("2. Show logs from previous simulations");
-            Console.WriteLine("3. Exit program\n");
+            Console.WriteLine("3. Reset Database");
+            Console.WriteLine("4. Exit program\n");
 
-            int num = GenerateNumber("Please enter a number between 1-3");
+            int num = GenerateNumber("Please enter a number between 1-4");
 
             MenuChoise(num);
 
@@ -76,6 +77,10 @@ namespace FrontEnd
                     ShowLogs();
                     break;
                 case 3:
+                    hamsterDayCare.CheckOutHamstersForTheDay();
+                    UI();
+                    break;
+                case 4:
                     Environment.ExitCode = 0;
                 break;
 

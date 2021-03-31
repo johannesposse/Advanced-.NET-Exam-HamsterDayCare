@@ -12,7 +12,7 @@ namespace BackEnd
     {
         private Ticker ticker = new Ticker();
 
-        private HamsterDayCareContext HDCon = new HamsterDayCareContext();
+        private static HamsterDayCareContext HDCon = new HamsterDayCareContext();
 
         private int counter = 0;
 
@@ -23,7 +23,6 @@ namespace BackEnd
 
             if (HDCon.Cages.Count() < 1)
             {
-
                 for (int i = 0; i < 10; i++)
                 {
                     var tempCage = new Cage(i);
@@ -62,7 +61,6 @@ namespace BackEnd
 
             HDCon.SaveChanges();
 
-
             return dbHasData;
         }
 
@@ -83,7 +81,7 @@ namespace BackEnd
             Console.WriteLine(e.Date);
 
             var a = StartTasks();
-            
+
 
         }
 
@@ -96,26 +94,19 @@ namespace BackEnd
             await Task.WhenAll(Add);
         }
 
-        private void AddHamstersToCages()
+        public void AddHamstersToCages()
         {
-            var hamsters = HDCon.Hamsters;
+            var hamsters = HDCon.Hamsters.ToList();
             var cages = HDCon.Cages;
 
-            foreach(var hamster in hamsters)
+            for (int i = 0; i < hamsters.Count(); i++)
             {
-                var cage = cages.First(x => x.Size < 3);
-                 cage.Hamsters.Add(hamster);
-                //hamster.CageID = cage.ID;
-                //var cage = cages.Where(x => x.ID == id).FirstOrDefault();
+                var cage = cages.First(x => x.Size < x.MaxSize);
+                cage.Hamsters.Add(hamsters[i]);
                 cage.Size++;
+                HDCon.SaveChanges();
             }
-            HDCon.SaveChanges();
-            Console.WriteLine("hejsan");
-            
         }
-
-
-        
 
         public string Print()
         {

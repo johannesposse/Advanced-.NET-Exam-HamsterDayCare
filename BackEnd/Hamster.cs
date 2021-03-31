@@ -8,19 +8,19 @@ namespace BackEnd
 {
     public class Hamster
     {
-        public int ID { get; private set; }
-        public string Name { get; private set; }
-        public string Ownername { get; private set; }
-        public int Age { get; private set; }
-        public bool IsFemale { get; private set; }
-        public DateTime? CheckedInTime {get; private set; }
-        public DateTime? LastExercise { get; private set; }
+        public int ID { get; internal set; }
+        public string Name { get; internal set; }
+        public string Ownername { get; internal set; }
+        public int Age { get; internal set; }
+        public bool IsFemale { get; internal set; }
+        public DateTime? CheckedInTime {get; internal set; }
+        public DateTime? LastExercise { get; internal set; }
 
-        public int? CageID { get; set; }
-        public virtual Cage Cage { get; private set; }
+        public int? CageID { get; internal set; }
+        public virtual Cage Cage { get; internal set; }
 
-        public int? ExerciseAreaID { get; set; }
-        public virtual ExerciseArea ExerciseArea { get; private set; }
+        public int? ExerciseAreaID { get; internal set; }
+        public virtual ExerciseArea ExerciseArea { get; internal set; }
 
         public Hamster()
         {
@@ -36,5 +36,7 @@ namespace BackEnd
             //this.CheckedInTime = checkedInTime;
             //this.LastExercise = lastExercise;
         }
+
+        
     }
 }

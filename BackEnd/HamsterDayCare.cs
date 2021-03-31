@@ -50,7 +50,6 @@ namespace BackEnd
                     }
                     var tempHamster = new Hamster(data[0], data[3], int.Parse(data[1]), isFemale);
                     HDCon.Hamsters.Add(tempHamster);
-
                 }
             }
 
@@ -71,6 +70,7 @@ namespace BackEnd
             //ticker.StartTick(ticksPerSecond, days);
 
             AddHamstersToCages();
+            //reset();
         }
 
         private void StartThreads(object sender, TickEventArgs e)
@@ -96,16 +96,37 @@ namespace BackEnd
 
         public void AddHamstersToCages()
         {
-            var hamsters = HDCon.Hamsters.ToList();
+            var hamsters = HDCon.Hamsters.OrderByDescending(x => x.IsFemale).ToList();
             var cages = HDCon.Cages;
+
 
             for (int i = 0; i < hamsters.Count(); i++)
             {
-                var cage = cages.First(x => x.Size < x.MaxSize);
-                cage.Hamsters.Add(hamsters[i]);
-                cage.Size++;
-                HDCon.SaveChanges();
+                var cage = cages.AsEnumerable().FirstOrDefault(x =>  x.Hamsters.Count < x.MaxSize & ((x.HasFemale == hamsters[i].IsFemale) | (x.Hamsters.Count < 1)));
+
+                if(cage != null)
+                {
+                    cage.Hamsters.Add(hamsters[i]);
+                    cage.HasFemale = hamsters[i].IsFemale;
+                    HDCon.SaveChanges();
+                }
             }
+        }
+
+        public void reset()
+        {
+            foreach (var ham in HDCon.Hamsters)
+            {
+                ham.CageID = null;
+            }
+
+            foreach (var c in HDCon.Cages)
+            {
+                c.Hamsters.Clear();
+                c.HasFemale = false;
+            }
+
+            HDCon.SaveChanges();
         }
 
         public string Print()
@@ -119,7 +140,7 @@ namespace BackEnd
             foreach (var hamster in hamsters)
             {
                 string female = "Female";
-                if (hamster.IsFemale == false)
+                if (!hamster.IsFemale)
                     female = "Male";
 
                 print.Append($"{hamster.Name,-15}{hamster.Age,-10}{female,-10}{hamster.Ownername,-20}\n");

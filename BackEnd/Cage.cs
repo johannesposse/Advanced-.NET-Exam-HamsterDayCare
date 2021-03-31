@@ -8,11 +8,11 @@ namespace BackEnd
 {
     public class Cage
     {
-        public int ID { get; private set; }
-        public int Number { get; private set; }
-        public int MaxSize { get; private set; } = 3;
-        public int Size { get; private set; } = 0;
-        public virtual IList<Hamster> Hamsters { get; private set; }
+        public int ID { get; internal set; }
+        public int Number { get; internal set; }
+        public int MaxSize { get; internal set; } = 3;
+        public bool HasFemale { get; set; } = false;
+        public virtual IList<Hamster> Hamsters { get; internal set; }
 
         public Cage()
         {
@@ -23,18 +23,6 @@ namespace BackEnd
         {
             this.MaxSize = 3;
             this.Number = number;
-            this.Size = 0;
-        }
-
-      
-        public void AddHamster(Hamster hamster)
-        {
-            
-        }
-
-        public void RemoveHamster(Hamster hamster)
-        {
-
         }
     }
 

@@ -73,13 +73,19 @@ namespace BackEnd
         private void StartThreads(object sender, TickEventArgs e)
         {
             
-            if (e.Date.Hour == 17)
+            
+            if (e.Date.Hour == 17 & e.Date.Minute == 0)
             {
-                Reset();
+                Console.Clear();
+                CheckOutHamstersForTheDay();
                 //e.isPaused = true;
-            }
-            else if (e.Date.Hour > 17 & e.Date.Hour < 7)
+            }else if (e.Date.Hour == 6 & e.Date.Minute == 56)
             {
+                Console.Clear();
+            }
+            else if (e.Date.Hour >= 17 | e.Date.Hour < 7)
+            {
+                PrintEvent?.Invoke(this, new PrintEventArgs(Print(), e.Date));
                 Console.WriteLine(e.Date);
             }
             else if(e.Date.Hour >= 7 & e.Date.Hour <= 17)
@@ -87,7 +93,6 @@ namespace BackEnd
                 Date = e.Date;
                 PrintEvent?.Invoke(this, new PrintEventArgs(Print(),e.Date));
                 AddHamstersToCages();
-                //AddHamstersToExerciseArea();
             }
 
             
@@ -124,11 +129,12 @@ namespace BackEnd
             }
         }
 
-        public void Reset()
+        public void CheckOutHamstersForTheDay()
         {
             foreach (var ham in HDCon.Hamsters)
             {
                 ham.CageID = null;
+                ham.CheckedInTime = null;
             }
 
             foreach (var c in HDCon.Cages)
@@ -149,15 +155,15 @@ namespace BackEnd
             foreach (var cage in hamsters)
             {
                 if(cage.Key != null)
-                    print.Append("\nCage: " + cage.Key + "\n-------------------------------\n");
+                    print.Append("\nCage: " + cage.Key + "\n--------------------------------------------------------------\n");
                 else
-                    print.Append("\nNot in cage: " + "\n-------------------------------\n");
+                    print.Append("\nNot in cage: " + "\n--------------------------------------------------------------\n");
                 foreach (var hamster in cage)
                 {
                     string female = "Female";
                     if (!hamster.IsFemale)
                           female = "Male";
-                        print.Append($"{hamster.Name,-15}{hamster.Age,-10}{female,-10}{hamster.Ownername,-20}{hamster.CheckedInTime.ToString(),-20}{hamster.LastExercise.ToString(),-20}\n");
+                        print.Append($"{hamster.Name,-15}{hamster.Age,-10}{female,-10}{hamster.Ownername,-25}{hamster.CheckedInTime.ToString(),-20}{hamster.LastExercise.ToString(),-20}\n");
                 }
             }
 

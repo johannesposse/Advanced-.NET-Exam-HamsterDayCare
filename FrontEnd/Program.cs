@@ -11,13 +11,21 @@ namespace FrontEnd
         static void Main(string[] args)
         {
             InitializeDataBase();
-            UI();
 
-            hamsterDayCare.StartSimulation(1,1);
+            try
+            {
+                UI();
+            }
+            catch(Exception x)
+            {
+                Console.WriteLine(x.Message);
+                Console.ReadLine();
+                UI();
+            }
         }
-
         private static void UI()
         {
+            Console.Clear();
             Logo();
             Console.WriteLine("Welcome to the best daycare in the world\n");
 
@@ -25,9 +33,49 @@ namespace FrontEnd
             Console.WriteLine("2. Show logs from previous simulations");
             Console.WriteLine("3. Exit program\n");
 
-            //Console.WriteLine(hamsterDayCare.Print());
-        }
 
+            int menuChoise;
+            bool intParse = int.TryParse(Console.ReadLine(), out menuChoise);
+
+            if (!intParse)
+            {
+                throw new ArgumentOutOfRangeException("Please enter a number between 1-3");
+            }
+            else
+            {
+                MenuChoise(menuChoise);
+            }
+
+            
+        }
+        private static void MenuChoise(int menu)
+        {
+            switch (menu)
+            {
+                case 1:
+                    StartNewSimulation();
+                    break;
+               case 2:
+                    ShowLogs();
+                    break;
+                case 3:
+                    Environment.ExitCode = 0;
+                break;
+
+                default:
+                    UI();
+                    break;
+            }
+        }
+        private static void ShowLogs()
+        {
+            throw new NotImplementedException();
+        }
+        private static void StartNewSimulation()
+        {
+            hamsterDayCare.StartSimulation(1, 4);
+            Console.WriteLine(hamsterDayCare.Print());
+        }
         private static void Logo()
         {
             string[] logo = {  "                           _                 ___              ___               ",

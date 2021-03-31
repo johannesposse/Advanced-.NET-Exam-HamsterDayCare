@@ -8,10 +8,10 @@ namespace BackEnd
 {
     public class ExerciseArea
     {
-        public int ID { get; private set; }
-        public int MaxSize { get; private set; } = 6;
-        public int Size { get; private set; }
-        public virtual IList<Hamster> Hamsters { get; private set; }
+        public int ID { get; internal set; }
+        public int MaxSize { get; internal set; } = 6;
+        public int Size { get; internal set; }
+        public virtual IList<Hamster> Hamsters { get; internal set; }
 
         public ExerciseArea()
         {
@@ -19,14 +19,6 @@ namespace BackEnd
             this.MaxSize = 6;
         }
 
-        public void AddHamster(Hamster hamster)
-        {
-
-        }
-
-        public void RemoveHamster(Hamster hamster)
-        {
-
-        }
+        
     }
 }

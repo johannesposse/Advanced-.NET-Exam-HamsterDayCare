@@ -1,7 +1,7 @@
 
 För G
 -Hamstrar som väntat längs ska tränas först
--Finns en bugg som gör att kön inte separeras efter träning korrekt
+
 -Göra metoder asynca som sköter flyttningen av hamstrar
 -Skapa raport/log funktioner
 -När sista hamstern hämtas ut från en bur så ska IsFemale sättas till false
@@ -16,3 +16,10 @@ För G
 
 För VG
 -Kom på nåt
+
+
+Pågående
+-Finns en bugg som gör att kön inte separeras efter träning korrekt
+
+
+Färdiga

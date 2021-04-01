@@ -10,6 +10,7 @@ namespace BackEnd
     {
         public int ID { get; internal set; }
         public int MaxSize { get; internal set; } = 6;
+        public bool HasFemale { get; set; } = false;
         public virtual IList<Hamster> Hamsters { get; internal set; }
 
         public ExerciseArea()

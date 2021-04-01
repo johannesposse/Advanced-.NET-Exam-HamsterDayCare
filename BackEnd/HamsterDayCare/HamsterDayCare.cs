@@ -95,9 +95,11 @@ namespace BackEnd
         private void AddHamstersToExerciseArea()
         {
             var hamstersNotInCage = HDCon.Hamsters.Where(x => x.CageID == null & x.LastExercise == null).ToList();
-
             var hamstersInCage = HDCon.Hamsters.Where(x => x.LastExercise == null & x.CageID != null).ToList();
             var exerciseArea = HDCon.ExerciseArea.First();
+            var cages = HDCon.Cages;
+
+            
 
 
             if (hamstersNotInCage.Count > 0)
@@ -121,6 +123,10 @@ namespace BackEnd
                 {
                     if(exerciseArea.Hamsters.Count < exerciseArea.MaxSize)
                     {
+                        var cage = cages.Where(x => x.Hamsters.Contains(hamstersInCage[i])).FirstOrDefault();
+                        if (cage.Hamsters.Count() < 1)
+                            cage.HasFemale = false;
+
                         exerciseArea.Hamsters.Add(hamstersInCage[i]);
                         hamstersInCage[i].LastExercise = Date;
                         hamstersInCage[i].CageID = null;

@@ -30,8 +30,10 @@ namespace FrontEnd
 
         private static void Print(object sender, PrintEventArgs e)
         {
-            Console.SetCursorPosition(0, 10);
+            Console.SetCursorPosition(4, 10);
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(e.Date + "\n" + e.Data);
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         private static int GenerateNumber(string message)

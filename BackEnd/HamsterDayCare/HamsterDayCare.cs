@@ -205,31 +205,21 @@ namespace BackEnd
 
             var hamsters = HDCon.Hamsters.OrderBy(x => x.CageID);
 
+            print.Append($"\n\n{"",-4}{"CageID",-7}{"ExerID",-7}{"Name",-15}{"Age",-10}{"Kön",-10}{"Owner",-25}{"CheckedIn",-25}{"Exersiced",-25}\n\n");
+
             foreach (var h in hamsters)
             {
                 string female = "Female";
+                string cageID = h.CageID.ToString();
+                string ExID = h.ExerciseAreaID.ToString(); ;
                 if (!h.IsFemale)
                     female = "Male";
-                print.Append($"{h.CageID,-5}{h.ExerciseAreaID,-5}{h.Name,-15}{h.Age,-10}{female,-10}{h.Ownername,-25}{h.CheckedInTime.ToString(),-20}{h.LastExercise.ToString(),-20}\n");
+                if (h.CageID == null)
+                    cageID = "";
+                if (h.ExerciseAreaID == null)
+                    ExID = "";
+                print.Append($"{"",-4}{cageID,-7}{ExID,-7}{h.Name,-15}{h.Age,-10}{female,-10}{h.Ownername,-25}{h.CheckedInTime.ToString(),-25}{h.LastExercise.ToString(),-25}\n");
             }
-
-            //var hamsters = HDCon.Hamsters.AsEnumerable().OrderBy(x => x.CageID).GroupBy(x => x.CageID);
-
-            //foreach (var cage in hamsters)
-            //{
-            //    if (cage.Key != null)
-            //        print.Append("\nCage: " + cage.Key + "\n--------------------------------------------------------------\n");
-            //    else
-            //        print.Append("\nNot in cage: " + "\n--------------------------------------------------------------\n");
-            //    foreach (var hamster in cage)
-            //    {
-            //        string female = "Female";
-            //        if (!hamster.IsFemale)
-            //            female = "Male";
-            //        print.Append($"{hamster.Name,-15}{hamster.Age,-10}{female,-10}{hamster.Ownername,-25}{hamster.CheckedInTime.ToString(),-20}{hamster.LastExercise.ToString(),-20}\n");
-            //    }
-            //}
-
             return print.ToString();
         }
     }

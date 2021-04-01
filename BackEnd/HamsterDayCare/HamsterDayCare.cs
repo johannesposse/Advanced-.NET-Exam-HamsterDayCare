@@ -78,9 +78,10 @@ namespace BackEnd
             {
                 Console.Clear();
                 CheckOutHamstersForTheDay();
+                PrintEvent?.Invoke(this, new PrintEventArgs(Print(), e.Date));
                 //e.isPaused = true;
             }
-            else if (e.Date.Hour >= 7 & e.Date.Hour <= 17)
+            else if (e.Date.Hour >= 7 & e.Date.TimeOfDay <= TimeSpan.Parse("17:00:00"))
             {
                 Date = e.Date;
                 PrintEvent?.Invoke(this, new PrintEventArgs(Print(), e.Date));
@@ -88,8 +89,10 @@ namespace BackEnd
                 RetreiveHamstersFromExtersiceArea();
                 AddHamstersToExerciseArea();
             }
-
-
+            else if(e.Date.Hour > 17 | e.Date.Hour < 7)
+            {
+                PrintEvent?.Invoke(this, new PrintEventArgs(Print(), e.Date));
+            }
         }
 
         private void AddHamstersToExerciseArea()
@@ -98,9 +101,6 @@ namespace BackEnd
             var hamstersInCage = HDCon.Hamsters.Where(x => x.LastExercise == null & x.CageID != null).ToList();
             var exerciseArea = HDCon.ExerciseArea.First();
             var cages = HDCon.Cages;
-
-
-
 
             if (hamstersNotInCage.Count > 0)
             {

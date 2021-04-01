@@ -85,8 +85,8 @@ namespace BackEnd
                 Date = e.Date;
                 PrintEvent?.Invoke(this, new PrintEventArgs(Print(), e.Date));
                 AddHamstersToCages();
-                AddHamstersToExerciseArea();
                 RetreiveHamstersFromExtersiceArea();
+                AddHamstersToExerciseArea();
             }
 
 
@@ -99,42 +99,48 @@ namespace BackEnd
             var exerciseArea = HDCon.ExerciseArea.First();
             var cages = HDCon.Cages;
 
-            
+
 
 
             if (hamstersNotInCage.Count > 0)
             {
                 for (int i = 0; i < hamstersNotInCage.Count(); i++)
                 {
-                    if (exerciseArea.Hamsters.Count < exerciseArea.MaxSize)
+                    if (exerciseArea.Hamsters.Count() < 1 | exerciseArea.Hamsters.Select(x => x.IsFemale).FirstOrDefault() == hamstersNotInCage[i].IsFemale)
                     {
-                        if (hamstersNotInCage[i].CheckedInTime == null)
-                            hamstersNotInCage[i].CheckedInTime = Date;
+                        if (exerciseArea.Hamsters.Count < exerciseArea.MaxSize)
+                        {
+                            if (hamstersNotInCage[i].CheckedInTime == null)
+                                hamstersNotInCage[i].CheckedInTime = Date;
 
-                        exerciseArea.Hamsters.Add(hamstersNotInCage[i]);
-                        hamstersNotInCage[i].LastExercise = Date;
-                        HDCon.SaveChanges();
+                            exerciseArea.Hamsters.Add(hamstersNotInCage[i]);
+                            hamstersNotInCage[i].LastExercise = Date;
+                            HDCon.SaveChanges();
+                        }
                     }
                 }
             }
             else
             {
-                for(int i = 0; i < hamstersInCage.Count(); i++)
+                for (int i = 0; i < hamstersInCage.Count(); i++)
                 {
-                    if(exerciseArea.Hamsters.Count < exerciseArea.MaxSize)
+                    if (exerciseArea.Hamsters.Count() < 1 | exerciseArea.Hamsters.Select(x => x.IsFemale).FirstOrDefault() == hamstersInCage[i].IsFemale)
                     {
-                        var cage = cages.Where(x => x.Hamsters.Contains(hamstersInCage[i])).FirstOrDefault();
-                        if (cage.Hamsters.Count() < 1)
-                            cage.HasFemale = false;
+                        if (exerciseArea.Hamsters.Count < exerciseArea.MaxSize)
+                        {
+                            var cage = cages.Where(x => x.Hamsters.Contains(hamstersInCage[i])).FirstOrDefault();
+                            if (cage.Hamsters.Count() == 1)
+                                cage.HasFemale = false;
 
-                        exerciseArea.Hamsters.Add(hamstersInCage[i]);
-                        hamstersInCage[i].LastExercise = Date;
-                        hamstersInCage[i].CageID = null;
-                        HDCon.SaveChanges();
-                    }
-                    else
-                    {
-                        break;
+                            exerciseArea.Hamsters.Add(hamstersInCage[i]);
+                            hamstersInCage[i].LastExercise = Date;
+                            hamstersInCage[i].CageID = null;
+                            HDCon.SaveChanges();
+                        }
+                        else
+                        {
+                            break;
+                        }
                     }
                 }
             }
@@ -148,20 +154,23 @@ namespace BackEnd
 
             for (int i = 0; i < hamstersInExerciseArea.Count(); i++)
             {
-                var cage = cages.AsEnumerable().FirstOrDefault(x => x.Hamsters.Count < x.MaxSize & ((x.HasFemale == hamstersInExerciseArea[i].IsFemale) | (x.Hamsters.Count < 1)));
-                if(cage != null)
+                var cage = cages.AsEnumerable().FirstOrDefault(x => x.Hamsters.Count < x.MaxSize & ((x.HasFemale == hamstersInExerciseArea[i].IsFemale) | (x.Hamsters.Count < 1))); 
+
+                if (cage != null)
                 {
                     cage.Hamsters.Add(hamstersInExerciseArea[i]);
+                    cage.HasFemale = hamstersInExerciseArea[i].IsFemale;
                     hamstersInExerciseArea[i].ExerciseAreaID = null;
+                    
                     HDCon.SaveChanges();
                 }
             }
-            
+
         }
 
         private void AddHamstersToCages()
         {
-            var hamsters = HDCon.Hamsters.OrderByDescending(x => x.IsFemale).ToList();
+            var hamsters = HDCon.Hamsters.OrderBy(x => x.IsFemale).ToList();
             var cages = HDCon.Cages;
 
             for (int i = 0; i < hamsters.Count(); i++)

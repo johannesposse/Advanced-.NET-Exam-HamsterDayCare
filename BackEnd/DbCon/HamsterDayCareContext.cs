@@ -13,6 +13,7 @@ namespace BackEnd
         public virtual DbSet<Hamster> Hamsters { get; set; }
         public virtual DbSet<Cage> Cages { get; set; }
         public virtual DbSet<ExerciseArea> ExerciseArea { get; set; }
+        public virtual DbSet<ActivityLog> ActivityLogs { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder dBContextbuilder)

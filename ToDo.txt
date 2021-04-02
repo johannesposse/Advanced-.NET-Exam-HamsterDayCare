@@ -2,22 +2,23 @@
 För G
 -Hamstrar som väntat längs ska tränas först ??
 -Göra metoder asynca som sköter flyttningen av hamstrar
--Skapa raport/log funktioner
 -Uppdatera UML i draw.io
 -ålder är satt i månader, inte år
 -Kanske bygga in funktion så att de motionerar två gånger eller fler per dag?
--Logga direkt när en förändring förs
+
 
 För VG
 -Kom på nåt
 
 
 Pågående
+-Skapa raport/log funktioner
+-Logga direkt när en förändring förs
 
 
 
 Färdiga
--Finns en bugg som gör att kön inte separeras efter träning korrekt
--Pojkar och flickor ska motioneras separat
--När sista hamstern hämtas ut från en bur så ska IsFemale sättas till false
--Paul har gjort fel i listan, ändra en tjej till en kille...
+-[FIXAD] Finns en bugg som gör att kön inte separeras efter träning korrekt
+-[FIXAD] Pojkar och flickor ska motioneras separat
+-[FIXAD] När sista hamstern hämtas ut från en bur så ska IsFemale sättas till false
+-[FIXAD] Paul har gjort fel i listan, ändra en tjej till en kille...

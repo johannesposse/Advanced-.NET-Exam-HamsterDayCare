@@ -97,31 +97,32 @@ namespace BackEnd
 
         private void AddHamstersToExerciseArea()
         {
-            var hamstersNotInCage = HDCon.Hamsters.Where(x => x.CageID == null & x.LastExercise == null).ToList();
+            //var hamstersNotInCage = HDCon.Hamsters.Where(x => x.CageID == null & x.LastExercise == null).ToList();
             var hamstersInCage = HDCon.Hamsters.Where(x => x.LastExercise == null & x.CageID != null).ToList();
             var exerciseArea = HDCon.ExerciseArea.First();
             var cages = HDCon.Cages;
+            var log = HDCon.ActivityLogs;
 
-            if (hamstersNotInCage.Count > 0)
-            {
-                for (int i = 0; i < hamstersNotInCage.Count(); i++)
-                {
-                    if (exerciseArea.Hamsters.Count() < 1 | exerciseArea.Hamsters.Select(x => x.IsFemale).FirstOrDefault() == hamstersNotInCage[i].IsFemale)
-                    {
-                        if (exerciseArea.Hamsters.Count < exerciseArea.MaxSize)
-                        {
-                            if (hamstersNotInCage[i].CheckedInTime == null)
-                                hamstersNotInCage[i].CheckedInTime = Date;
+            //if (hamstersNotInCage.Count > 0)
+            //{
+            //    for (int i = 0; i < hamstersNotInCage.Count(); i++)
+            //    {
+            //        if (exerciseArea.Hamsters.Count() < 1 | exerciseArea.Hamsters.Select(x => x.IsFemale).FirstOrDefault() == hamstersNotInCage[i].IsFemale)
+            //        {
+            //            if (exerciseArea.Hamsters.Count < exerciseArea.MaxSize)
+            //            {
+            //                if (hamstersNotInCage[i].CheckedInTime == null)
+            //                    hamstersNotInCage[i].CheckedInTime = Date;
 
-                            exerciseArea.Hamsters.Add(hamstersNotInCage[i]);
-                            hamstersNotInCage[i].LastExercise = Date;
-                            HDCon.SaveChanges();
-                        }
-                    }
-                }
-            }
-            else
-            {
+            //                exerciseArea.Hamsters.Add(hamstersNotInCage[i]);
+            //                hamstersNotInCage[i].LastExercise = Date;
+            //                HDCon.SaveChanges();
+            //            }
+            //        }
+            //    }
+            //}
+            //else
+            //{
                 for (int i = 0; i < hamstersInCage.Count(); i++)
                 {
                     if (exerciseArea.Hamsters.Count() < 1 | exerciseArea.Hamsters.Select(x => x.IsFemale).FirstOrDefault() == hamstersInCage[i].IsFemale)
@@ -135,6 +136,7 @@ namespace BackEnd
                             exerciseArea.Hamsters.Add(hamstersInCage[i]);
                             hamstersInCage[i].LastExercise = Date;
                             hamstersInCage[i].CageID = null;
+                            log.Add(new ActivityLog("Exercise", Date, hamstersInCage[i].ID));
                             HDCon.SaveChanges();
                         }
                         else
@@ -143,7 +145,7 @@ namespace BackEnd
                         }
                     }
                 }
-            }
+            //}
         }
 
         private void RetreiveHamstersFromExtersiceArea()
@@ -151,6 +153,7 @@ namespace BackEnd
             var exerciseArea = HDCon.ExerciseArea.First();
             var hamstersInExerciseArea = exerciseArea.Hamsters.Where(x => x.LastExercise.Value.Hour + 1 == Date.Hour).ToList();
             var cages = HDCon.Cages;
+            var logs = HDCon.ActivityLogs;
 
             for (int i = 0; i < hamstersInExerciseArea.Count(); i++)
             {
@@ -161,7 +164,8 @@ namespace BackEnd
                     cage.Hamsters.Add(hamstersInExerciseArea[i]);
                     cage.HasFemale = hamstersInExerciseArea[i].IsFemale;
                     hamstersInExerciseArea[i].ExerciseAreaID = null;
-                    
+                    var log = logs.Where(x => x.HamsterID == hamstersInExerciseArea[i].ID & x.ActivityName == "Exercise" & x.EndDate == null).FirstOrDefault();
+                    log.EndDate = Date;
                     HDCon.SaveChanges();
                 }
             }
@@ -172,6 +176,7 @@ namespace BackEnd
         {
             var hamsters = HDCon.Hamsters.OrderBy(x => x.IsFemale).ToList();
             var cages = HDCon.Cages;
+            var logs = HDCon.ActivityLogs;
 
             for (int i = 0; i < hamsters.Count(); i++)
             {
@@ -183,6 +188,7 @@ namespace BackEnd
                     {
                         cage.Hamsters.Add(hamsters[i]);
                         cage.HasFemale = hamsters[i].IsFemale;
+                        logs.Add(new ActivityLog("Checked In for The Day", Date, hamsters[i].ID));
 
                         if (hamsters[i].CheckedInTime == null)
                         {
@@ -196,8 +202,13 @@ namespace BackEnd
 
         public void CheckOutHamstersForTheDay()
         {
+            var logs = HDCon.ActivityLogs;
+
             foreach (var ham in HDCon.Hamsters)
             {
+                var log = logs.Where(x => x.HamsterID == ham.ID & x.ActivityName == "Checked In for The Day" & x.EndDate == null).FirstOrDefault();
+                if(log != null)
+                    log.EndDate = Date;
                 ham.CageID = null;
                 ham.ExerciseAreaID = null;
                 ham.CheckedInTime = null;
@@ -209,6 +220,8 @@ namespace BackEnd
                 c.Hamsters.Clear();
                 c.HasFemale = false;
             }
+
+
 
             HDCon.SaveChanges();
         }

@@ -228,9 +228,15 @@ namespace BackEnd
 
             foreach (var ham in HDCon.Hamsters)
             {
-                var log = logs.Where(x => x.HamsterID == ham.ID & x.ActivityName == "Checked In for The Day" & x.EndDate == null).FirstOrDefault();
+                //var log = logs.Where(x => x.HamsterID == ham.ID & x.ActivityName == "Checked In for The Day" & x.EndDate == null).FirstOrDefault();
+                var log = logs.Where(x => x.HamsterID == ham.ID & x.EndDate == null);
                 if (log != null)
-                    log.EndDate = Date;
+                {
+                    foreach (var l in log)
+                    {
+                        l.EndDate = Date;
+                    }
+                }
                 ham.CageID = null;
                 ham.ExerciseAreaID = null;
                 ham.CheckedInTime = null;

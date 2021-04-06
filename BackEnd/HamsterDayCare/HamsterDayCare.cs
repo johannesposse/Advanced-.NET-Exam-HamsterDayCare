@@ -2,10 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace BackEnd
 {
@@ -81,7 +83,10 @@ namespace BackEnd
                 var checkOutTask = CheckOutHamstersForTheDay();
                 await Task.WhenAll(checkOutTask);
                 e.IsPaused = true;
-                ReportEvent?.Invoke(this, new ReportEventArgs("Slut på dagen, skriv ut rapport"));
+                ReportEvent?.Invoke(this, new ReportEventArgs(HDCon.Hamsters.ToList(),HDCon.ActivityLogs.ToList()));
+                var logs = HDCon.ActivityLogs;
+                HDCon.ActivityLogs.RemoveRange(logs);
+                HDCon.SaveChanges();
                 e.Date = e.Date.AddHours(14);
                 e.IsPaused = false;
                 
@@ -108,6 +113,7 @@ namespace BackEnd
 
         private async Task AddHamstersToExerciseArea()
         {
+
             var hamsters = HDCon.Hamsters.Where(x => x.LastExercise == null & x.CageID != null).ToList();
             var aEHamsters = HDCon.Hamsters.Where(x => x.LastExercise.Value.Hour + 1 <= Date.Hour & x.Cage != null).OrderBy(x => x.LastExercise).ToList();
             var exerciseArea = HDCon.ExerciseArea.First();
@@ -127,6 +133,9 @@ namespace BackEnd
                             if (cage.Hamsters.Count == 1)
                                 cage.HasFemale = false;
 
+                            //var l = log.Where(x => x.ActivityName == hamsters[i].CageID.ToString() & x.EndDate == null).FirstOrDefault();
+                            //if(l != null)
+                            //    l.EndDate = Date;
                             exerciseArea.Hamsters.Add(hamsters[i]);
                             hamsters[i].LastExercise = Date;
                             hamsters[i].CageID = null;
@@ -152,6 +161,10 @@ namespace BackEnd
                             if (cage.Hamsters.Count == 1)
                                 cage.HasFemale = false;
 
+                            
+                            //var l = log.Where(x => x.ActivityName == hamsters[i].CageID.ToString() & x.EndDate == null).FirstOrDefault();
+                            //if (l != null)
+                            //    l.EndDate = Date;
                             exerciseArea.Hamsters.Add(aEHamsters[i]);
                             aEHamsters[i].LastExercise = Date;
                             aEHamsters[i].CageID = null;
@@ -165,12 +178,12 @@ namespace BackEnd
                     }
                 }
             }
-            
-
+           
             await Task.CompletedTask;
         }
         private async Task RetreiveHamstersFromExtersiceArea()
         {
+  
             var exerciseArea = HDCon.ExerciseArea.First();
             var hamstersInExerciseArea = exerciseArea.Hamsters.Where(x => x.LastExercise.Value.Hour + 1 == Date.Hour).ToList();
             var cages = HDCon.Cages;
@@ -187,6 +200,7 @@ namespace BackEnd
                     hamstersInExerciseArea[i].ExerciseAreaID = null;
                     var log = logs.Where(x => x.HamsterID == hamstersInExerciseArea[i].ID & x.ActivityName == "Exercise" & x.EndDate == null).FirstOrDefault();
                     log.EndDate = Date;
+                    logs.Add(new ActivityLog(cage.ID.ToString(), Date, hamstersInExerciseArea[i].ID));
                     HDCon.SaveChanges();
                 }
             }
@@ -195,6 +209,7 @@ namespace BackEnd
         }
         private async Task AddHamstersToCages()
         {
+           
             //var hamsters = HDCon.Hamsters.OrderBy(x => x.IsFemale).ToList();
             var hamsters = HDCon.Hamsters.Shuffle().ToList();
             var cages = HDCon.Cages;
@@ -211,6 +226,7 @@ namespace BackEnd
                         cage.Hamsters.Add(hamsters[i]);
                         cage.HasFemale = hamsters[i].IsFemale;
                         logs.Add(new ActivityLog("Checked In for The Day", Date, hamsters[i].ID));
+                        logs.Add(new ActivityLog(cage.ID.ToString(), Date, hamsters[i].ID));
 
                         if (hamsters[i].CheckedInTime == null)
                         {
@@ -220,6 +236,8 @@ namespace BackEnd
                     }
                 }
             }
+
+            
             await Task.CompletedTask;
         }
         public async Task CheckOutHamstersForTheDay()

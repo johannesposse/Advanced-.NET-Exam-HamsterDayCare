@@ -11,7 +11,7 @@ namespace BackEnd
         public int ID { get; internal set; }
         public string Name { get; internal set; }
         public string Ownername { get; internal set; }
-        public int Age { get; internal set; }
+        public decimal Age { get; internal set; }
         public bool IsFemale { get; internal set; }
         public DateTime? CheckedInTime {get; internal set; }
         public DateTime? LastExercise { get; set; }
@@ -27,7 +27,7 @@ namespace BackEnd
 
         }
 
-        public Hamster(string name, string ownerName, int age, bool isFemale) //DateTime checkedInTime, DateTime lastExercise
+        public Hamster(string name, string ownerName, decimal age, bool isFemale) //DateTime checkedInTime, DateTime lastExercise
         {
             this.Name = name;
             this.Ownername = ownerName;

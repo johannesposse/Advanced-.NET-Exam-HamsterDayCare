@@ -47,7 +47,7 @@ namespace BackEnd
                     {
                         isFemale = false;
                     }
-                    var tempHamster = new Hamster(data[0], data[3], int.Parse(data[1]), isFemale);
+                    var tempHamster = new Hamster(data[0], data[3], Math.Round(decimal.Parse(data[1])/12,1), isFemale);
                     HDCon.Hamsters.Add(tempHamster);
                 }
             }

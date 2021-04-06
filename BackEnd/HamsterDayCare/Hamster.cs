@@ -27,14 +27,12 @@ namespace BackEnd
 
         }
 
-        public Hamster(string name, string ownerName, decimal age, bool isFemale) //DateTime checkedInTime, DateTime lastExercise
+        public Hamster(string name, string ownerName, decimal age, bool isFemale)
         {
             this.Name = name;
             this.Ownername = ownerName;
             this.Age = age;
             this.IsFemale = isFemale;
-            //this.CheckedInTime = checkedInTime;
-            //this.LastExercise = lastExercise;
         }
 
         

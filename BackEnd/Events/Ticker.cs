@@ -8,17 +8,17 @@ namespace BackEnd
 {
     internal class Ticker
     {
-        internal event EventHandler<TickEventArgs> tick;
+        internal event EventHandler<TickEventArgs> Tick;
 
         internal void StartTick(int ticksPerSecond, int days)
         {
-            DateTime startDate = DateTime.Parse("1993 - 08 - 01 06:30:00");
-            DateTime endDate = startDate.AddDays(days);
-            TickEventArgs tickEventArgs = new TickEventArgs(startDate,endDate); 
+            var startDate = DateTime.Parse("1993 - 08 - 01 07:00:00");
+            var endDate = startDate.AddDays(days);
+            var tickEventArgs = new TickEventArgs(startDate,endDate); 
 
-            while (!tickEventArgs.isPaused & tickEventArgs.Date != tickEventArgs.EndDate)
+            while (!tickEventArgs.IsPaused & tickEventArgs.Date <= tickEventArgs.EndDate)
             {
-                tick?.Invoke(this, tickEventArgs);
+                Tick?.Invoke(this, tickEventArgs);
                 System.Threading.Thread.Sleep(ticksPerSecond);
                 tickEventArgs.Date = tickEventArgs.Date.AddMinutes(6);
             }

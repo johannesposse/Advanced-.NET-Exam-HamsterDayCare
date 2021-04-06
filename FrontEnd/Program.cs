@@ -12,6 +12,7 @@ namespace FrontEnd
         static void Main(string[] args)
         {
             hamsterDayCare.PrintEvent += Print;
+            hamsterDayCare.ReportEvent += ShowReport;
 
             InitializeDataBase();
 
@@ -34,6 +35,12 @@ namespace FrontEnd
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(e.Date + "\n" + e.Data);
             Console.ForegroundColor = ConsoleColor.White;
+        }
+        private static void ShowReport(object sender, ReportEventArgs e)
+        {
+            Console.WriteLine(e.Data);
+            Console.WriteLine("Press any key to continue...");
+            Console.ReadLine();
         }
 
         private static int GenerateNumber(string message)
@@ -76,7 +83,7 @@ namespace FrontEnd
                     StartNewSimulation();
                     break;
                case 2:
-                    ShowLogs();
+                    //ShowLogs();
                     break;
                 case 3:
                     hamsterDayCare.CheckOutHamstersForTheDay();
@@ -90,10 +97,6 @@ namespace FrontEnd
                     UI();
                     break;
             }
-        }
-        private static void ShowLogs()
-        {
-            throw new NotImplementedException();
         }
         private static void StartNewSimulation()
         {

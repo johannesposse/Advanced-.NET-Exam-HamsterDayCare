@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BackEnd.Extensions;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,7 +13,8 @@ namespace BackEnd
     {
         private Ticker ticker = new Ticker();
         public event EventHandler<PrintEventArgs> PrintEvent;
-        private static HamsterDayCareContext HDCon = new HamsterDayCareContext();
+        public event EventHandler<ReportEventArgs> ReportEvent;
+        private HamsterDayCareContext HDCon = new HamsterDayCareContext();
         private DateTime Date;
 
         public bool InitilizeDatabase(out bool dbHasData)
@@ -20,7 +22,7 @@ namespace BackEnd
             dbHasData = true;
 
 
-            if (HDCon.Cages.Count() < 1)
+            if (!HDCon.Cages.Any())
             {
                 for (int i = 0; i < 10; i++)
                 {
@@ -29,13 +31,13 @@ namespace BackEnd
                 }
             }
 
-            if (HDCon.ExerciseArea.Count() < 1)
+            if (!HDCon.ExerciseArea.Any())
             {
                 var tempExerciseArea = new ExerciseArea();
                 HDCon.ExerciseArea.Add(tempExerciseArea);
             }
 
-            if (HDCon.Hamsters.Count() < 1)
+            if (!HDCon.Hamsters.Any())
             {
                 List<string> hamsterData = File.ReadAllLines(@"..\..\..\..\Hamsterlista30.csv").ToList();
 
@@ -52,7 +54,7 @@ namespace BackEnd
                 }
             }
 
-            if (HDCon.Cages.Count() < 1 ^ HDCon.ExerciseArea.Count() < 1 ^ HDCon.Hamsters.Count() < 1)
+            if (!HDCon.Cages.Any() ^ !HDCon.ExerciseArea.Any() ^ !HDCon.Hamsters.Any())
             {
                 dbHasData = false;
             }
@@ -65,7 +67,7 @@ namespace BackEnd
         public void StartSimulation(int days, int ticksPerSecond)
         {
             ticksPerSecond = 1000 / ticksPerSecond;
-            ticker.tick += StartThreads;
+            ticker.Tick += StartThreads;
 
             ticker.StartTick(ticksPerSecond, days);
         }
@@ -75,26 +77,31 @@ namespace BackEnd
 
             if (e.Date.Hour == 17 & e.Date.Minute == 0)
             {
+                Date = e.Date;
                 Console.Clear();
                 var checkOutTask = CheckOutHamstersForTheDay();
-
                 await Task.WhenAll(checkOutTask);
-
-                PrintEvent?.Invoke(this, new PrintEventArgs(Print(), e.Date));
-                //e.isPaused = true;
+                e.IsPaused = true;
+                ReportEvent?.Invoke(this, new ReportEventArgs("Slut på dagen, skriv ut rapport"));
+                e.Date = e.Date.AddHours(14);
+                e.IsPaused = false;
+                
             }
             else if (e.Date.Hour >= 7 & e.Date.TimeOfDay <= TimeSpan.Parse("17:00:00"))
             {
                 Date = e.Date;
                 PrintEvent?.Invoke(this, new PrintEventArgs(Print(), e.Date));
-
                 var addToCageTask = AddHamstersToCages();
                 var retrieveFromExerciseTask = RetreiveHamstersFromExtersiceArea();
                 var addToExerciseTask = AddHamstersToExerciseArea();
 
-                await Task.WhenAll(addToCageTask, retrieveFromExerciseTask, addToExerciseTask);
+                await addToCageTask;
+                await retrieveFromExerciseTask;
+                await addToExerciseTask;
+
+                //await Task.WhenAll(addToCageTask, retrieveFromExerciseTask, addToExerciseTask);
             }
-            else if (e.Date.Hour > 17 | e.Date.Hour < 7)
+            else if (e.Date.Hour >= 17 | e.Date.Hour < 7)
             {
                 PrintEvent?.Invoke(this, new PrintEventArgs(Print(), e.Date));
             }
@@ -107,14 +114,14 @@ namespace BackEnd
             var cages = HDCon.Cages;
             var log = HDCon.ActivityLogs;
 
-            for (int i = 0; i < hamstersInCage.Count(); i++)
+            for (int i = 0; i < hamstersInCage.Count; i++)
             {
-                if (exerciseArea.Hamsters.Count() < 1 | exerciseArea.Hamsters.Select(x => x.IsFemale).FirstOrDefault() == hamstersInCage[i].IsFemale)
+                if (exerciseArea.Hamsters.Count < 1 | exerciseArea.Hamsters.Select(x => x.IsFemale).FirstOrDefault() == hamstersInCage[i].IsFemale)
                 {
                     if (exerciseArea.Hamsters.Count < exerciseArea.MaxSize)
                     {
                         var cage = cages.Where(x => x.Hamsters.Contains(hamstersInCage[i])).FirstOrDefault();
-                        if (cage.Hamsters.Count() == 1)
+                        if (cage.Hamsters.Count == 1)
                             cage.HasFemale = false;
 
                         exerciseArea.Hamsters.Add(hamstersInCage[i]);
@@ -132,7 +139,6 @@ namespace BackEnd
 
             await Task.CompletedTask;
         }
-
         private async Task RetreiveHamstersFromExtersiceArea()
         {
             var exerciseArea = HDCon.ExerciseArea.First();
@@ -140,7 +146,7 @@ namespace BackEnd
             var cages = HDCon.Cages;
             var logs = HDCon.ActivityLogs;
 
-            for (int i = 0; i < hamstersInExerciseArea.Count(); i++)
+            for (int i = 0; i < hamstersInExerciseArea.Count; i++)
             {
                 var cage = cages.AsEnumerable().FirstOrDefault(x => x.Hamsters.Count < x.MaxSize & ((x.HasFemale == hamstersInExerciseArea[i].IsFemale) | (x.Hamsters.Count < 1)));
 
@@ -157,14 +163,14 @@ namespace BackEnd
 
             await Task.CompletedTask;
         }
-
         private async Task AddHamstersToCages()
         {
-            var hamsters = HDCon.Hamsters.OrderBy(x => x.IsFemale).ToList();
+            //var hamsters = HDCon.Hamsters.OrderBy(x => x.IsFemale).ToList();
+            var hamsters = HDCon.Hamsters.Shuffle().ToList();
             var cages = HDCon.Cages;
             var logs = HDCon.ActivityLogs;
 
-            for (int i = 0; i < hamsters.Count(); i++)
+            for (int i = 0; i < hamsters.Count; i++)
             {
                 if (hamsters[i].ExerciseAreaID == null & hamsters[i].CageID == null)
                 {
@@ -186,7 +192,6 @@ namespace BackEnd
             }
             await Task.CompletedTask;
         }
-
         public async Task CheckOutHamstersForTheDay()
         {
             var logs = HDCon.ActivityLogs;
@@ -211,7 +216,6 @@ namespace BackEnd
             HDCon.SaveChanges();
             await Task.CompletedTask;
         }
-
         public string Print()
         {
             var print = new StringBuilder();
@@ -232,7 +236,7 @@ namespace BackEnd
                     cageID = "";
                 if (h.ExerciseAreaID == null)
                     ExID = "";
-                print.Append($"{"",-4}{cageID,-7}{ExID,-7}{h.Name,-15}{h.Age,-10}{female,-10}{h.Ownername,-25}{h.CheckedInTime.ToString(),-25}{h.LastExercise.ToString(),-25}\n");
+                print.Append($"{"",-4}{cageID,-7}{ExID,-7}{h.Name,-15}{h.Age,-10}{female,-10}{h.Ownername,-25}{h.CheckedInTime,-25}{h.LastExercise,-25}\n");
             }
             return print.ToString();
         }

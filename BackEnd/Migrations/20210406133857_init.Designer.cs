@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BackEnd.Migrations
 {
     [DbContext(typeof(HamsterDayCareContext))]
-    [Migration("20210401115857_4")]
-    partial class _4
+    [Migration("20210406133857_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,32 @@ namespace BackEnd.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.4")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("BackEnd.ActivityLog", b =>
+                {
+                    b.Property<int>("ActivityLogID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ActivityName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("HamsterID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ActivityLogID");
+
+                    b.HasIndex("HamsterID");
+
+                    b.ToTable("ActivityLogs");
+                });
 
             modelBuilder.Entity("BackEnd.Cage", b =>
                 {
@@ -67,8 +93,8 @@ namespace BackEnd.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Age")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Age")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("CageID")
                         .HasColumnType("int");
@@ -98,6 +124,17 @@ namespace BackEnd.Migrations
                     b.HasIndex("ExerciseAreaID");
 
                     b.ToTable("Hamsters");
+                });
+
+            modelBuilder.Entity("BackEnd.ActivityLog", b =>
+                {
+                    b.HasOne("BackEnd.Hamster", "Hamster")
+                        .WithMany()
+                        .HasForeignKey("HamsterID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Hamster");
                 });
 
             modelBuilder.Entity("BackEnd.Hamster", b =>

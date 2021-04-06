@@ -68,7 +68,6 @@ namespace BackEnd
         {
             ticksPerSecond = 1000 / ticksPerSecond;
             ticker.Tick += StartThreads;
-
             ticker.StartTick(ticksPerSecond, days);
         }
 
@@ -101,7 +100,7 @@ namespace BackEnd
 
                 //await Task.WhenAll(addToCageTask, retrieveFromExerciseTask, addToExerciseTask);
             }
-            else if (e.Date.Hour >= 17 | e.Date.Hour < 7)
+            else if (e.Date.Hour >= 17 | e.Date.Hour < 7) //ta bort??
             {
                 PrintEvent?.Invoke(this, new PrintEventArgs(Print(), e.Date));
             }
@@ -109,33 +108,64 @@ namespace BackEnd
 
         private async Task AddHamstersToExerciseArea()
         {
-            var hamstersInCage = HDCon.Hamsters.Where(x => x.LastExercise == null & x.CageID != null).ToList();
+            var hamsters = HDCon.Hamsters.Where(x => x.LastExercise == null & x.CageID != null).ToList();
+            var aEHamsters = HDCon.Hamsters.Where(x => x.LastExercise.Value.Hour + 1 <= Date.Hour & x.Cage != null).OrderBy(x => x.LastExercise).ToList();
             var exerciseArea = HDCon.ExerciseArea.First();
             var cages = HDCon.Cages;
             var log = HDCon.ActivityLogs;
 
-            for (int i = 0; i < hamstersInCage.Count; i++)
-            {
-                if (exerciseArea.Hamsters.Count < 1 | exerciseArea.Hamsters.Select(x => x.IsFemale).FirstOrDefault() == hamstersInCage[i].IsFemale)
-                {
-                    if (exerciseArea.Hamsters.Count < exerciseArea.MaxSize)
-                    {
-                        var cage = cages.Where(x => x.Hamsters.Contains(hamstersInCage[i])).FirstOrDefault();
-                        if (cage.Hamsters.Count == 1)
-                            cage.HasFemale = false;
 
-                        exerciseArea.Hamsters.Add(hamstersInCage[i]);
-                        hamstersInCage[i].LastExercise = Date;
-                        hamstersInCage[i].CageID = null;
-                        log.Add(new ActivityLog("Exercise", Date, hamstersInCage[i].ID));
-                        HDCon.SaveChanges();
-                    }
-                    else
+            if (hamsters.Any())
+            {
+                for (int i = 0; i < hamsters.Count; i++)
+                {
+                    if (exerciseArea.Hamsters.Count < 1 | exerciseArea.Hamsters.Select(x => x.IsFemale).FirstOrDefault() == hamsters[i].IsFemale)
                     {
-                        break;
+                        if (exerciseArea.Hamsters.Count < exerciseArea.MaxSize)
+                        {
+                            var cage = cages.Where(x => x.Hamsters.Contains(hamsters[i])).FirstOrDefault();
+                            if (cage.Hamsters.Count == 1)
+                                cage.HasFemale = false;
+
+                            exerciseArea.Hamsters.Add(hamsters[i]);
+                            hamsters[i].LastExercise = Date;
+                            hamsters[i].CageID = null;
+                            log.Add(new ActivityLog("Exercise", Date, hamsters[i].ID));
+                            HDCon.SaveChanges();
+                        }
+                        else
+                        {
+                            break;
+                        }
                     }
                 }
             }
+            else if(aEHamsters.Any())
+            {
+                for (int i = 0; i < aEHamsters.Count; i++)
+                {
+                    if (exerciseArea.Hamsters.Count < 1 | exerciseArea.Hamsters.Select(x => x.IsFemale).FirstOrDefault() == aEHamsters[i].IsFemale)
+                    {
+                        if (exerciseArea.Hamsters.Count < exerciseArea.MaxSize)
+                        {
+                            var cage = cages.Where(x => x.Hamsters.Contains(aEHamsters[i])).FirstOrDefault();
+                            if (cage.Hamsters.Count == 1)
+                                cage.HasFemale = false;
+
+                            exerciseArea.Hamsters.Add(aEHamsters[i]);
+                            aEHamsters[i].LastExercise = Date;
+                            aEHamsters[i].CageID = null;
+                            log.Add(new ActivityLog("Exercise", Date, aEHamsters[i].ID));
+                            HDCon.SaveChanges();
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                }
+            }
+            
 
             await Task.CompletedTask;
         }

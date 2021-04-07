@@ -1,12 +1,12 @@
 
 För G
--Hamstrar som väntat längs ska tränas först ??
--Göra metoder asynca som sköter flyttningen av hamstrar
+
+
 -Uppdatera UML i draw.io
--bygga in funktion så att de motionerar två gånger eller fler per dag?
--Skapa logfiler, med en snygg mappstruktur
 -Skapa en print metod för slutet av varje dag där rapporter visas
--Skapa raport funktion
+-Tider stämmer inte alltid på träningen, mindre än en timma, är antagligen loggen som strular
+-
+
 
 
 För VG
@@ -14,9 +14,10 @@ För VG
 
 
 Pågående
--/
+-Fixa träningen är nåt som strular
 
 
+Bör Dubbelkollas
 
 
 Färdiga
@@ -27,3 +28,8 @@ Färdiga
 -[FIXAD] Logga direkt när en förändring förs
 -[FIXAD] ålder är satt i månader, inte år
 -[FIXAD] log funktioner
+-[FIXAD] Göra metoder asynca som sköter flyttningen av hamstrar
+-[FIXAD] Skapa raport funktion
+-[FIXAD] bygga in funktion så att de motionerar två gånger eller fler per dag?
+-[FIXAD] Hamstrar som väntat längs ska tränas först ??
+-[FIXAD] Skapa logfiler, med en snygg mappstruktur

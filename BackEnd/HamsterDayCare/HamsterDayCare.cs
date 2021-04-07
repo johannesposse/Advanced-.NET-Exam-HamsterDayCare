@@ -175,8 +175,6 @@ namespace BackEnd
         }
         private async Task AddHamstersToCages()
         {
-
-            //var hamsters = HDCon.Hamsters.OrderBy(x => x.IsFemale).ToList();
             var hamsters = HDCon.Hamsters.Shuffle().ToList();
             var cages = HDCon.Cages;
             var logs = HDCon.ActivityLogs;

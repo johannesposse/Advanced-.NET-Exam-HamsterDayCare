@@ -76,7 +76,7 @@ namespace BackEnd
         private async void StartThreads(object sender, TickEventArgs e)
         {
 
-            if (e.Date.TimeOfDay == TimeSpan.Parse("17:00:00")) //e.Date.Hour == 17 & e.Date.Minute == 0
+            if (e.Date.TimeOfDay == TimeSpan.Parse("17:00:00"))
             {
                 Date = e.Date;
                 Console.Clear();
@@ -105,8 +105,6 @@ namespace BackEnd
                 await addToCageTask;
                 await retrieveFromExerciseTask;
                 await addToExerciseTask;
-
-                //await Task.WhenAll(addToCageTask, retrieveFromExerciseTask, addToExerciseTask);
             }
         }
 

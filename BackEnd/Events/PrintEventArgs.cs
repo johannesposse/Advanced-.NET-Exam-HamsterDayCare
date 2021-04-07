@@ -17,6 +17,11 @@ namespace BackEnd
             this.Date = date;
         }
 
+        public PrintEventArgs(string data)
+        {
+            this.Data = data;
+        }
+
         public override string ToString()
         {
             return this.Data;

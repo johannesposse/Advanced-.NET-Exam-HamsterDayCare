@@ -41,7 +41,6 @@ namespace BackEnd
 
             foreach (var h in ham)
             {
-                //string path = @"..\..\..\..\Logs\" + Date.ToString("yy-MM-dd hh-mm-ss");
                 var temp = $"{h.ID},{h.Owner},{h.HamName}, {h.Activity}, {h.Start}, {h.End}\n";
                 DirectoryInfo di = Directory.CreateDirectory(path);
                 File.AppendAllText(path +"\\"+ h.HamName + ".txt",temp);
@@ -59,6 +58,8 @@ namespace BackEnd
 
         private void PrintReports(string path)
         {
+            var print = new StringBuilder();
+
             List<string> input = File.ReadAllLines(path + "\\total.txt").ToList();
             var reports = new List<Report>();
 
@@ -73,15 +74,16 @@ namespace BackEnd
 
             foreach (var rep in report)
             {
-                Console.WriteLine(rep.Key + "------------------------------------------------------------\n");
+                print.Append(rep.Key + "------------------------------------------------------------\n");
 
                 foreach (var r in rep.OrderBy(x => x.Name))
                 {
-                    Console.WriteLine($"{r.Name,-15}{r.Acticity,-25}{r.Start,-30}{r.End,-30}");
+                    print.Append($"{r.Name,-15}{r.Acticity,-25}{r.Start,-30}{r.End,-30}\n");
                 }
-                Console.WriteLine("\n");
+                print.Append("\n");
             }
 
+            this.Data = print.ToString();
         }
 
 

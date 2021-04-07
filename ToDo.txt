@@ -1,12 +1,10 @@
 
 För G
 
-
+-Andra dagen checkas de in kl 07.06??
 -Uppdatera UML i draw.io
 -Skapa en print metod för slutet av varje dag där rapporter visas
 -Tider stämmer inte alltid på träningen, mindre än en timma, är antagligen loggen som strular
--
-
 
 
 För VG
@@ -14,7 +12,7 @@ För VG
 
 
 Pågående
--Fixa träningen är nåt som strular
+-Fixa träningen är nåt som strular, när de plockas ut ur en bur till träningen
 
 
 Bör Dubbelkollas

@@ -1,7 +1,6 @@
 
 För G
 
--Andra dagen checkas de in kl 07.06??
 -Uppdatera UML i draw.io
 -Skapa en print metod för slutet av varje dag där rapporter visas
 -Tider stämmer inte alltid på träningen, mindre än en timma, är antagligen loggen som strular
@@ -9,6 +8,7 @@ För G
 
 För VG
 -Kom på nåt
+-Skapa pdf filer av rapporter?
 
 
 Pågående
@@ -31,3 +31,5 @@ Färdiga
 -[FIXAD] bygga in funktion så att de motionerar två gånger eller fler per dag?
 -[FIXAD] Hamstrar som väntat längs ska tränas först ??
 -[FIXAD] Skapa logfiler, med en snygg mappstruktur
+
+-[FIXAD] Andra dagen checkas de in kl 07.06??

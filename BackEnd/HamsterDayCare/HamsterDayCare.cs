@@ -78,31 +78,35 @@ namespace BackEnd
 
             if (e.Date.TimeOfDay == TimeSpan.Parse("17:00:00"))
             {
+                e.IsPaused = true;
                 Date = e.Date;
                 Console.Clear();
 
                 var checkOutTask = CheckOutHamstersForTheDay();
                 await Task.WhenAll(checkOutTask);
 
-                e.IsPaused = true;
                 ReportEvent?.Invoke(this, new ReportEventArgs(HDCon.Hamsters.ToList(), HDCon.ActivityLogs.ToList()));
 
                 var logs = HDCon.ActivityLogs;
                 HDCon.ActivityLogs.RemoveRange(logs);
                 HDCon.SaveChanges();
 
-                e.Date = e.Date.AddHours(14);
+                e.Date = e.Date.AddHours(13.9);
                 e.IsPaused = false;
+            }
+            else if (e.Date.TimeOfDay == TimeSpan.Parse("07:00:00"))
+            {
+                Date = e.Date;
+                var addToCageTask = AddHamstersToCages();
+                await addToCageTask;
             }
             else if (e.Date.Hour >= 7 & e.Date.TimeOfDay <= TimeSpan.Parse("17:00:00"))
             {
                 Date = e.Date;
                 PrintEvent?.Invoke(this, new PrintEventArgs(Print(), e.Date));
-                var addToCageTask = AddHamstersToCages();
                 var retrieveFromExerciseTask = RetreiveHamstersFromExtersiceArea();
                 var addToExerciseTask = AddHamstersToExerciseArea();
 
-                await addToCageTask;
                 await retrieveFromExerciseTask;
                 await addToExerciseTask;
             }
@@ -126,7 +130,7 @@ namespace BackEnd
                         if (cage.Hamsters.Count == 1)
                             cage.HasFemale = false;
 
-                        var log = logs.Where(x => x.ActivityName == hamsters[i].CageID.ToString() & x.EndDate == null).FirstOrDefault();
+                        var log = logs.Where(x => x.ActivityName  == "Cage: " + hamsters[i].CageID.ToString() & x.EndDate == null).FirstOrDefault();
                         log.EndDate = Date;
                         hamsters[i].LastExercise = Date;
                         hamsters[i].CageID = null;
@@ -162,7 +166,7 @@ namespace BackEnd
                     hamsters[i].ExerciseAreaID = null;
                     var log = logs.Where(x => x.HamsterID == hamsters[i].ID & x.ActivityName == "Exercise" & x.EndDate == null).FirstOrDefault();
                     log.EndDate = Date;
-                    logs.Add(new ActivityLog(cage.ID.ToString(), Date, hamsters[i].ID));
+                    logs.Add(new ActivityLog("Cage: " + cage.ID.ToString(), Date, hamsters[i].ID));
                     HDCon.SaveChanges();
                 }
             }
@@ -188,7 +192,7 @@ namespace BackEnd
                         cage.Hamsters.Add(hamsters[i]);
                         cage.HasFemale = hamsters[i].IsFemale;
                         logs.Add(new ActivityLog("Checked In for The Day", Date, hamsters[i].ID));
-                        logs.Add(new ActivityLog(cage.ID.ToString(), Date, hamsters[i].ID));
+                        logs.Add(new ActivityLog("Cage: " + cage.ID.ToString(), Date, hamsters[i].ID));
 
                         if (hamsters[i].CheckedInTime == null)
                         {

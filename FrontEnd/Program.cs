@@ -66,8 +66,8 @@ namespace FrontEnd
             Console.WriteLine("Welcome to the best daycare in the world\n");
 
             Console.WriteLine("1. Start new simulation");
-            Console.WriteLine("2. Show logs from previous simulations");
-            Console.WriteLine("3. Reset Database");
+            Console.WriteLine("2. ---");
+            Console.WriteLine("3. ---");
             Console.WriteLine("4. Exit program\n");
 
             int num = GenerateNumber("Please enter a number between 1-4");
@@ -132,9 +132,9 @@ namespace FrontEnd
         {
             bool dbHasData = true;
             hamsterDayCare.InitilizeDatabase(out dbHasData);
-            var animationTask = Animation(dbHasData);
+            //var animationTask = Animation(dbHasData);
 
-            await animationTask;
+            //await animationTask;
         }
         private static async Task Animation(bool dbHasData)
         {

@@ -39,12 +39,12 @@ namespace BackEnd
                 End = ac.EndDate,
             });
 
-            foreach (var h in ham)
-            {
-                var temp = $"{h.ID},{h.Owner},{h.HamName}, {h.Activity}, {h.Start}, {h.End}\n";
-                DirectoryInfo di = Directory.CreateDirectory(path);
-                File.AppendAllText(path +"\\"+ h.HamName + ".txt",temp);
-            }
+            //foreach (var h in ham)
+            //{
+            //    var temp = $"{h.ID},{h.Owner},{h.HamName}, {h.Activity}, {h.Start}, {h.End}\n";
+            //    DirectoryInfo di = Directory.CreateDirectory(path);
+            //    File.AppendAllText(path +"\\"+ h.HamName + ".txt",temp);
+            //}
 
             foreach(var h in ham)
             {

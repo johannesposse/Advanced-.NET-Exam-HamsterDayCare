@@ -93,16 +93,18 @@ namespace BackEnd
                 e.Date = e.Date.AddHours(13.9);
                 e.IsPaused = false;
             }
-            else if (e.Date.TimeOfDay == TimeSpan.Parse("07:00:00"))
-            {
-                Date = e.Date;
-                var addToCageTask = AddHamstersToCages();
-                await addToCageTask;
-            }
             else if (e.Date.Hour >= 7 & e.Date.TimeOfDay <= TimeSpan.Parse("17:00:00"))
             {
                 Date = e.Date;
+
+                if(e.Date.TimeOfDay == TimeSpan.Parse("07:00:00"))
+                {
+                    var addToCageTask = AddHamstersToCages();
+                    await addToCageTask;
+                }
+
                 PrintEvent?.Invoke(this, new PrintEventArgs(Print(), e.Date));
+
                 var retrieveFromExerciseTask = RetreiveHamstersFromExtersiceArea();
                 var addToExerciseTask = AddHamstersToExerciseArea();
 
@@ -119,15 +121,19 @@ namespace BackEnd
 
             for (int i = 0; i < hamsters.Count; i++)
             {
-                if (exerciseArea.Hamsters.Count < 1 | exerciseArea.Hamsters.Select(x => x.IsFemale).FirstOrDefault() == hamsters[i].IsFemale)
+                if(hamsters[i].Name == "Starlight" & Date.Hour == 13)
                 {
-                    if (exerciseArea.Hamsters.Count < exerciseArea.MaxSize)
+
+                }
+                if (exerciseArea.Hamsters.Count < exerciseArea.MaxSize)
+                {
+                    if (!exerciseArea.Hamsters.Any() | exerciseArea.Hamsters.Select(x => x.IsFemale).FirstOrDefault() == hamsters[i].IsFemale)
                     {
                         var cage = cages.Where(x => x.Hamsters.Contains(hamsters[i])).FirstOrDefault();
                         if (cage.Hamsters.Count == 1)
                             cage.HasFemale = false;
 
-                        var log = logs.Where(x => x.ActivityName  == "Cage: " + hamsters[i].CageID.ToString() & x.EndDate == null).FirstOrDefault();
+                        var log = logs.Where(x => x.ActivityName == "Cage: " + hamsters[i].CageID.ToString() &  x.HamsterID == hamsters[i].ID & x.EndDate == null).FirstOrDefault();
                         log.EndDate = Date;
                         hamsters[i].LastExercise = Date;
                         hamsters[i].CageID = null;
@@ -135,13 +141,12 @@ namespace BackEnd
                         logs.Add(new ActivityLog("Exercise", Date, hamsters[i].ID));
                         HDCon.SaveChanges();
                     }
-                    else
-                    {
-                        break;
-                    }
+                }
+                else
+                {
+                    break;
                 }
             }
-
             await Task.CompletedTask;
         }
         private async Task RetreiveHamstersFromExtersiceArea()
@@ -172,7 +177,8 @@ namespace BackEnd
         }
         private async Task AddHamstersToCages()
         {
-            var hamsters = HDCon.Hamsters.Shuffle().ToList();
+            //var hamsters = HDCon.Hamsters.Shuffle().ToList();
+            var hamsters = HDCon.Hamsters.ToList();
             var cages = HDCon.Cages;
             var logs = HDCon.ActivityLogs;
 
@@ -189,15 +195,14 @@ namespace BackEnd
                         logs.Add(new ActivityLog("Checked In for The Day", Date, hamsters[i].ID));
                         logs.Add(new ActivityLog("Cage: " + cage.ID.ToString(), Date, hamsters[i].ID));
 
-                        if (hamsters[i].CheckedInTime == null)
-                        {
+                        //if (hamsters[i].CheckedInTime == null)
+                        //{
                             hamsters[i].CheckedInTime = Date;
-                        }
+                        //}
                         HDCon.SaveChanges();
                     }
                 }
             }
-
 
             await Task.CompletedTask;
         }
@@ -252,7 +257,7 @@ namespace BackEnd
 
             HDCon.SaveChanges();
         }
-        public string Print()
+        private string Print()
         {
             var print = new StringBuilder();
 

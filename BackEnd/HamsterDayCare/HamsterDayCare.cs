@@ -177,8 +177,7 @@ namespace BackEnd
         }
         private async Task AddHamstersToCages()
         {
-            //var hamsters = HDCon.Hamsters.Shuffle().ToList();
-            var hamsters = HDCon.Hamsters.ToList();
+            var hamsters = HDCon.Hamsters.Shuffle().ToList();
             var cages = HDCon.Cages;
             var logs = HDCon.ActivityLogs;
 
@@ -195,10 +194,8 @@ namespace BackEnd
                         logs.Add(new ActivityLog("Checked In for The Day", Date, hamsters[i].ID));
                         logs.Add(new ActivityLog("Cage: " + cage.ID.ToString(), Date, hamsters[i].ID));
 
-                        //if (hamsters[i].CheckedInTime == null)
-                        //{
-                            hamsters[i].CheckedInTime = Date;
-                        //}
+                        hamsters[i].CheckedInTime = Date;
+
                         HDCon.SaveChanges();
                     }
                 }

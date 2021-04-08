@@ -3,7 +3,7 @@ För G
 
 -Uppdatera UML i draw.io
 -Skriv kommentarer i koden
--Programmet stängs av efter en simulation är klar
+
 
 För VG
 -Kom på nåt
@@ -32,8 +32,8 @@ Färdiga
 -[FIXAD] Skapa logfiler, med en snygg mappstruktur
 -[FIXAD] Andra dagen checkas de in kl 07.06??
 -[FIXAD] Skapa en print metod för slutet av varje dag där rapporter visas
-
 -[FIXAD] Fixa så att allt nollställs när en ny simulation startas
 -[FIXAD] Hittade en bugg som gjorde att det skrevs i loggen att en hamster plockades ut ur en bur när den inte gjorde det
 -[FIXAD] Fixa träningen är nåt som strular, när de plockas ut ur en bur till träningen
 -[FIXAD] Tider stämmer inte alltid på träningen, mindre än en timma, är antagligen loggen som strular
+-[FIXAD] Programmet stängs av efter en simulation är klar

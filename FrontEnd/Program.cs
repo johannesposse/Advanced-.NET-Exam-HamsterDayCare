@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using BackEnd;
 using Microsoft.EntityFrameworkCore;
@@ -8,8 +9,7 @@ namespace FrontEnd
     class Program
     {
         static HamsterDayCare hamsterDayCare = new HamsterDayCare();
-        
-        
+
         static void Main(string[] args)
         {
             hamsterDayCare.PrintEvent += Print;
@@ -32,6 +32,7 @@ namespace FrontEnd
 
         private static void Print(object sender, PrintEventArgs e)
         {
+            Console.CursorVisible = false;
             Console.SetCursorPosition(4, 10);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(e.Date + "\n" + e.Data);
@@ -42,9 +43,11 @@ namespace FrontEnd
             Console.WriteLine(e.Data);
             Console.WriteLine("Press any key to continue...");
             Console.ReadLine();
+            Console.Clear();
         }
         private static int GenerateNumber(string message)
         {
+            Console.SetCursorPosition = true;
             int num;
             bool intParse = int.TryParse(Console.ReadLine(), out num);
 
@@ -99,7 +102,6 @@ namespace FrontEnd
         }
         private static void StartNewSimulation()
         {
-
             Console.Write("Enter number of days you want to simulate: ");
             int days = GenerateNumber("Please only enter numbers");
 
@@ -108,8 +110,10 @@ namespace FrontEnd
 
             Console.Clear();
             Logo();
+
             hamsterDayCare.StartSimulation(days, speed);
-            
+
+            UI();
         }
         private static void Logo()
         {

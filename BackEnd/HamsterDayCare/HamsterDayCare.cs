@@ -65,14 +65,13 @@ namespace BackEnd
 
             return dbHasData;
         }
-
         public void StartSimulation(int days, int ticksPerSecond)
         {
+            Reset();
             ticksPerSecond = 1000 / ticksPerSecond;
             ticker.Tick += StartThreads;
             ticker.StartTick(ticksPerSecond, days);
         }
-
         private async void StartThreads(object sender, TickEventArgs e)
         {
 
@@ -111,8 +110,6 @@ namespace BackEnd
                 await addToExerciseTask;
             }
         }
-
-       
         private async Task AddHamstersToExerciseArea()
         {
             var hamsters = HDCon.Hamsters.Where(x => x.CageID != null).OrderBy(x => x.LastExercise).ToList();
@@ -210,7 +207,6 @@ namespace BackEnd
 
             foreach (var ham in HDCon.Hamsters)
             {
-                //var log = logs.Where(x => x.HamsterID == ham.ID & x.ActivityName == "Checked In for The Day" & x.EndDate == null).FirstOrDefault();
                 var log = logs.Where(x => x.HamsterID == ham.ID & x.EndDate == null);
                 if (log != null)
                 {
@@ -235,6 +231,27 @@ namespace BackEnd
             await Task.CompletedTask;
         }
 
+        private void Reset()
+        {
+            HDCon.ActivityLogs.RemoveRange(HDCon.ActivityLogs);
+            HDCon.SaveChanges(); //kanske inte behövs?
+
+            foreach (var ham in HDCon.Hamsters)
+            {
+                ham.CageID = null;
+                ham.ExerciseAreaID = null;
+                ham.CheckedInTime = null;
+                ham.LastExercise = null;
+            }
+
+            foreach (var c in HDCon.Cages)
+            {
+                c.Hamsters.Clear();
+                c.HasFemale = false;
+            }
+
+            HDCon.SaveChanges();
+        }
         public string Print()
         {
             var print = new StringBuilder();
@@ -259,8 +276,6 @@ namespace BackEnd
             }
             return print.ToString();
         }
-
-        
 
     }
 }

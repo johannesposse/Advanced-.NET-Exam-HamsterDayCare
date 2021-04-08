@@ -43,7 +43,6 @@ namespace FrontEnd
             Console.WriteLine("Press any key to continue...");
             Console.ReadLine();
         }
-
         private static int GenerateNumber(string message)
         {
             int num;
@@ -87,7 +86,6 @@ namespace FrontEnd
                     //ShowLogs();
                     break;
                 case 3:
-                    hamsterDayCare.CheckOutHamstersForTheDay();
                     UI();
                     break;
                 case 4:
@@ -138,7 +136,6 @@ namespace FrontEnd
 
             await animationTask;
         }
-
         private static async Task Animation(bool dbHasData)
         {
             Console.CursorVisible = false;

@@ -17,11 +17,18 @@ namespace FrontEnd_Forms
         public HamsterDayCare()
         {
             InitializeComponent();
+            string userName = Environment.UserName;
+            UserName.Text = "Welcome: " + userName;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void UserName_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

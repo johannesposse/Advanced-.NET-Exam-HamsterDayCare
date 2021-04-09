@@ -28,7 +28,7 @@ namespace BackEnd
 
         internal void GenerateRapport()
         {
-            string path = @"..\..\..\..\Logs\" + Date.ToString("yy-MM-dd hh-mm-ss");
+            string path = @"..\..\..\..\Logs\" + Date.ToString("yy-MM-dd hh-mm-ss") + ".txt";
             var ham = ActivityLogs.Join(Hamsters, ac => ac.HamsterID, ham => ham.ID, (ac, ham) => new
             {
                 Owner = ham.Ownername,
@@ -39,28 +39,23 @@ namespace BackEnd
                 End = ac.EndDate,
             });
 
-            //foreach (var h in ham)
-            //{
-            //    var temp = $"{h.ID},{h.Owner},{h.HamName}, {h.Activity}, {h.Start}, {h.End}\n";
-            //    DirectoryInfo di = Directory.CreateDirectory(path);
-            //    File.AppendAllText(path +"\\"+ h.HamName + ".txt",temp);
-            //}
 
             foreach(var h in ham)
             {
                 var temp = $"{h.ID},{h.Owner},{h.HamName}, {h.Activity}, {h.Start}, {h.End}\n";
-                DirectoryInfo di = Directory.CreateDirectory(path);
-                File.AppendAllText(path + "\\total.txt", temp);
+                //DirectoryInfo di = Directory.CreateDirectory(path);
+                File.AppendAllText(path, temp);
             }
 
             PrintReports(path);
+
         }
 
         private void PrintReports(string path)
         {
             var print = new StringBuilder();
 
-            List<string> input = File.ReadAllLines(path + "\\total.txt").ToList();
+            List<string> input = File.ReadAllLines(path).ToList();
             var reports = new List<Report>();
 
             foreach (var i in input)

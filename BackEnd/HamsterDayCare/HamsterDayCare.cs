@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
@@ -19,6 +20,7 @@ namespace BackEnd
         private HamsterDayCareContext HDCon = new HamsterDayCareContext();
         private DateTime Date;
 
+       
         public bool InitilizeDatabase(out bool dbHasData)
         {
             dbHasData = true;
@@ -277,6 +279,21 @@ namespace BackEnd
                 print.Append($"{"",-4}{cageID,-7}{ExID,-7}{h.Name,-15}{h.Age,-10}{female,-10}{h.Ownername,-25}{h.CheckedInTime,-25}{h.LastExercise,-25}\n");
             }
             return print.ToString();
+        }
+
+        public void ShowPreviousResults()
+        {
+            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Logs\");
+            //string[] filePaths = Directory.GetFiles(@"Logs\");
+            string[] Documents = System.IO.Directory.GetFiles("../../../../Logs/");
+
+            int i = 0;
+
+            foreach (var d in Documents)
+            {
+                i++;
+                Console.WriteLine(i + ". " + d);
+            }
         }
 
     }

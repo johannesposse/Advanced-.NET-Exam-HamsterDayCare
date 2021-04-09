@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 using BackEnd;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +14,8 @@ namespace FrontEnd
 
         static void Main(string[] args)
         {
+            StartUpAnimation();
+ 
             hamsterDayCare.PrintEvent += Print;
             hamsterDayCare.ReportEvent += ShowReport;
 
@@ -28,6 +32,21 @@ namespace FrontEnd
                 Console.ReadLine();
                 UI();
             }
+        }
+
+        private static async Task StartUpAnimation()
+        {
+            Logo();
+
+            var text = "\nProbarbly the best daycare, in the world...";
+
+            foreach (var t in text)
+            {
+                Console.Write(t);
+                await Task.Delay(20);
+            }
+
+            await Task.CompletedTask;
         }
 
         private static void Print(object sender, PrintEventArgs e)
@@ -47,7 +66,7 @@ namespace FrontEnd
         }
         private static int GenerateNumber(string message)
         {
-            Console.SetCursorPosition = true;
+            Console.CursorVisible = true;
             int num;
             bool intParse = int.TryParse(Console.ReadLine(), out num);
 
@@ -69,7 +88,7 @@ namespace FrontEnd
             Console.WriteLine("Welcome to the best daycare in the world\n");
 
             Console.WriteLine("1. Start new simulation");
-            Console.WriteLine("2. ---");
+            Console.WriteLine("2. Show reports from previous simulations");
             Console.WriteLine("3. ---");
             Console.WriteLine("4. Exit program\n");
 
@@ -86,7 +105,7 @@ namespace FrontEnd
                     StartNewSimulation();
                     break;
                case 2:
-                    //ShowLogs();
+                    ShowLogs();
                     break;
                 case 3:
                     UI();
@@ -100,6 +119,14 @@ namespace FrontEnd
                     break;
             }
         }
+
+        private static void ShowLogs()
+        {
+            hamsterDayCare.ShowPreviousResults();
+            Console.ReadLine();
+            UI();
+        }
+
         private static void StartNewSimulation()
         {
             Console.Write("Enter number of days you want to simulate: ");
@@ -117,12 +144,11 @@ namespace FrontEnd
         }
         private static void Logo()
         {
-            string[] logo = {  "                           _                 ___              ___               ",
-                              @"  /\  /\__ _ _ __ ___  ___| |_ ___ _ __     /   \__ _ _   _  / __\__ _ _ __ ___ ",
-                              @" / /_/ / _` | '_ ` _ \/ __| __/ _ \ '__|   / /\ / _` | | | |/ /  / _` | '__/ _ \",
-                              @"/ __  / (_| | | | | | \__ \ ||  __/ |     / /_// (_| | |_| / /__| (_| | | |  __/",
-                              @"\/ /_/ \__,_|_| |_| |_|___/\__\___|_|    /___,' \__,_|\__, \____/\__,_|_|  \___|",
-                              @"                                                      |___/                     "
+            string[] logo = {  
+
+"\n\n▒█░▒█ █▀▀█ █▀▄▀█ █▀▀ ▀▀█▀▀ █▀▀ █▀▀█ ▒█▀▀▄ █▀▀█ █░░█ ▒█▀▀█ █▀▀█ █▀▀█ █▀▀",
+"▒█▀▀█ █▄▄█ █░▀░█ ▀▀█ ░░█░░ █▀▀ █▄▄▀ ▒█░▒█ █▄▄█ █▄▄█ ▒█░░░ █▄▄█ █▄▄▀ █▀▀", 
+"▒█░▒█ ▀░░▀ ▀░░░▀ ▀▀▀ ░░▀░░ ▀▀▀ ▀░▀▀ ▒█▄▄▀ ▀░░▀ ▄▄▄█ ▒█▄▄█ ▀░░▀ ▀░▀▀ ▀▀▀"
             };
 
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -132,70 +158,10 @@ namespace FrontEnd
             }
             Console.ForegroundColor = ConsoleColor.White;
         }
-        private static async void InitializeDataBase()
+        private static void InitializeDataBase()
         {
             bool dbHasData = true;
             hamsterDayCare.InitilizeDatabase(out dbHasData);
-            //var animationTask = Animation(dbHasData);
-
-            //await animationTask;
         }
-        private static async Task Animation(bool dbHasData)
-        {
-            Console.CursorVisible = false;
-            if (!dbHasData)
-            {
-                Console.SetCursorPosition(10, 5);
-                string message = "No data in database, generating database...";
-                foreach (var m in message)
-                {
-                    Console.Write(m);
-                    System.Threading.Thread.Sleep(40);
-                }
-
-                Console.SetCursorPosition(17, 6);
-                Console.WriteLine("[          ]");
-
-                for (int i = 0; i < 10; i++)
-                {
-                    Console.SetCursorPosition(18 + i, 6);
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.Write("█");
-                    System.Threading.Thread.Sleep(200);
-                }
-
-                System.Threading.Thread.Sleep(500);
-                Console.Clear();
-            }
-            else
-            {
-                Console.SetCursorPosition(10, 5);
-                string message = "Loading database...";
-                foreach (var m in message)
-                {
-                    Console.Write(m);
-                    System.Threading.Thread.Sleep(40);
-                }
-                System.Threading.Thread.Sleep(200);
-
-                Console.SetCursorPosition(13, 6);
-                Console.WriteLine("[          ]");
-
-                for (int i = 0; i < 10; i++)
-                {
-                    Console.SetCursorPosition(14 + i, 6);
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.Write("█");
-                    System.Threading.Thread.Sleep(200);
-                }
-
-                System.Threading.Thread.Sleep(500);
-                Console.Clear();
-                Console.CursorVisible = true;
-            }
-
-            await Task.CompletedTask;
-        }
-
     }
 }

@@ -22,8 +22,6 @@ namespace BackEnd
                 System.Threading.Thread.Sleep(ticksPerSecond);
                 tickEventArgs.Date = tickEventArgs.Date.AddMinutes(6);
             }
-        }
-
-        
+        } 
     }
 }

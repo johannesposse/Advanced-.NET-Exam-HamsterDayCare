@@ -1,6 +1,7 @@
 
 För G
-
+-Snygga till rapporterna 
+-Snygga till UI
 -Uppdatera UML i draw.io
 -Skriv kommentarer i koden
 
@@ -8,14 +9,11 @@ För G
 För VG
 -Kom på nåt
 -Skapa pdf filer av rapporter och skicka mail?
+-Eller nåt annat kul
 
 
 Pågående
-
-
-
-Bör Dubbelkollas
-
+-
 
 Färdiga
 -[FIXAD] Finns en bugg som gör att kön inte separeras efter träning korrekt

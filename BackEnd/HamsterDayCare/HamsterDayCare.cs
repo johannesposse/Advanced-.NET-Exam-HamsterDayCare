@@ -15,7 +15,7 @@ namespace BackEnd
     public class HamsterDayCare
     {
         private Ticker ticker = new Ticker();
-        public event EventHandler<PrintEventArgs> PrintEvent;
+        public static event EventHandler<PrintEventArgs> PrintEvent;
         public event EventHandler<ReportEventArgs> ReportEvent;
         private HamsterDayCareContext HDCon = new HamsterDayCareContext();
         private DateTime Date;
@@ -278,6 +278,8 @@ namespace BackEnd
                     ExID = "";
                 print.Append($"{"",-4}{cageID,-7}{ExID,-7}{h.Name,-15}{h.Age,-10}{female,-10}{h.Ownername,-25}{h.CheckedInTime,-25}{h.LastExercise,-25}\n");
             }
+
+            PrintEvent?.Invoke(this, new PrintEventArgs(print.ToString()));
             return print.ToString();
         }
 

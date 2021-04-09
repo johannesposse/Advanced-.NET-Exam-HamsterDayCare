@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using BackEnd;
@@ -130,6 +131,7 @@ namespace FrontEnd
             int selectedIndex = mainMenu.Run(); //får tillbaka vilken meny som valdes
 
             var printReport = new ReportEventArgs();
+
 
             printReport.PrintReports(@"..\..\..\..\Logs\" + options[selectedIndex]);
 

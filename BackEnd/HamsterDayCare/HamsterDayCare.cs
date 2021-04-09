@@ -283,6 +283,12 @@ namespace BackEnd
 
         public string[] ShowPreviousResults()
         {
+
+            if (!Directory.Exists(@"..\..\..\..\Logs"))
+            {
+                throw new Exception("The path does not exist, please run the simulation once to create it...");
+            }
+
             string[] documents = System.IO.Directory.GetFiles("../../../../Logs/");
 
 

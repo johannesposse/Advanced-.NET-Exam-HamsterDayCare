@@ -34,6 +34,14 @@ namespace BackEnd
         internal void GenerateRapport()
         {
             string path = @"..\..\..\..\Logs\" + Date.ToString("yy-MM-dd hh-mm-ss") + ".txt";
+
+            string root = @"..\..\..\..\Logs";
+
+            if (!Directory.Exists(root))
+            {
+                Directory.CreateDirectory(root);
+            }
+
             var ham = ActivityLogs.Join(Hamsters, ac => ac.HamsterID, ham => ham.ID, (ac, ham) => new
             {
                 Owner = ham.Ownername,

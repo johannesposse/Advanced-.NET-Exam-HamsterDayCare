@@ -1,5 +1,6 @@
 
 För G
+
 -Snygga till rapporterna 
 -Uppdatera UML i draw.io
 -Skriv kommentarer i koden

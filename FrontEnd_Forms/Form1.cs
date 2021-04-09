@@ -33,8 +33,15 @@ namespace FrontEnd_Forms
             InitializeComponent();
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
 
+            lblTitle.Text = "Dashboard";
+            this.PnlFormLoader.Controls.Clear();
+            FrmDashBoard frmDashBoard = new FrmDashBoard() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            frmDashBoard.FormBorderStyle = FormBorderStyle.None;
+            this.PnlFormLoader.Controls.Add(frmDashBoard);
+            frmDashBoard.Show();
             string userName = Environment.UserName;
             UserName.Text = "Welcome " + userName;
+
         }
 
         private void Dashboard_button_Click(object sender, EventArgs e)
@@ -43,6 +50,13 @@ namespace FrontEnd_Forms
             Nav_Pnl.Top = Dashboard_button.Top;
             Nav_Pnl.Left = Dashboard_button.Left;
             Dashboard_button.BackColor = Color.FromArgb(46, 51, 73);
+
+            lblTitle.Text = "Dashboard";
+            this.PnlFormLoader.Controls.Clear();
+            FrmDashBoard frmDashBoard = new FrmDashBoard() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            frmDashBoard.FormBorderStyle = FormBorderStyle.None;
+            this.PnlFormLoader.Controls.Add(frmDashBoard);
+            frmDashBoard.Show();
         }
 
         private void simulation_button_Click(object sender, EventArgs e)
@@ -51,6 +65,13 @@ namespace FrontEnd_Forms
             Nav_Pnl.Top = simulation_button.Top;
             Nav_Pnl.Left = simulation_button.Left;
             simulation_button.BackColor = Color.FromArgb(46, 51, 73);
+
+            lblTitle.Text = "Simulation";
+            this.PnlFormLoader.Controls.Clear();
+            FrmSimulation frmSimulation = new FrmSimulation() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            frmSimulation.FormBorderStyle = FormBorderStyle.None;
+            this.PnlFormLoader.Controls.Add(frmSimulation);
+            frmSimulation.Show();
         }
 
         private void Reports_Button_Click(object sender, EventArgs e)
@@ -59,6 +80,13 @@ namespace FrontEnd_Forms
             Nav_Pnl.Top = Reports_Button.Top;
             Nav_Pnl.Left = Reports_Button.Left;
             Reports_Button.BackColor = Color.FromArgb(46, 51, 73);
+
+            lblTitle.Text = "Reports";
+            this.PnlFormLoader.Controls.Clear();
+            FrmReports frmReports = new FrmReports() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            frmReports.FormBorderStyle = FormBorderStyle.None;
+            this.PnlFormLoader.Controls.Add(frmReports);
+            frmReports.Show();
         }
 
         private void Statistics_Button_Click(object sender, EventArgs e)
@@ -67,6 +95,13 @@ namespace FrontEnd_Forms
             Nav_Pnl.Top = Statistics_Button.Top;
             Nav_Pnl.Left = Statistics_Button.Left;
             Statistics_Button.BackColor = Color.FromArgb(46, 51, 73);
+
+            lblTitle.Text = "Statistics";
+            this.PnlFormLoader.Controls.Clear();
+            FrmStatistics frmStatistics = new FrmStatistics() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            frmStatistics.FormBorderStyle = FormBorderStyle.None;
+            this.PnlFormLoader.Controls.Add(frmStatistics);
+            frmStatistics.Show();
         }
 
         private void Settings_Button_Click(object sender, EventArgs e)
@@ -75,6 +110,13 @@ namespace FrontEnd_Forms
             Nav_Pnl.Top = Settings_Button.Top;
             Nav_Pnl.Left = Settings_Button.Left;
             Settings_Button.BackColor = Color.FromArgb(46, 51, 73);
+
+            lblTitle.Text = "Settings";
+            this.PnlFormLoader.Controls.Clear();
+            FrmSettings frmSettings = new FrmSettings() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            frmSettings.FormBorderStyle = FormBorderStyle.None;
+            this.PnlFormLoader.Controls.Add(frmSettings);
+            frmSettings.Show();
         }
 
         private void Dashboard_button_Leave(object sender, EventArgs e)

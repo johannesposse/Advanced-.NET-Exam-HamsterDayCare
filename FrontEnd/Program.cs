@@ -122,7 +122,13 @@ namespace FrontEnd
 
         private static void ShowLogs()
         {
-            hamsterDayCare.ShowPreviousResults();
+            var data = hamsterDayCare.ShowPreviousResults();
+            foreach (var d in data)
+            {
+                Console.WriteLine(d);
+            }
+
+
             Console.ReadLine();
             UI();
         }

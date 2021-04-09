@@ -281,19 +281,18 @@ namespace BackEnd
             return print.ToString();
         }
 
-        public void ShowPreviousResults()
+        public string[] ShowPreviousResults()
         {
-            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Logs\");
-            //string[] filePaths = Directory.GetFiles(@"Logs\");
-            string[] Documents = System.IO.Directory.GetFiles("../../../../Logs/");
+            string[] documents = System.IO.Directory.GetFiles("../../../../Logs/");
 
-            int i = 0;
 
-            foreach (var d in Documents)
+            for (int i = 0; i < documents.Length; i++)
             {
-                i++;
-                Console.WriteLine(i + ". " + d);
+                documents[i] = documents[i].Replace("../../../../Logs/", "");
             }
+
+
+            return documents;
         }
 
     }

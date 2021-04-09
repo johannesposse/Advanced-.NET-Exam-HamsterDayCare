@@ -26,6 +26,11 @@ namespace BackEnd
             this.Data = data;
         }
 
+        public ReportEventArgs()
+        {
+
+        }
+
         internal void GenerateRapport()
         {
             string path = @"..\..\..\..\Logs\" + Date.ToString("yy-MM-dd hh-mm-ss") + ".txt";
@@ -51,7 +56,7 @@ namespace BackEnd
 
         }
 
-        private void PrintReports(string path)
+        public void PrintReports(string path)
         {
             var print = new StringBuilder();
 

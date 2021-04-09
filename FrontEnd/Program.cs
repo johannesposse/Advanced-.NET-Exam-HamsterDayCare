@@ -38,7 +38,8 @@ namespace FrontEnd
         {
             Logo();
 
-            var text = "\nProbarbly the best daycare, in the world...";
+            var text = "  Probarbly the best daycare, in the world...";
+
 
             foreach (var t in text)
             {
@@ -84,33 +85,31 @@ namespace FrontEnd
         private static void UI()
         {
             Console.Clear();
-            Logo();
-            Console.WriteLine("Welcome to the best daycare in the world\n");
 
-            Console.WriteLine("1. Start new simulation");
-            Console.WriteLine("2. Show reports from previous simulations");
-            Console.WriteLine("3. ---");
-            Console.WriteLine("4. Exit program\n");
+            string prompt = "Welcome to the best daycare in the world"; //menyalternativ
+            string[] options = {
+                "Start new simulation",
+                "Show reports from previous simulations",
+                "Exit program"
+               };
 
-            int num = GenerateNumber("Please enter a number between 1-4");
+            Menu mainMenu = new Menu(prompt, options); //skickar in menyalternativerna till menu classen
+            int selectedIndex = mainMenu.Run(); //får tillbaka vilken meny som valdes
 
-            MenuChoise(num);
+            MenuChoise(selectedIndex);
 
         }
         private static void MenuChoise(int menu)
         {
             switch (menu)
             {
-                case 1:
+                case 0:
                     StartNewSimulation();
                     break;
-               case 2:
+               case 1:
                     ShowLogs();
                     break;
-                case 3:
-                    UI();
-                    break;
-                case 4:
+                case 2:
                     Environment.ExitCode = 0;
                 break;
 
@@ -122,20 +121,29 @@ namespace FrontEnd
 
         private static void ShowLogs()
         {
-            var data = hamsterDayCare.ShowPreviousResults();
-            foreach (var d in data)
-            {
-                Console.WriteLine(d);
-            }
+            Console.Clear();
+            string[] options = hamsterDayCare.ShowPreviousResults();
+            string prompt = "Welcome to the best daycare in the world"; //menyalternativ
+ 
 
+            Menu mainMenu = new Menu(prompt, options); //skickar in menyalternativerna till menu classen
+            int selectedIndex = mainMenu.Run(); //får tillbaka vilken meny som valdes
 
+            var printReport = new ReportEventArgs();
+
+            printReport.PrintReports(@"..\..\..\..\Logs\" + options[selectedIndex]);
+
+            Console.Clear();
+            Console.WriteLine(printReport.Data);
+
+            Console.WriteLine("Press anykey to continue...");
             Console.ReadLine();
             UI();
         }
 
         private static void StartNewSimulation()
         {
-            Console.Write("Enter number of days you want to simulate: ");
+            Console.Write("\nEnter number of days you want to simulate: ");
             int days = GenerateNumber("Please only enter numbers");
 
             Console.Write("Enter ticks per second: ");
@@ -152,12 +160,13 @@ namespace FrontEnd
         {
             string[] logo = {  
 
-"\n\n▒█░▒█ █▀▀█ █▀▄▀█ █▀▀ ▀▀█▀▀ █▀▀ █▀▀█ ▒█▀▀▄ █▀▀█ █░░█ ▒█▀▀█ █▀▀█ █▀▀█ █▀▀",
-"▒█▀▀█ █▄▄█ █░▀░█ ▀▀█ ░░█░░ █▀▀ █▄▄▀ ▒█░▒█ █▄▄█ █▄▄█ ▒█░░░ █▄▄█ █▄▄▀ █▀▀", 
-"▒█░▒█ ▀░░▀ ▀░░░▀ ▀▀▀ ░░▀░░ ▀▀▀ ▀░▀▀ ▒█▄▄▀ ▀░░▀ ▄▄▄█ ▒█▄▄█ ▀░░▀ ▀░▀▀ ▀▀▀"
+                "▒█░▒█ █▀▀█ █▀▄▀█ █▀▀ ▀▀█▀▀ █▀▀ █▀▀█ ▒█▀▀▄ █▀▀█ █░░█ ▒█▀▀█ █▀▀█ █▀▀█ █▀▀",
+              "  ▒█▀▀█ █▄▄█ █░▀░█ ▀▀█ ░░█░░ █▀▀ █▄▄▀ ▒█░▒█ █▄▄█ █▄▄█ ▒█░░░ █▄▄█ █▄▄▀ █▀▀", 
+              "  ▒█░▒█ ▀░░▀ ▀░░░▀ ▀▀▀ ░░▀░░ ▀▀▀ ▀░▀▀ ▒█▄▄▀ ▀░░▀ ▄▄▄█ ▒█▄▄█ ▀░░▀ ▀░▀▀ ▀▀▀"
             };
 
             Console.ForegroundColor = ConsoleColor.Blue;
+            Console.SetCursorPosition(2, 3);
             foreach (var row in logo)
             {
                 Console.WriteLine(row);

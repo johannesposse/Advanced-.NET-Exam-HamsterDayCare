@@ -33,7 +33,7 @@ namespace FrontEnd_Forms
             InitializeComponent();
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
 
-            lblTitle.Text = "Dashboard";
+            lblTitle.Text = "Welcome to the best Hamster Daycare, in the world";
             this.PnlFormLoader.Controls.Clear();
             FrmDashBoard frmDashBoard = new FrmDashBoard() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             frmDashBoard.FormBorderStyle = FormBorderStyle.None;
@@ -155,6 +155,11 @@ namespace FrontEnd_Forms
         }
 
         private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void PnlFormLoader_Paint(object sender, PaintEventArgs e)
         {
 
         }

@@ -263,7 +263,9 @@ namespace BackEnd
 
             var hamsters = HDCon.Hamsters.OrderBy(x => x.CageID);
 
-            print.Append($"\n\n{"",-4}{"CageID",-7}{"ExerID",-7}{"Name",-15}{"Age",-10}{"Kön",-10}{"Owner",-25}{"CheckedIn",-25}{"Exersiced",-25}\n\n");
+            print.Append(Date + Environment.NewLine + Environment.NewLine);
+
+            print.Append($"\n\n{"",-4}{"CageID",-7}{"ExerID",-7}{"Name",-15}{"Age",-10}{"Kön",-10}{"Owner",-25}{"CheckedIn",-25}{"Exersiced",-25}" + Environment.NewLine + Environment.NewLine);
 
             foreach (var h in hamsters)
             {
@@ -276,7 +278,7 @@ namespace BackEnd
                     cageID = "";
                 if (h.ExerciseAreaID == null)
                     ExID = "";
-                print.Append($"{"",-4}{cageID,-7}{ExID,-7}{h.Name,-15}{h.Age,-10}{female,-10}{h.Ownername,-25}{h.CheckedInTime,-25}{h.LastExercise,-25}\n");
+                print.Append($"{"",-4}{cageID,-7}{ExID,-7}{h.Name,-15}{h.Age,-10}{female,-10}{h.Ownername,-25}{h.CheckedInTime,-25}{h.LastExercise,-25}" + Environment.NewLine);
             }
 
             PrintEvent?.Invoke(this, new PrintEventArgs(print.ToString()));

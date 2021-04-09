@@ -52,5 +52,12 @@ namespace FrontEnd_Forms
         {
             textBox1.Text = data;
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            threadOne = new Thread(new ThreadStart(StartSimulation));
+            threadOne.Start();
+            TimerGetData.Start();
+        }
     }
 }

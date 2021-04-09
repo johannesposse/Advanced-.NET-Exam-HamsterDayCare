@@ -29,6 +29,7 @@ namespace FrontEnd_Forms
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HamsterDayCare));
             this.panel1 = new System.Windows.Forms.Panel();
             this.Nav_Pnl = new System.Windows.Forms.Panel();
             this.Settings_Button = new System.Windows.Forms.Button();
@@ -203,9 +204,9 @@ namespace FrontEnd_Forms
             this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(158)))), ((int)(((byte)(161)))), ((int)(((byte)(176)))));
             this.lblTitle.Location = new System.Drawing.Point(20, 17);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(162, 32);
+            this.lblTitle.Size = new System.Drawing.Size(705, 32);
             this.lblTitle.TabIndex = 1;
-            this.lblTitle.Text = "Dashboard";
+            this.lblTitle.Text = "Welcome to the best Hamster Daycare, in the world";
             // 
             // panel3
             // 
@@ -225,6 +226,7 @@ namespace FrontEnd_Forms
             this.PnlFormLoader.Name = "PnlFormLoader";
             this.PnlFormLoader.Size = new System.Drawing.Size(1061, 600);
             this.PnlFormLoader.TabIndex = 4;
+            this.PnlFormLoader.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlFormLoader_Paint);
             // 
             // button1
             // 
@@ -249,6 +251,7 @@ namespace FrontEnd_Forms
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "HamsterDayCare";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "HamsterDayCare";

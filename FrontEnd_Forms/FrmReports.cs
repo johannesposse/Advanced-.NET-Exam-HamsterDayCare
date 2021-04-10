@@ -13,28 +13,10 @@ namespace FrontEnd_Forms
     public partial class FrmReports : Form
     {
         static BackEnd.HamsterDayCare hamsterDayCare = new BackEnd.HamsterDayCare();
+        static string[] options = hamsterDayCare.ShowPreviousResults();
         public FrmReports()
         {
-            InitializeComponent();
-
-
-            string[] options = hamsterDayCare.ShowPreviousResults();
-            label4.Text = options.Length.ToString();
-
-            foreach (var o in options)
-            {
-                listBox1.Items.Add(o);
-            }
-
-            
-
-            //var printReport = new BackEnd.ReportEventArgs();
-
-
-            //printReport.PrintReports(@"..\..\..\..\Logs\" + options[selectedIndex]);
-
-            //textBox1.Text = printReport.Data;
-
+            InitializeComponent();          
 
         }
 
@@ -45,14 +27,32 @@ namespace FrontEnd_Forms
 
         private void FrmReports_Load(object sender, EventArgs e)
         {
+            options = hamsterDayCare.ShowPreviousResults();
+            if(options.Length < 1)
+            {
+                label4.Text = "0";
+            }
+            else
+            {
+                label4.Text = (options.Length - 1).ToString();
+            }
 
+            foreach (var o in options)
+            {
+                if(o != "total.txt")
+                listBox1.Items.Add(o);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string selectedItem = listBox1.Items[listBox1.SelectedIndex].ToString();
+            var selectedItem = listBox1.SelectedIndex;
 
-            MessageBox.Show(selectedItem);
+            var printReport = new BackEnd.ReportEventArgs();
+
+            printReport.PrintReports(@"..\..\..\..\Logs\" + options[selectedItem]);
+
+            textBox1.Text = printReport.Data;
         }
     }
 }

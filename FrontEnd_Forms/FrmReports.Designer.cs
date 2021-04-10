@@ -107,11 +107,14 @@ namespace FrontEnd_Forms
             // 
             // listBox1
             // 
+            this.listBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
+            this.listBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listBox1.ForeColor = System.Drawing.Color.White;
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 15;
             this.listBox1.Location = new System.Drawing.Point(19, 42);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(183, 304);
+            this.listBox1.Size = new System.Drawing.Size(183, 300);
             this.listBox1.TabIndex = 1;
             // 
             // label2

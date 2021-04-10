@@ -45,7 +45,7 @@ namespace FrontEnd_Forms
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
+            this.Label_NumberOfSimulations = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -229,23 +229,23 @@ namespace FrontEnd_Forms
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
-            this.panel4.Controls.Add(this.label3);
+            this.panel4.Controls.Add(this.Label_NumberOfSimulations);
             this.panel4.Controls.Add(this.label2);
             this.panel4.Location = new System.Drawing.Point(23, 29);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(327, 148);
             this.panel4.TabIndex = 9;
             // 
-            // label3
+            // Label_NumberOfSimulations
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(146)))), ((int)(((byte)(249)))));
-            this.label3.Location = new System.Drawing.Point(19, 48);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(31, 32);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "2";
+            this.Label_NumberOfSimulations.AutoSize = true;
+            this.Label_NumberOfSimulations.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Label_NumberOfSimulations.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(146)))), ((int)(((byte)(249)))));
+            this.Label_NumberOfSimulations.Location = new System.Drawing.Point(19, 48);
+            this.Label_NumberOfSimulations.Name = "Label_NumberOfSimulations";
+            this.Label_NumberOfSimulations.Size = new System.Drawing.Size(31, 32);
+            this.Label_NumberOfSimulations.TabIndex = 1;
+            this.Label_NumberOfSimulations.Text = "2";
             // 
             // label2
             // 
@@ -272,6 +272,7 @@ namespace FrontEnd_Forms
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmDashBoard";
             this.Text = "frmDashBoard";
+            this.Load += new System.EventHandler(this.FrmDashBoard_Load);
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -304,7 +305,7 @@ namespace FrontEnd_Forms
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label Label_NumberOfSimulations;
         private System.Windows.Forms.Label label2;
     }
 }

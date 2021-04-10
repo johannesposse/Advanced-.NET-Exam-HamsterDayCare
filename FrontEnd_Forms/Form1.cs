@@ -53,6 +53,7 @@ namespace FrontEnd_Forms
 
             lblTitle.Text = "Dashboard";
             this.PnlFormLoader.Controls.Clear();
+            
             FrmDashBoard frmDashBoard = new FrmDashBoard() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             frmDashBoard.FormBorderStyle = FormBorderStyle.None;
             this.PnlFormLoader.Controls.Add(frmDashBoard);
@@ -68,6 +69,7 @@ namespace FrontEnd_Forms
 
             lblTitle.Text = "Simulation";
             this.PnlFormLoader.Controls.Clear();
+            
             FrmSimulation frmSimulation = new FrmSimulation() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             frmSimulation.FormBorderStyle = FormBorderStyle.None;
             this.PnlFormLoader.Controls.Add(frmSimulation);
@@ -83,6 +85,7 @@ namespace FrontEnd_Forms
 
             lblTitle.Text = "Reports";
             this.PnlFormLoader.Controls.Clear();
+            
             FrmReports frmReports = new FrmReports() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             frmReports.FormBorderStyle = FormBorderStyle.None;
             this.PnlFormLoader.Controls.Add(frmReports);
@@ -98,6 +101,7 @@ namespace FrontEnd_Forms
 
             lblTitle.Text = "Statistics";
             this.PnlFormLoader.Controls.Clear();
+            
             FrmStatistics frmStatistics = new FrmStatistics() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             frmStatistics.FormBorderStyle = FormBorderStyle.None;
             this.PnlFormLoader.Controls.Add(frmStatistics);
@@ -113,6 +117,7 @@ namespace FrontEnd_Forms
 
             lblTitle.Text = "Settings";
             this.PnlFormLoader.Controls.Clear();
+            
             FrmSettings frmSettings = new FrmSettings() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             frmSettings.FormBorderStyle = FormBorderStyle.None;
             this.PnlFormLoader.Controls.Add(frmSettings);

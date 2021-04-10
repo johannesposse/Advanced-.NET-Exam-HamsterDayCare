@@ -34,6 +34,7 @@ namespace BackEnd
         internal void GenerateRapport()
         {
             string path = @"..\..\..\..\Logs\" + Date.ToString("yy-MM-dd hh-mm-ss") + ".txt";
+            string pathTotal = @"..\..\..\..\Logs\total.txt";
 
             string root = @"..\..\..\..\Logs";
 
@@ -53,11 +54,12 @@ namespace BackEnd
             });
 
 
-            foreach(var h in ham)
+            foreach (var h in ham)
             {
                 var temp = $"{h.ID},{h.Owner},{h.HamName}, {h.Activity}, {h.Start}, {h.End}\n";
                 //DirectoryInfo di = Directory.CreateDirectory(path);
                 File.AppendAllText(path, temp);
+                File.AppendAllText(pathTotal, temp);
             }
 
             PrintReports(path);
@@ -80,16 +82,29 @@ namespace BackEnd
 
             var report = reports.GroupBy(x => x.Owner).OrderBy(x => x.Key);
 
+
+
             foreach (var rep in report)
             {
-                print.Append(rep.Key + "------------------------------------------------------------\n");
+                print.Append(rep.Key + "------------------------------------------------------------" + Environment.NewLine);
 
                 foreach (var r in rep.OrderBy(x => x.Name))
                 {
-                    print.Append($"{r.Name,-15}{r.Acticity,-25}{r.Start,-30}{r.End,-30}\n");
+                    print.Append($"{r.Name,-15}{r.Acticity,-25}{r.Start,-30}{r.End,-30}" + Environment.NewLine);
                 }
-                print.Append("\n");
+                print.Append("" + Environment.NewLine);
             }
+
+            //foreach (var rep in report)
+            //{
+            //    print.Append(rep.Key + "------------------------------------------------------------\n");
+
+            //    foreach (var r in rep.OrderBy(x => x.Name))
+            //    {
+            //        print.Append($"{r.Name,-15}{r.Acticity,-25}{r.Start,-30}{r.End,-30}\n");
+            //    }
+            //    print.Append("\n");
+            //}
 
             this.Data = print.ToString();
         }

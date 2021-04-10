@@ -17,7 +17,7 @@ namespace FrontEnd
         {
             StartUpAnimation();
  
-            hamsterDayCare.PrintEvent += Print;
+            //hamsterDayCare.PrintEvent += Print;
             hamsterDayCare.ReportEvent += ShowReport;
 
             InitializeDataBase();

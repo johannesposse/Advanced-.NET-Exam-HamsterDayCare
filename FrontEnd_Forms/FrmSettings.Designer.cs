@@ -36,6 +36,7 @@ namespace FrontEnd_Forms
             this.label2 = new System.Windows.Forms.Label();
             this.btn_Update = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.btn_ResetConfig = new System.Windows.Forms.Button();
             this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -106,12 +107,11 @@ namespace FrontEnd_Forms
             this.btn_Update.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Update.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btn_Update.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.btn_Update.Image = global::FrontEnd_Forms.Properties.Resources.home;
             this.btn_Update.Location = new System.Drawing.Point(818, 530);
             this.btn_Update.Name = "btn_Update";
             this.btn_Update.Size = new System.Drawing.Size(231, 58);
             this.btn_Update.TabIndex = 6;
-            this.btn_Update.Text = "Update";
+            this.btn_Update.Text = "Update Config";
             this.btn_Update.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btn_Update.UseVisualStyleBackColor = false;
             this.btn_Update.Click += new System.EventHandler(this.btn_Update_Click);
@@ -127,12 +127,29 @@ namespace FrontEnd_Forms
             this.label3.TabIndex = 11;
             this.label3.Text = "Simulation settings";
             // 
+            // btn_ResetConfig
+            // 
+            this.btn_ResetConfig.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(32)))), ((int)(((byte)(54)))));
+            this.btn_ResetConfig.FlatAppearance.BorderSize = 0;
+            this.btn_ResetConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_ResetConfig.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_ResetConfig.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
+            this.btn_ResetConfig.Location = new System.Drawing.Point(581, 530);
+            this.btn_ResetConfig.Name = "btn_ResetConfig";
+            this.btn_ResetConfig.Size = new System.Drawing.Size(231, 58);
+            this.btn_ResetConfig.TabIndex = 12;
+            this.btn_ResetConfig.Text = "Reset config";
+            this.btn_ResetConfig.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btn_ResetConfig.UseVisualStyleBackColor = false;
+            this.btn_ResetConfig.Click += new System.EventHandler(this.btn_ResetConfig_Click);
+            // 
             // FrmSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(1061, 600);
+            this.Controls.Add(this.btn_ResetConfig);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btn_Update);
             this.Controls.Add(this.panel4);
@@ -156,5 +173,6 @@ namespace FrontEnd_Forms
         private System.Windows.Forms.TextBox txt_NumSpeed;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btn_ResetConfig;
     }
 }

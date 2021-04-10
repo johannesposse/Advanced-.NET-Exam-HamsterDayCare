@@ -24,26 +24,35 @@ namespace FrontEnd_Forms
             if (!File.Exists(path))
             {
                 using (File.Create(path)) { }
-                File.AppendAllText(path, "test");
+                string[] data = { "#Simulation", "days,1", "speed,10" };
+                File.WriteAllLines(path, data);
+                ReadFromFile();
             }
             else
             {
-                var config = File.ReadAllLines(path).ToList();
-                try
-                {
-                    var days = config[1].Split(",");
-                    txt_numDays.Text = days[1];
-                    var speed = config[2].Split(",");
-                    txt_NumSpeed.Text = speed[1];
-                }
-                catch
-                {
-                    MessageBox.Show("The config file was corrupted.\nResetting the config file");
-                }
+                ReadFromFile();
             }
 
 
 
+        }
+
+        private void ReadFromFile()
+        {
+            var config = File.ReadAllLines(path).ToList();
+            try
+            {
+                var days = config[1].Split(",");
+                txt_numDays.Text = days[1];
+                var speed = config[2].Split(",");
+                txt_NumSpeed.Text = speed[1];
+            }
+            catch
+            {
+                MessageBox.Show("The config file was corrupted.\nResetting the config file");
+                string[] data = { "#Simulation", "days,1", "speed,10" };
+                File.WriteAllLines(path, data);
+            }
         }
 
         private void btn_Update_Click(object sender, EventArgs e)
@@ -69,6 +78,12 @@ namespace FrontEnd_Forms
             File.WriteAllLines(path, data);
 
             MessageBox.Show("The config file was updated");
+        }
+
+        private void btn_ResetConfig_Click(object sender, EventArgs e)
+        {
+            string[] data = { "#Simulation", "days,1", "speed,10" };
+            File.WriteAllLines(path, data);
         }
     }
 }

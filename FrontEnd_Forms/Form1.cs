@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BackEnd;
 using System.Runtime.InteropServices;
+using System.IO;
 
 namespace FrontEnd_Forms
 {
@@ -30,8 +31,17 @@ namespace FrontEnd_Forms
         private BackEnd.HamsterDayCare hamsterDay = new BackEnd.HamsterDayCare();
         public HamsterDayCare()
         {
+
+            
+
             InitializeComponent();
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
+
+
+            if (!Directory.Exists(@"..\..\..\..\Logs"))
+            {
+                Directory.CreateDirectory(@"..\..\..\..\Logs");
+            }
 
             lblTitle.Text = "Welcome to the best Hamster Daycare, in the world";
             this.PnlFormLoader.Controls.Clear();

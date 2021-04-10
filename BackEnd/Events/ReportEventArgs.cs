@@ -90,7 +90,7 @@ namespace BackEnd
 
                 foreach (var r in rep.OrderBy(x => x.Name))
                 {
-                    print.Append($"{r.Name,-15}{r.Acticity,-25}{r.Start,-30}{r.End,-30}" + Environment.NewLine);
+                    print.Append($"{r.Name,-20}{r.Acticity,-55}{r.Start,-30}{r.End,-30}" + Environment.NewLine);
                 }
                 print.Append("" + Environment.NewLine);
             }

@@ -30,9 +30,9 @@ namespace FrontEnd_Forms
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmStatistics));
-            this.label2 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.PopularCage = new System.Windows.Forms.Label();
+            this.lbl_MostExercisedName = new System.Windows.Forms.Label();
+            this.ExercisedHamster = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -48,6 +48,7 @@ namespace FrontEnd_Forms
             this.lbl_MostPopularCage = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.lbl_MostPopularCageID = new System.Windows.Forms.Label();
+            this.lbl_MosteExercisedTimes = new System.Windows.Forms.Label();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -56,45 +57,46 @@ namespace FrontEnd_Forms
             this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label2
+            // PopularCage
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(19, 14);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(170, 25);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Most popular cage";
+            this.PopularCage.AutoSize = true;
+            this.PopularCage.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.PopularCage.ForeColor = System.Drawing.Color.White;
+            this.PopularCage.Location = new System.Drawing.Point(19, 14);
+            this.PopularCage.Name = "PopularCage";
+            this.PopularCage.Size = new System.Drawing.Size(170, 25);
+            this.PopularCage.TabIndex = 0;
+            this.PopularCage.Text = "Most popular cage";
             // 
-            // label4
+            // lbl_MostExercisedName
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(226)))), ((int)(((byte)(178)))));
-            this.label4.Location = new System.Drawing.Point(19, 48);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(31, 32);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "0";
+            this.lbl_MostExercisedName.AutoSize = true;
+            this.lbl_MostExercisedName.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbl_MostExercisedName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(226)))), ((int)(((byte)(178)))));
+            this.lbl_MostExercisedName.Location = new System.Drawing.Point(19, 48);
+            this.lbl_MostExercisedName.Name = "lbl_MostExercisedName";
+            this.lbl_MostExercisedName.Size = new System.Drawing.Size(31, 32);
+            this.lbl_MostExercisedName.TabIndex = 1;
+            this.lbl_MostExercisedName.Text = "0";
             // 
-            // label5
+            // ExercisedHamster
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(19, 14);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(223, 25);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Dagar sen senaste olycka";
+            this.ExercisedHamster.AutoSize = true;
+            this.ExercisedHamster.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ExercisedHamster.ForeColor = System.Drawing.Color.White;
+            this.ExercisedHamster.Location = new System.Drawing.Point(19, 14);
+            this.ExercisedHamster.Name = "ExercisedHamster";
+            this.ExercisedHamster.Size = new System.Drawing.Size(211, 25);
+            this.ExercisedHamster.TabIndex = 0;
+            this.ExercisedHamster.Text = "Most exercised hamster";
             // 
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
-            this.panel5.Controls.Add(this.label4);
-            this.panel5.Controls.Add(this.label5);
-            this.panel5.Location = new System.Drawing.Point(370, 29);
+            this.panel5.Controls.Add(this.lbl_MostExercisedName);
+            this.panel5.Controls.Add(this.lbl_MosteExercisedTimes);
+            this.panel5.Controls.Add(this.ExercisedHamster);
+            this.panel5.Location = new System.Drawing.Point(370, 12);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(328, 148);
             this.panel5.TabIndex = 13;
@@ -168,7 +170,7 @@ namespace FrontEnd_Forms
             this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
             this.panel6.Controls.Add(this.label6);
             this.panel6.Controls.Add(this.label7);
-            this.panel6.Location = new System.Drawing.Point(704, 29);
+            this.panel6.Location = new System.Drawing.Point(715, 12);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(334, 148);
             this.panel6.TabIndex = 12;
@@ -190,9 +192,9 @@ namespace FrontEnd_Forms
             this.panel7.Controls.Add(this.circularProgressBar1);
             this.panel7.Controls.Add(this.label8);
             this.panel7.Controls.Add(this.label9);
-            this.panel7.Location = new System.Drawing.Point(23, 200);
+            this.panel7.Location = new System.Drawing.Point(12, 185);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(327, 371);
+            this.panel7.Size = new System.Drawing.Size(338, 403);
             this.panel7.TabIndex = 11;
             // 
             // pictureBox2
@@ -233,9 +235,9 @@ namespace FrontEnd_Forms
             this.panel8.Controls.Add(this.pictureBox2);
             this.panel8.Controls.Add(this.label10);
             this.panel8.Controls.Add(this.label11);
-            this.panel8.Location = new System.Drawing.Point(370, 200);
+            this.panel8.Location = new System.Drawing.Point(370, 185);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(668, 371);
+            this.panel8.Size = new System.Drawing.Size(679, 403);
             this.panel8.TabIndex = 10;
             // 
             // lbl_MostPopularCage
@@ -255,10 +257,10 @@ namespace FrontEnd_Forms
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
             this.panel4.Controls.Add(this.lbl_MostPopularCage);
             this.panel4.Controls.Add(this.lbl_MostPopularCageID);
-            this.panel4.Controls.Add(this.label2);
-            this.panel4.Location = new System.Drawing.Point(23, 29);
+            this.panel4.Controls.Add(this.PopularCage);
+            this.panel4.Location = new System.Drawing.Point(12, 12);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(327, 148);
+            this.panel4.Size = new System.Drawing.Size(338, 148);
             this.panel4.TabIndex = 14;
             // 
             // lbl_MostPopularCageID
@@ -271,6 +273,17 @@ namespace FrontEnd_Forms
             this.lbl_MostPopularCageID.Size = new System.Drawing.Size(124, 19);
             this.lbl_MostPopularCageID.TabIndex = 0;
             this.lbl_MostPopularCageID.Text = "Most popular cage";
+            // 
+            // lbl_MosteExercisedTimes
+            // 
+            this.lbl_MosteExercisedTimes.AutoSize = true;
+            this.lbl_MosteExercisedTimes.Font = new System.Drawing.Font("Nirmala UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbl_MosteExercisedTimes.ForeColor = System.Drawing.Color.White;
+            this.lbl_MosteExercisedTimes.Location = new System.Drawing.Point(19, 100);
+            this.lbl_MosteExercisedTimes.Name = "lbl_MosteExercisedTimes";
+            this.lbl_MosteExercisedTimes.Size = new System.Drawing.Size(124, 19);
+            this.lbl_MosteExercisedTimes.TabIndex = 0;
+            this.lbl_MosteExercisedTimes.Text = "Most popular cage";
             // 
             // FrmStatistics
             // 
@@ -304,9 +317,9 @@ namespace FrontEnd_Forms
 
         #endregion
 
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label PopularCage;
+        private System.Windows.Forms.Label lbl_MostExercisedName;
+        private System.Windows.Forms.Label ExercisedHamster;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
@@ -322,5 +335,6 @@ namespace FrontEnd_Forms
         private System.Windows.Forms.Label lbl_MostPopularCage;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label lbl_MostPopularCageID;
+        private System.Windows.Forms.Label lbl_MosteExercisedTimes;
     }
 }

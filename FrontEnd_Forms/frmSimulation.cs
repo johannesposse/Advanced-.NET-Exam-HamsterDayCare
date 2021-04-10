@@ -87,9 +87,16 @@ namespace FrontEnd_Forms
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            threadOne = new Thread(new ThreadStart(StartSimulation));
-            threadOne.Start();
-            TimerGetData.Start();
+            if (threadOne == null)
+            {
+                threadOne = new Thread(new ThreadStart(StartSimulation));
+                threadOne.Start();
+                TimerGetData.Start();
+            }
+            else
+            {
+                MessageBox.Show("Stop that");
+            }
         }
     }
 }

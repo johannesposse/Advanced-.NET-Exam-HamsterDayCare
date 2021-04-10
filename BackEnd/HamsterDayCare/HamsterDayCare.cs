@@ -81,7 +81,6 @@ namespace BackEnd
             {
                 e.IsPaused = true;
                 Date = e.Date;
-                Console.Clear();
 
                 var checkOutTask = CheckOutHamstersForTheDay();
                 await Task.WhenAll(checkOutTask);
@@ -263,9 +262,7 @@ namespace BackEnd
 
             var hamsters = HDCon.Hamsters.OrderBy(x => x.CageID);
 
-            print.Append(Date + Environment.NewLine + Environment.NewLine);
-
-            print.Append($"\n\n{"",-4}{"CageID",-7}{"ExerID",-7}{"Name",-15}{"Age",-10}{"Kön",-10}{"Owner",-25}{"CheckedIn",-25}{"Exersiced",-25}" + Environment.NewLine + Environment.NewLine);
+            print.Append($"\n\n{"",-4}{"CageID"}{"ExerID"}\t{"Name"}\t\t{"Age"}\t\t{"Kön"}\t\t{"Owner"}\t\t{"CheckedIn"}\t\t\t{"Exersiced"}" + Environment.NewLine + Environment.NewLine);
 
             foreach (var h in hamsters)
             {
@@ -278,10 +275,10 @@ namespace BackEnd
                     cageID = "";
                 if (h.ExerciseAreaID == null)
                     ExID = "";
-                print.Append($"{"",-4}{cageID,-7}{ExID,-7}{h.Name,-15}{h.Age,-10}{female,-10}{h.Ownername,-25}{h.CheckedInTime,-25}{h.LastExercise,-25}" + Environment.NewLine);
+                print.Append($"{"",-4}{cageID}{ExID,5}{h.Name,30}{h.Age,30}{female,30}{h.Ownername,50}{h.CheckedInTime,50}{h.LastExercise,50}" + Environment.NewLine);
             }
 
-            PrintEvent?.Invoke(this, new PrintEventArgs(print.ToString()));
+            PrintEvent?.Invoke(this, new PrintEventArgs(print.ToString(),Date));
             return print.ToString();
         }
 

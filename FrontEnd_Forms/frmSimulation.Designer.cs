@@ -35,12 +35,17 @@ namespace FrontEnd_Forms
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.TimerGetData = new System.Windows.Forms.Timer(this.components);
             this.panel4 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.Label_Date = new System.Windows.Forms.Label();
             this.panel4.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox1
@@ -48,23 +53,24 @@ namespace FrontEnd_Forms
             this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.textBox1.Location = new System.Drawing.Point(0, 0);
+            this.textBox1.Location = new System.Drawing.Point(0, 33);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(1037, 452);
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox1.Size = new System.Drawing.Size(1037, 399);
             this.textBox1.TabIndex = 3;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(296, 63);
+            this.textBox2.Location = new System.Drawing.Point(559, 13);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 23);
             this.textBox2.TabIndex = 4;
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(445, 63);
+            this.textBox3.Location = new System.Drawing.Point(559, 48);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(100, 23);
             this.textBox3.TabIndex = 4;
@@ -77,31 +83,55 @@ namespace FrontEnd_Forms
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
+            this.panel4.Controls.Add(this.label4);
             this.panel4.Controls.Add(this.button1);
+            this.panel4.Controls.Add(this.label1);
             this.panel4.Controls.Add(this.label2);
-            this.panel4.Controls.Add(this.label3);
             this.panel4.Controls.Add(this.textBox3);
             this.panel4.Controls.Add(this.textBox2);
             this.panel4.Location = new System.Drawing.Point(12, 12);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1037, 118);
+            this.panel4.Size = new System.Drawing.Size(1037, 87);
             this.panel4.TabIndex = 10;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Nirmala UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(443, 52);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(110, 19);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Ticks per sekund";
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(32)))), ((int)(((byte)(54)))));
             this.button1.FlatAppearance.BorderSize = 0;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Nirmala UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
             this.button1.Image = global::FrontEnd_Forms.Properties.Resources.home;
-            this.button1.Location = new System.Drawing.Point(19, 42);
+            this.button1.Location = new System.Drawing.Point(796, 13);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(231, 60);
+            this.button1.Size = new System.Drawing.Size(231, 58);
             this.button1.TabIndex = 5;
             this.button1.Text = "Start";
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Nirmala UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(473, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(80, 19);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Antal dagar";
             // 
             // label2
             // 
@@ -114,25 +144,46 @@ namespace FrontEnd_Forms
             this.label2.TabIndex = 0;
             this.label2.Text = "Starta ny simulering";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(146)))), ((int)(((byte)(249)))));
-            this.label3.Location = new System.Drawing.Point(822, 35);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(31, 32);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "2";
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
+            this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.textBox1);
-            this.panel1.Location = new System.Drawing.Point(12, 136);
+            this.panel1.Location = new System.Drawing.Point(12, 156);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1037, 452);
+            this.panel1.Size = new System.Drawing.Size(1037, 432);
             this.panel1.TabIndex = 11;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Nirmala UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(19, 11);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(52, 19);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Cage 1";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
+            this.panel2.Controls.Add(this.Label_Date);
+            this.panel2.Location = new System.Drawing.Point(12, 105);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1037, 45);
+            this.panel2.TabIndex = 10;
+            // 
+            // Label_Date
+            // 
+            this.Label_Date.AutoSize = true;
+            this.Label_Date.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Label_Date.ForeColor = System.Drawing.Color.White;
+            this.Label_Date.Location = new System.Drawing.Point(424, 10);
+            this.Label_Date.Name = "Label_Date";
+            this.Label_Date.Size = new System.Drawing.Size(144, 25);
+            this.Label_Date.TabIndex = 0;
+            this.Label_Date.Text = "Simulation time";
             // 
             // FrmSimulation
             // 
@@ -141,6 +192,7 @@ namespace FrontEnd_Forms
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(1061, 600);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel4);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmSimulation";
@@ -150,6 +202,8 @@ namespace FrontEnd_Forms
             this.panel4.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -161,8 +215,12 @@ namespace FrontEnd_Forms
         private System.Windows.Forms.Timer TimerGetData;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label Label_Date;
     }
 }

@@ -1,16 +1,17 @@
 
 För G
 
--Snygga till rapporterna 
--Uppdatera UML i draw.io
 -Skriv kommentarer i koden
 
 
 För VG
--Kom på nåt
--Skapa pdf filer av rapporter och skicka mail?
--Eller nåt annat kul
 
+
+
+
+-Windows forms
+-Inställningar 
+-Visa statestik
 
 Pågående
 -

@@ -262,7 +262,7 @@ namespace BackEnd
 
             var hamsters = HDCon.Hamsters.OrderBy(x => x.CageID);
 
-            print.Append($"\n\n{"",-4}{"CageID"}{"ExerID"}\t{"Name"}\t\t{"Age"}\t\t{"Kön"}\t\t{"Owner"}\t\t{"CheckedIn"}\t\t\t{"Exersiced"}" + Environment.NewLine + Environment.NewLine);
+            print.Append($"{"CageID",-3}{"ExerID",-3}{"Name",-15}\t{"Age",-10}\t{"Sex",-10}\t{"Owner",-30}   \t\t{"CheckedIn",-40}\t{"Exersiced",-40}" + Environment.NewLine + Environment.NewLine);
 
             foreach (var h in hamsters)
             {
@@ -275,7 +275,9 @@ namespace BackEnd
                     cageID = "";
                 if (h.ExerciseAreaID == null)
                     ExID = "";
-                print.Append($"{"",-4}{cageID}{ExID,5}{h.Name,30}{h.Age,30}{female,30}{h.Ownername,50}{h.CheckedInTime,50}{h.LastExercise,50}" + Environment.NewLine);
+
+                print.Append($"{cageID,-3}{ExID,-3}{h.Name,-15}\t{h.Age,-10}\t{female,-10}\t{h.Ownername,-30}   \t\t{h.CheckedInTime,-40}\t{h.LastExercise,-40}" + Environment.NewLine);
+                //print.Append($"{"",-4}{cageID}{ExID,5}{h.Name,30}{h.Age,30}{female,30}{h.Ownername,50}{h.CheckedInTime,50}{h.LastExercise,50}" + Environment.NewLine);
             }
 
             PrintEvent?.Invoke(this, new PrintEventArgs(print.ToString(),Date));

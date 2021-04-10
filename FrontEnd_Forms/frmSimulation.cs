@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -28,9 +29,9 @@ namespace FrontEnd_Forms
         private void ShowReport(object sender, ReportEventArgs e)
         {
             MessageBox.Show("A new report has been created. Go to the reports tab to check it out");
-
+            
             data = "";
-            TimerGetData.Stop();
+            //TimerGetData.Stop();
         }
 
         private void ReceiveData(object sender, PrintEventArgs e)
@@ -41,41 +42,45 @@ namespace FrontEnd_Forms
 
         private void StartSimulation()
         {
+            
             BackEnd.HamsterDayCare.PrintEvent += ReceiveData;
-
-
 
             int numDays;
             int numSpeed;
 
-            if (!int.TryParse(textBox2.Text, out numDays) | !int.TryParse(textBox3.Text, out numSpeed))
+            string path = @"..\..\..\..\config.txt";
+
+            try
             {
-                MessageBox.Show("This is a posetive number only field");
-                return;
+                var config = File.ReadAllLines(path).ToList();
+                var days = config[1].Split(",");
+                numDays = int.Parse(days[1]);
+                var speed = config[2].Split(",");
+                numSpeed = int.Parse(speed[1]);
             }
-            else if (numDays < 1 | numSpeed < 1)
+            catch
             {
-                MessageBox.Show("This is a posetive number only field");
-                return;
+                MessageBox.Show("The config file was corrupted.\nRunning simulation at default values");
+                numDays = 1;
+                numSpeed = 10;
             }
 
+            
             hamsterDayCare.StartSimulation(numDays, numSpeed);
+
+            
+            data = "";
+
         }
 
         private void FrmSimulation_Load(object sender, EventArgs e)
         {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            threadOne = new Thread(new ThreadStart(StartSimulation));
-            threadOne.Start();
-            TimerGetData.Start();
+            
         }
 
         private void TimerGetData_Tick(object sender, EventArgs e)
         {
+            
             textBox1.Text = data;
             Label_Date.Text = Date.ToString("yyyy:MM:dd hh:mm:ss");
         }

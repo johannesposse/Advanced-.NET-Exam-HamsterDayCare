@@ -18,9 +18,6 @@ namespace FrontEnd_Forms
         public FrmStatistics()
         {
             InitializeComponent();
-
-
-
         }
 
         private void Label_NumberOfSimulations_Click(object sender, EventArgs e)

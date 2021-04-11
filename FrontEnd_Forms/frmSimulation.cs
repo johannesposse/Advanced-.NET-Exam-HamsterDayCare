@@ -65,17 +65,19 @@ namespace FrontEnd_Forms
                 numSpeed = 10;
             }
 
-            
+            bool hasData;
+            hamsterDayCare.InitilizeDatabase(out hasData);
             hamsterDayCare.StartSimulation(numDays, numSpeed);
 
             
             data = "";
+            threadOne = null;
 
         }
 
         private void FrmSimulation_Load(object sender, EventArgs e)
         {
-            
+            threadOne = null;
         }
 
         private void TimerGetData_Tick(object sender, EventArgs e)

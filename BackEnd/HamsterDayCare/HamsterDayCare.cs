@@ -83,7 +83,7 @@ namespace BackEnd
                 Date = e.Date;
 
                 var checkOutTask = CheckOutHamstersForTheDay();
-                await Task.WhenAll(checkOutTask);
+                await checkOutTask;
 
                 ReportEvent?.Invoke(this, new ReportEventArgs(HDCon.Hamsters.ToList(), HDCon.ActivityLogs.ToList()));
 
@@ -93,6 +93,8 @@ namespace BackEnd
 
                 e.Date = e.Date.AddHours(13.9);
                 e.IsPaused = false;
+
+                
             }
             else if (e.Date.Hour >= 7 & e.Date.TimeOfDay <= TimeSpan.Parse("17:00:00"))
             {
@@ -236,8 +238,9 @@ namespace BackEnd
 
         private void Reset()
         {
+            
             HDCon.ActivityLogs.RemoveRange(HDCon.ActivityLogs);
-            HDCon.SaveChanges(); //kanske inte behövs?
+            HDCon.SaveChanges(); 
 
             foreach (var ham in HDCon.Hamsters)
             {

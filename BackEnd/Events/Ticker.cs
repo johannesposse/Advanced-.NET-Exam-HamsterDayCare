@@ -16,7 +16,7 @@ namespace BackEnd
             var endDate = startDate.AddDays(days);
             var tickEventArgs = new TickEventArgs(startDate,endDate); 
 
-            while (!tickEventArgs.IsPaused & tickEventArgs.Date <= tickEventArgs.EndDate)
+            while (!tickEventArgs.IsPaused & tickEventArgs.Date < tickEventArgs.EndDate)
             {
                 Tick?.Invoke(this, tickEventArgs);
                 System.Threading.Thread.Sleep(ticksPerSecond);

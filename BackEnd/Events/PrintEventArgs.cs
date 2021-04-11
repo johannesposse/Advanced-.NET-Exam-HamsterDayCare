@@ -8,7 +8,7 @@ namespace BackEnd
 {
     public class PrintEventArgs : EventArgs
     {
-        public string Data { get; set; }
+        public string Data { get; set; } 
         public DateTime Date { get; set; }
 
         public PrintEventArgs(string data, DateTime date)

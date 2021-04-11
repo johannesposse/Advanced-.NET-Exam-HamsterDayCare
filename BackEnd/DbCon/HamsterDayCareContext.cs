@@ -16,15 +16,14 @@ namespace BackEnd
         public virtual DbSet<ActivityLog> ActivityLogs { get; set; }
 
 
-        protected override void OnConfiguring(DbContextOptionsBuilder dBContextbuilder)
+        protected override void OnConfiguring(DbContextOptionsBuilder dBContextbuilder) //kör vid init av HamsterDayCareContext
         {
             dBContextbuilder.UseSqlServer(@"Server=.\SQLExpress;Database=advJohannesPosse;Trusted_Connection=True;MultipleActiveResultSets=True;").UseLazyLoadingProxies();
-            
         }
 
         public HamsterDayCareContext()
         {
-            this.Database.EnsureCreated();
+            this.Database.EnsureCreated(); //denna kollar så att databasen finns, gör den inte det så skapas den
         }
     }
 }

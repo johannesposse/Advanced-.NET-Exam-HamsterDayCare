@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BackEnd
 {
-    public class Report
+    public class Report //hjälp class för att enklare generera text rapporter
     {
         public int ID { get; set; }
         public string Owner { get; set; }

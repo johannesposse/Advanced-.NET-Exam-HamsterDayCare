@@ -12,21 +12,21 @@ using System.Timers;
 
 namespace BackEnd
 {
-    public class HamsterDayCare
+    public class HamsterDayCare 
     {
-        private Ticker ticker = new Ticker();
-        public static event EventHandler<PrintEventArgs> PrintEvent;
-        public event EventHandler<ReportEventArgs> ReportEvent;
-        private HamsterDayCareContext HDCon = new HamsterDayCareContext();
-        private DateTime Date;
+        private Ticker ticker = new Ticker(); //en ny instans av ticker som driver simuleringen
+        public static event EventHandler<PrintEventArgs> PrintEvent; //event för att skriva ut till skärm vad som händer varje tick
+        public event EventHandler<ReportEventArgs> ReportEvent; //event för att skapa rapporter
+        private HamsterDayCareContext HDCon = new HamsterDayCareContext(); //ny instans av hamsterdaycarecontext som gör det möjligt att koppla upp mot databasen
+        private DateTime Date; //en datetime som sätts varje tick
 
 
-        public bool InitilizeDatabase(out bool dbHasData)
+        public bool InitilizeDatabase(out bool dbHasData) //metod för att initialisera databasen, om det inte redan finns den grund data som behövs
         {
-            dbHasData = true;
+            dbHasData = true; //bool för att kolla om databasen har grund data
 
 
-            if (!HDCon.Cages.Any())
+            if (!HDCon.Cages.Any()) //kollar om det finns några burar, gör det inte det skapas 10st burar
             {
                 for (int i = 0; i < 10; i++)
                 {
@@ -36,44 +36,44 @@ namespace BackEnd
                 }
             }
 
-            if (!HDCon.ExerciseArea.Any())
+            if (!HDCon.ExerciseArea.Any()) //kollar om det finns ett träningsområde, för det inte det så skapas ett träningsområde
             {
                 var tempExerciseArea = new ExerciseArea();
                 HDCon.ExerciseArea.Add(tempExerciseArea);
                 HDCon.SaveChanges();
             }
 
-            if (!HDCon.Hamsters.Any())
+            if (!HDCon.Hamsters.Any()) //kollar om det finns hamstrar, gör det inte det skapas hamstrar
             {
-                List<string> hamsterData = File.ReadAllLines(@"..\..\..\..\Hamsterlista30.csv").ToList();
+                List<string> hamsterData = File.ReadAllLines(@"..\..\..\..\Hamsterlista30.csv").ToList(); //läser in från fil till en string lista
 
-                for (int i = 0; i < hamsterData.Count; i++)
+                for (int i = 0; i < hamsterData.Count; i++) //loopar igenom listan
                 {
-                    string[] data = hamsterData[i].Split(";");
-                    bool isFemale = true;
-                    if (data[2] == "M")
+                    string[] data = hamsterData[i].Split(";"); //splittar varje rad till en array
+                    bool isFemale = true; //sätter en bool för att kolla kön till true som default
+                    if (data[2] == "M") //om datan som läses in är en kille sätts boolen till false
                     {
                         isFemale = false;
                     }
-                    var tempHamster = new Hamster(data[0], data[3], Math.Round(decimal.Parse(data[1]) / 12, 1), isFemale);
-                    HDCon.Hamsters.Add(tempHamster);
-                    HDCon.SaveChanges();
+                    var tempHamster = new Hamster(data[0], data[3], Math.Round(decimal.Parse(data[1]) / 12, 1), isFemale); //skapar en ny hamster
+                    HDCon.Hamsters.Add(tempHamster); //lägger till hamstern i databasen
+                    HDCon.SaveChanges(); //sparar
                 }
             }
 
-            if (!HDCon.Cages.Any() ^ !HDCon.ExerciseArea.Any() ^ !HDCon.Hamsters.Any())
+            if (!HDCon.Cages.Any() ^ !HDCon.ExerciseArea.Any() ^ !HDCon.Hamsters.Any()) //kollar om cages, träningsområde och hamsters har någon data
             {
-                dbHasData = false;
+                dbHasData = false; //har dom inte det sätts boolsen till false, annars är den true
             }
 
-            HDCon.SaveChanges();
+            HDCon.SaveChanges(); //sparar ändringar
 
-            return dbHasData;
+            return dbHasData; //retunerar boolen
         }
-        public void StartSimulation(int days, int ticksPerSecond)
+        public void StartSimulation(int days, int ticksPerSecond) //metod som startar igång hela simuleringen, tar emot antal dagar och hastigheten till simuleringen
         {
-            Reset();
-            ticksPerSecond = 1000 / ticksPerSecond;
+            Reset(); //nollställer alla värden, ifall en simulering skulle ha avbrutits så sätter den rätt värden för att kunna skapa en ny simulering utan problem
+            ticksPerSecond = 1000 / ticksPerSecond; //
             ticker.Tick += StartThreads;
             ticker.StartTick(ticksPerSecond, days);
         }

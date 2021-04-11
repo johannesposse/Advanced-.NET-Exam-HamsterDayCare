@@ -12,7 +12,7 @@ namespace BackEnd
         public bool IsPaused { get; set; }
         public DateTime EndDate { get; set; }
 
-        public TickEventArgs(DateTime startDate, DateTime endDate, bool isPaused = false)
+        public TickEventArgs(DateTime startDate, DateTime endDate, bool isPaused = false) //tar emot startdatum, slutdatum, pausbool som default sätts till false
         {
             this.Date = startDate;
             this.EndDate = endDate;
@@ -21,7 +21,7 @@ namespace BackEnd
 
         public override string ToString()
         {
-            return this.Date.ToString("YY:MM:DD hh:mm:ss");
+            return this.Date.ToString("YY:MM:DD hh:mm:ss"); //retunerar datumet som en string
         }
     }
 

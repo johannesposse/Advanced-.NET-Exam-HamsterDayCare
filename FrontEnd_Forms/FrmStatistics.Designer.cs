@@ -75,9 +75,9 @@ namespace FrontEnd_Forms
             this.lbl_MostExercisedName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(226)))), ((int)(((byte)(178)))));
             this.lbl_MostExercisedName.Location = new System.Drawing.Point(19, 48);
             this.lbl_MostExercisedName.Name = "lbl_MostExercisedName";
-            this.lbl_MostExercisedName.Size = new System.Drawing.Size(31, 32);
+            this.lbl_MostExercisedName.Size = new System.Drawing.Size(64, 32);
             this.lbl_MostExercisedName.TabIndex = 1;
-            this.lbl_MostExercisedName.Text = "0";
+            this.lbl_MostExercisedName.Text = "N/A";
             // 
             // ExercisedHamster
             // 
@@ -119,9 +119,9 @@ namespace FrontEnd_Forms
             this.lbl_AverageWatingToExercise.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(226)))), ((int)(((byte)(178)))));
             this.lbl_AverageWatingToExercise.Location = new System.Drawing.Point(19, 48);
             this.lbl_AverageWatingToExercise.Name = "lbl_AverageWatingToExercise";
-            this.lbl_AverageWatingToExercise.Size = new System.Drawing.Size(57, 32);
+            this.lbl_AverageWatingToExercise.Size = new System.Drawing.Size(64, 32);
             this.lbl_AverageWatingToExercise.TabIndex = 1;
-            this.lbl_AverageWatingToExercise.Text = "5/5";
+            this.lbl_AverageWatingToExercise.Text = "N/A";
             // 
             // label7
             // 
@@ -258,9 +258,9 @@ namespace FrontEnd_Forms
             this.lbl_MostPopularCage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(146)))), ((int)(((byte)(249)))));
             this.lbl_MostPopularCage.Location = new System.Drawing.Point(19, 48);
             this.lbl_MostPopularCage.Name = "lbl_MostPopularCage";
-            this.lbl_MostPopularCage.Size = new System.Drawing.Size(31, 32);
+            this.lbl_MostPopularCage.Size = new System.Drawing.Size(64, 32);
             this.lbl_MostPopularCage.TabIndex = 1;
-            this.lbl_MostPopularCage.Text = "2";
+            this.lbl_MostPopularCage.Text = "N/A";
             this.lbl_MostPopularCage.Click += new System.EventHandler(this.Label_NumberOfSimulations_Click);
             // 
             // panel4

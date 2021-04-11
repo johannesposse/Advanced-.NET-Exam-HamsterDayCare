@@ -13,7 +13,7 @@ namespace FrontEnd_Forms
 {
     public partial class FrmStatistics : Form
     {
-
+        static BackEnd.HamsterDayCare hamsterDayCare = new BackEnd.HamsterDayCare();
 
         public FrmStatistics()
         {
@@ -35,18 +35,44 @@ namespace FrontEnd_Forms
 
         private void MosteExercisedHamster(List<BackEnd.Report> reports)
         {
-
-
-
             var hamsters = reports.Where(x => x.Acticity == " Exercise").GroupBy(x => x.Name).Select(x => new { Name = x.Key, Count = x.Count() });
-            var mostExercised = hamsters.FirstOrDefault();
+            var mostExercised = hamsters.OrderByDescending(x => x.Count).FirstOrDefault();
             lbl_MosteExercisedTimes.Text = "Has exercised " + mostExercised.Count.ToString() + " times";
             lbl_MostExercisedName.Text = mostExercised.Name;
         }
 
         private void AverageWaitingTimeToExercise(List<BackEnd.Report> reports)
         {
+            var options = hamsterDayCare.ShowPreviousResults();
 
+            TimeSpan start = TimeSpan.Parse("07:00:00");
+
+            var exercise = reports.Where(x => x.Acticity == " Exercise").OrderBy(x => x.Start);
+
+            int timeDifference = 0;
+            int num = 30 * (options.Length - 1);
+                
+            if (options.Any())
+            {
+                var firstExersice = exercise.Take(num);
+
+                foreach (var first in firstExersice)
+                {
+                    var timeSpanDifference = first.Start.TimeOfDay - start;
+                    timeDifference += timeSpanDifference.Hours;
+                }
+
+                double averageTime = timeDifference / num;
+                lbl_AverageWatingToExercise.Text = averageTime + " hours";
+            }
+            else
+            {
+                lbl_AverageWatingToExercise.Text = "N/A";
+            }
+
+
+            
+           
         }
 
         private void FrmStatistics_Load(object sender, EventArgs e)

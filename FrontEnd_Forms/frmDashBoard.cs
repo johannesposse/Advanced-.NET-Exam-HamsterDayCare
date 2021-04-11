@@ -20,13 +20,13 @@ namespace FrontEnd_Forms
 
         private void FrmDashBoard_Load(object sender, EventArgs e)
         {
-            var options = hamsterDayCare.ShowPreviousResults();
+            var options = hamsterDayCare.ShowPreviousResults(); //hämtar ut en array av föregående rapporter
 
-            if (options.Length < 1)
+            if (options.Length < 1) //om den är tom så skrivs det ut en nolla
             {
                 Label_NumberOfSimulations.Text = "0";
             }
-            else
+            else //annars så skrivs antalet rapporter ut som antal simulationer (förutom total)
             {
                 Label_NumberOfSimulations.Text = (options.Length - 1).ToString();
             }

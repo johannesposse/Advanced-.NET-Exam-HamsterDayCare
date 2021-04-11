@@ -43,7 +43,7 @@ namespace FrontEnd_Forms
             this.lblTitle = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.PnlFormLoader = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_Exit = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -211,13 +211,12 @@ namespace FrontEnd_Forms
             // panel3
             // 
             this.panel3.Controls.Add(this.PnlFormLoader);
-            this.panel3.Controls.Add(this.button1);
+            this.panel3.Controls.Add(this.btn_Exit);
             this.panel3.Controls.Add(this.lblTitle);
             this.panel3.Location = new System.Drawing.Point(238, 0);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1061, 700);
             this.panel3.TabIndex = 1;
-            this.panel3.Paint += new System.Windows.Forms.PaintEventHandler(this.panel3_Paint);
             // 
             // PnlFormLoader
             // 
@@ -226,21 +225,20 @@ namespace FrontEnd_Forms
             this.PnlFormLoader.Name = "PnlFormLoader";
             this.PnlFormLoader.Size = new System.Drawing.Size(1061, 600);
             this.PnlFormLoader.TabIndex = 4;
-            this.PnlFormLoader.Paint += new System.Windows.Forms.PaintEventHandler(this.PnlFormLoader_Paint);
             // 
-            // button1
+            // btn_Exit
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(41)))), ((int)(((byte)(63)))));
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(113)))));
-            this.button1.Location = new System.Drawing.Point(1015, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(35, 35);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "X";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btn_Exit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(41)))), ((int)(((byte)(63)))));
+            this.btn_Exit.FlatAppearance.BorderSize = 0;
+            this.btn_Exit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_Exit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(81)))), ((int)(((byte)(91)))), ((int)(((byte)(113)))));
+            this.btn_Exit.Location = new System.Drawing.Point(1015, 12);
+            this.btn_Exit.Name = "btn_Exit";
+            this.btn_Exit.Size = new System.Drawing.Size(35, 35);
+            this.btn_Exit.TabIndex = 3;
+            this.btn_Exit.Text = "X";
+            this.btn_Exit.UseVisualStyleBackColor = false;
+            this.btn_Exit.Click += new System.EventHandler(this.button1_Click);
             // 
             // HamsterDayCare
             // 
@@ -279,7 +277,7 @@ namespace FrontEnd_Forms
         private System.Windows.Forms.Panel Nav_Pnl;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_Exit;
         private System.Windows.Forms.Panel PnlFormLoader;
     }
 }

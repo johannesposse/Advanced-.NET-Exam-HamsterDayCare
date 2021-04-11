@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BackEnd
 {
-    public class ActivityLog
+    public class ActivityLog //klass för att hålla införmation för loggar
     {
         public int ActivityLogID { get; set; }
         public string ActivityName { get; set; }

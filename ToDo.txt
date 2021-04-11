@@ -1,15 +1,10 @@
 
 För G
 
--Snygga till rapporterna 
--Uppdatera UML i draw.io
 -Skriv kommentarer i koden
 
 
 För VG
--Kom på nåt
--Skapa pdf filer av rapporter och skicka mail?
--Eller nåt annat kul
 
 
 Pågående
@@ -37,3 +32,6 @@ Färdiga
 -[FIXAD] Programmet stängs av efter en simulation är klar
 -[FIXAD] Snygga till UI
 -[FIXAD] La till ett menysystem man navigerar med tangenterna
+-[FIXAD] Windows forms
+-[FIXAD] Inställningar 
+-[FIXAD] Visa statestik

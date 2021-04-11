@@ -29,7 +29,6 @@ namespace FrontEnd_Forms
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmStatistics));
             this.PopularCage = new System.Windows.Forms.Label();
             this.lbl_MostExercisedName = new System.Windows.Forms.Label();
             this.ExercisedHamster = new System.Windows.Forms.Label();
@@ -37,10 +36,9 @@ namespace FrontEnd_Forms
             this.lbl_MosteExercisedTimes = new System.Windows.Forms.Label();
             this.lbl_AverageWatingToExercise = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.circularProgressBar1 = new CircularProgressBar.CircularProgressBar();
-            this.label8 = new System.Windows.Forms.Label();
+            this.lbl_AverageTimesExercisedPerDayNum = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.label9 = new System.Windows.Forms.Label();
+            this.lbl_AverageTimesExercisedPerDay = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -49,12 +47,14 @@ namespace FrontEnd_Forms
             this.lbl_MostPopularCage = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.lbl_MostPopularCageID = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel8.SuspendLayout();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // PopularCage
@@ -71,11 +71,11 @@ namespace FrontEnd_Forms
             // lbl_MostExercisedName
             // 
             this.lbl_MostExercisedName.AutoSize = true;
-            this.lbl_MostExercisedName.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbl_MostExercisedName.Font = new System.Drawing.Font("Microsoft Sans Serif", 40F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lbl_MostExercisedName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(226)))), ((int)(((byte)(178)))));
             this.lbl_MostExercisedName.Location = new System.Drawing.Point(19, 48);
             this.lbl_MostExercisedName.Name = "lbl_MostExercisedName";
-            this.lbl_MostExercisedName.Size = new System.Drawing.Size(64, 32);
+            this.lbl_MostExercisedName.Size = new System.Drawing.Size(120, 63);
             this.lbl_MostExercisedName.TabIndex = 1;
             this.lbl_MostExercisedName.Text = "N/A";
             // 
@@ -106,7 +106,7 @@ namespace FrontEnd_Forms
             this.lbl_MosteExercisedTimes.AutoSize = true;
             this.lbl_MosteExercisedTimes.Font = new System.Drawing.Font("Nirmala UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbl_MosteExercisedTimes.ForeColor = System.Drawing.Color.White;
-            this.lbl_MosteExercisedTimes.Location = new System.Drawing.Point(19, 100);
+            this.lbl_MosteExercisedTimes.Location = new System.Drawing.Point(19, 115);
             this.lbl_MosteExercisedTimes.Name = "lbl_MosteExercisedTimes";
             this.lbl_MosteExercisedTimes.Size = new System.Drawing.Size(124, 19);
             this.lbl_MosteExercisedTimes.TabIndex = 0;
@@ -115,11 +115,11 @@ namespace FrontEnd_Forms
             // lbl_AverageWatingToExercise
             // 
             this.lbl_AverageWatingToExercise.AutoSize = true;
-            this.lbl_AverageWatingToExercise.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbl_AverageWatingToExercise.Font = new System.Drawing.Font("Microsoft Sans Serif", 50F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lbl_AverageWatingToExercise.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(226)))), ((int)(((byte)(178)))));
             this.lbl_AverageWatingToExercise.Location = new System.Drawing.Point(19, 48);
             this.lbl_AverageWatingToExercise.Name = "lbl_AverageWatingToExercise";
-            this.lbl_AverageWatingToExercise.Size = new System.Drawing.Size(64, 32);
+            this.lbl_AverageWatingToExercise.Size = new System.Drawing.Size(147, 76);
             this.lbl_AverageWatingToExercise.TabIndex = 1;
             this.lbl_AverageWatingToExercise.Text = "N/A";
             // 
@@ -134,47 +134,16 @@ namespace FrontEnd_Forms
             this.label7.TabIndex = 0;
             this.label7.Text = "Average waiting time to exercise";
             // 
-            // circularProgressBar1
+            // lbl_AverageTimesExercisedPerDayNum
             // 
-            this.circularProgressBar1.AnimationSpeed = 500;
-            this.circularProgressBar1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
-            this.circularProgressBar1.Font = new System.Drawing.Font("Segoe UI", 44F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.circularProgressBar1.ForeColor = System.Drawing.Color.White;
-            this.circularProgressBar1.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
-            this.circularProgressBar1.InnerMargin = 2;
-            this.circularProgressBar1.InnerWidth = -1;
-            this.circularProgressBar1.Location = new System.Drawing.Point(19, 86);
-            this.circularProgressBar1.MarqueeAnimationSpeed = 2000;
-            this.circularProgressBar1.Name = "circularProgressBar1";
-            this.circularProgressBar1.OuterColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(30)))), ((int)(((byte)(54)))));
-            this.circularProgressBar1.OuterMargin = -25;
-            this.circularProgressBar1.OuterWidth = 26;
-            this.circularProgressBar1.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
-            this.circularProgressBar1.ProgressWidth = 7;
-            this.circularProgressBar1.SecondaryFont = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.circularProgressBar1.Size = new System.Drawing.Size(270, 270);
-            this.circularProgressBar1.StartAngle = 270;
-            this.circularProgressBar1.SubscriptColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(166)))), ((int)(((byte)(166)))));
-            this.circularProgressBar1.SubscriptMargin = new System.Windows.Forms.Padding(10, -35, 0, 0);
-            this.circularProgressBar1.SubscriptText = "";
-            this.circularProgressBar1.SuperscriptColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(166)))), ((int)(((byte)(166)))));
-            this.circularProgressBar1.SuperscriptMargin = new System.Windows.Forms.Padding(10, 35, 0, 0);
-            this.circularProgressBar1.SuperscriptText = "";
-            this.circularProgressBar1.TabIndex = 2;
-            this.circularProgressBar1.Text = "69%";
-            this.circularProgressBar1.TextMargin = new System.Windows.Forms.Padding(5, 8, 0, 0);
-            this.circularProgressBar1.Value = 68;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(226)))), ((int)(((byte)(178)))));
-            this.label8.Location = new System.Drawing.Point(19, 48);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(57, 32);
-            this.label8.TabIndex = 1;
-            this.label8.Text = "5/5";
+            this.lbl_AverageTimesExercisedPerDayNum.AutoSize = true;
+            this.lbl_AverageTimesExercisedPerDayNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 100F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbl_AverageTimesExercisedPerDayNum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(226)))), ((int)(((byte)(178)))));
+            this.lbl_AverageTimesExercisedPerDayNum.Location = new System.Drawing.Point(19, 48);
+            this.lbl_AverageTimesExercisedPerDayNum.Name = "lbl_AverageTimesExercisedPerDayNum";
+            this.lbl_AverageTimesExercisedPerDayNum.Size = new System.Drawing.Size(291, 153);
+            this.lbl_AverageTimesExercisedPerDayNum.TabIndex = 1;
+            this.lbl_AverageTimesExercisedPerDayNum.Text = "N/A";
             // 
             // panel6
             // 
@@ -186,23 +155,23 @@ namespace FrontEnd_Forms
             this.panel6.Size = new System.Drawing.Size(334, 148);
             this.panel6.TabIndex = 12;
             // 
-            // label9
+            // lbl_AverageTimesExercisedPerDay
             // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(19, 14);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(230, 25);
-            this.label9.TabIndex = 0;
-            this.label9.Text = "Snittbetyg från användare";
+            this.lbl_AverageTimesExercisedPerDay.AutoSize = true;
+            this.lbl_AverageTimesExercisedPerDay.Font = new System.Drawing.Font("Nirmala UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbl_AverageTimesExercisedPerDay.ForeColor = System.Drawing.Color.White;
+            this.lbl_AverageTimesExercisedPerDay.Location = new System.Drawing.Point(19, 14);
+            this.lbl_AverageTimesExercisedPerDay.Name = "lbl_AverageTimesExercisedPerDay";
+            this.lbl_AverageTimesExercisedPerDay.Size = new System.Drawing.Size(224, 25);
+            this.lbl_AverageTimesExercisedPerDay.TabIndex = 0;
+            this.lbl_AverageTimesExercisedPerDay.Text = "Average Times Exercised ";
             // 
             // panel7
             // 
             this.panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
-            this.panel7.Controls.Add(this.circularProgressBar1);
-            this.panel7.Controls.Add(this.label8);
-            this.panel7.Controls.Add(this.label9);
+            this.panel7.Controls.Add(this.pictureBox1);
+            this.panel7.Controls.Add(this.lbl_AverageTimesExercisedPerDayNum);
+            this.panel7.Controls.Add(this.lbl_AverageTimesExercisedPerDay);
             this.panel7.Location = new System.Drawing.Point(12, 185);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(338, 403);
@@ -254,11 +223,11 @@ namespace FrontEnd_Forms
             // lbl_MostPopularCage
             // 
             this.lbl_MostPopularCage.AutoSize = true;
-            this.lbl_MostPopularCage.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbl_MostPopularCage.Font = new System.Drawing.Font("Microsoft Sans Serif", 40F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lbl_MostPopularCage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(146)))), ((int)(((byte)(249)))));
             this.lbl_MostPopularCage.Location = new System.Drawing.Point(19, 48);
             this.lbl_MostPopularCage.Name = "lbl_MostPopularCage";
-            this.lbl_MostPopularCage.Size = new System.Drawing.Size(64, 32);
+            this.lbl_MostPopularCage.Size = new System.Drawing.Size(120, 63);
             this.lbl_MostPopularCage.TabIndex = 1;
             this.lbl_MostPopularCage.Text = "N/A";
             this.lbl_MostPopularCage.Click += new System.EventHandler(this.Label_NumberOfSimulations_Click);
@@ -279,11 +248,21 @@ namespace FrontEnd_Forms
             this.lbl_MostPopularCageID.AutoSize = true;
             this.lbl_MostPopularCageID.Font = new System.Drawing.Font("Nirmala UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.lbl_MostPopularCageID.ForeColor = System.Drawing.Color.White;
-            this.lbl_MostPopularCageID.Location = new System.Drawing.Point(19, 100);
+            this.lbl_MostPopularCageID.Location = new System.Drawing.Point(19, 115);
             this.lbl_MostPopularCageID.Name = "lbl_MostPopularCageID";
             this.lbl_MostPopularCageID.Size = new System.Drawing.Size(124, 19);
             this.lbl_MostPopularCageID.TabIndex = 0;
             this.lbl_MostPopularCageID.Text = "Most popular cage";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::FrontEnd_Forms.Properties.Resources.hamsterWorkOut;
+            this.pictureBox1.Location = new System.Drawing.Point(19, 204);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(302, 184);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
             // 
             // FrmStatistics
             // 
@@ -311,6 +290,7 @@ namespace FrontEnd_Forms
             this.panel8.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -323,10 +303,9 @@ namespace FrontEnd_Forms
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label lbl_AverageWatingToExercise;
         private System.Windows.Forms.Label label7;
-        private CircularProgressBar.CircularProgressBar circularProgressBar1;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lbl_AverageTimesExercisedPerDayNum;
         private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lbl_AverageTimesExercisedPerDay;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label label10;
@@ -336,5 +315,6 @@ namespace FrontEnd_Forms
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label lbl_MostPopularCageID;
         private System.Windows.Forms.Label lbl_MosteExercisedTimes;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

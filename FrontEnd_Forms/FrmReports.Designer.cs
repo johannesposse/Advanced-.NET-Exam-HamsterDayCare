@@ -57,11 +57,11 @@ namespace FrontEnd_Forms
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 50F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(226)))), ((int)(((byte)(178)))));
             this.label4.Location = new System.Drawing.Point(19, 48);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(31, 32);
+            this.label4.Size = new System.Drawing.Size(70, 76);
             this.label4.TabIndex = 1;
             this.label4.Text = "0";
             // 
@@ -144,12 +144,12 @@ namespace FrontEnd_Forms
             this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBox1.ForeColor = System.Drawing.SystemColors.ScrollBar;
-            this.textBox1.Location = new System.Drawing.Point(0, 48);
+            this.textBox1.Location = new System.Drawing.Point(19, 48);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(816, 528);
+            this.textBox1.Size = new System.Drawing.Size(782, 519);
             this.textBox1.TabIndex = 4;
             // 
             // label6

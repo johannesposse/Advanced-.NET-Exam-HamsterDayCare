@@ -68,11 +68,35 @@ namespace FrontEnd_Forms
             else
             {
                 lbl_AverageWatingToExercise.Text = "N/A";
+            }  
+        }
+
+        private void AverageTimesExercisedPerDay(List<BackEnd.Report> reports)
+        {
+            var options = hamsterDayCare.ShowPreviousResults();
+            var exercise = reports.Where(x => x.Acticity == " Exercise");
+
+            if (exercise.Any())
+            {
+                var exCount = exercise.Count();
+                double times = Convert.ToDouble(exCount) / 30;
+                lbl_AverageTimesExercisedPerDayNum.Text = times.ToString();
+            }
+            else
+            {
+                lbl_AverageTimesExercisedPerDayNum.Text = "N/A";
             }
 
 
-            
-           
+            //if (options.Any())
+            //{
+            //    double times = exercise.Count() / (options.Length - 1);
+            //    lbl_AverageTimesExercisedPerDayNum.Text = times.ToString();
+            //}
+            //else
+            //{
+            //    lbl_AverageTimesExercisedPerDayNum.Text = "N/A";
+            //}
         }
 
         private void FrmStatistics_Load(object sender, EventArgs e)
@@ -93,6 +117,7 @@ namespace FrontEnd_Forms
                 MostPopularCage(reports);
                 MosteExercisedHamster(reports);
                 AverageWaitingTimeToExercise(reports);
+                AverageTimesExercisedPerDay(reports);
             }
             else
             {

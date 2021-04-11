@@ -43,10 +43,13 @@ namespace FrontEnd_Forms
             this.lbl_MostPopularCage = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.lbl_MostPopularCageID = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.txt_HamsterStatic = new System.Windows.Forms.TextBox();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // PopularCage
@@ -202,12 +205,35 @@ namespace FrontEnd_Forms
             this.lbl_MostPopularCageID.TabIndex = 0;
             this.lbl_MostPopularCageID.Text = "Most popular cage";
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
+            this.panel2.Controls.Add(this.txt_HamsterStatic);
+            this.panel2.Location = new System.Drawing.Point(12, 333);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1031, 255);
+            this.panel2.TabIndex = 15;
+            // 
+            // txt_HamsterStatic
+            // 
+            this.txt_HamsterStatic.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
+            this.txt_HamsterStatic.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt_HamsterStatic.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.txt_HamsterStatic.Location = new System.Drawing.Point(19, 15);
+            this.txt_HamsterStatic.Multiline = true;
+            this.txt_HamsterStatic.Name = "txt_HamsterStatic";
+            this.txt_HamsterStatic.ReadOnly = true;
+            this.txt_HamsterStatic.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txt_HamsterStatic.Size = new System.Drawing.Size(994, 224);
+            this.txt_HamsterStatic.TabIndex = 4;
+            // 
             // FrmStatistics
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(51)))), ((int)(((byte)(73)))));
             this.ClientSize = new System.Drawing.Size(1061, 600);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel7);
@@ -224,6 +250,8 @@ namespace FrontEnd_Forms
             this.panel7.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -244,5 +272,7 @@ namespace FrontEnd_Forms
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label lbl_MostPopularCageID;
         private System.Windows.Forms.Label lbl_MosteExercisedTimes;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.TextBox txt_HamsterStatic;
     }
 }

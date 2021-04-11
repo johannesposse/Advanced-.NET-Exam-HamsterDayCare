@@ -33,8 +33,6 @@ namespace FrontEnd_Forms
         public HamsterDayCare()
         {
 
-            
-
             InitializeComponent();
 
             bool hasData;
@@ -44,7 +42,7 @@ namespace FrontEnd_Forms
             if (!File.Exists(path))
             {
                 using (File.Create(path)) { }
-                string[] data = { "#Simulation", "days,1", "speed,10" };
+                string[] data = { "#Simulation", "days,1", "speed,3" };
                 File.WriteAllLines(path, data);
             }
 

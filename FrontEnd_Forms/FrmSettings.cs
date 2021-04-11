@@ -24,7 +24,7 @@ namespace FrontEnd_Forms
             if (!File.Exists(path))
             {
                 using (File.Create(path)) { }
-                string[] data = { "#Simulation", "days,1", "speed,10" };
+                string[] data = { "#Simulation", "days,1", "speed,3" };
                 File.WriteAllLines(path, data);
                 ReadFromFile();
             }
@@ -50,7 +50,7 @@ namespace FrontEnd_Forms
             catch
             {
                 MessageBox.Show("The config file was corrupted.\nResetting the config file");
-                string[] data = { "#Simulation", "days,1", "speed,10" };
+                string[] data = { "#Simulation", "days,1", "speed,3" };
                 File.WriteAllLines(path, data);
             }
         }
@@ -82,7 +82,7 @@ namespace FrontEnd_Forms
 
         private void btn_ResetConfig_Click(object sender, EventArgs e)
         {
-            string[] data = { "#Simulation", "days,1", "speed,10" };
+            string[] data = { "#Simulation", "days,1", "speed,3" };
             File.WriteAllLines(path, data);
         }
     }

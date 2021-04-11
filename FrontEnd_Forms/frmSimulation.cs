@@ -61,7 +61,7 @@ namespace FrontEnd_Forms
             {
                 MessageBox.Show("The config file was corrupted.\nRunning simulation at default values");
                 numDays = 1;
-                numSpeed = 10;
+                numSpeed = 3;
             }
 
             hamsterDayCare.StartSimulation(numDays, numSpeed);

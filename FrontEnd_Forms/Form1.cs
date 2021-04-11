@@ -81,7 +81,6 @@ namespace FrontEnd_Forms
             lblTitle.Text = "Simulation";
             this.PnlFormLoader.Controls.Clear();
             
-            //FrmSimulation frmSimulation = new FrmSimulation() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             frmSimulation.FormBorderStyle = FormBorderStyle.None;
             this.PnlFormLoader.Controls.Add(frmSimulation);
             frmSimulation.Show();

@@ -61,17 +61,17 @@ namespace FrontEnd_Forms
             this.panel8.Controls.Add(this.pictureBox2);
             this.panel8.Controls.Add(this.label10);
             this.panel8.Controls.Add(this.label11);
-            this.panel8.Location = new System.Drawing.Point(370, 200);
+            this.panel8.Location = new System.Drawing.Point(370, 185);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(668, 371);
+            this.panel8.Size = new System.Drawing.Size(679, 403);
             this.panel8.TabIndex = 5;
             // 
             // pictureBox2
             // 
             this.pictureBox2.Image = global::FrontEnd_Forms.Properties.Resources.chart_diagram;
-            this.pictureBox2.Location = new System.Drawing.Point(19, 86);
+            this.pictureBox2.Location = new System.Drawing.Point(19, 107);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(637, 270);
+            this.pictureBox2.Size = new System.Drawing.Size(642, 270);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 2;
             this.pictureBox2.TabStop = false;
@@ -94,9 +94,9 @@ namespace FrontEnd_Forms
             this.label11.ForeColor = System.Drawing.Color.White;
             this.label11.Location = new System.Drawing.Point(19, 14);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(195, 25);
+            this.label11.Size = new System.Drawing.Size(179, 25);
             this.label11.TabIndex = 0;
-            this.label11.Text = "Förväntad popularitet";
+            this.label11.Text = "Expected popularity";
             // 
             // panel7
             // 
@@ -104,9 +104,9 @@ namespace FrontEnd_Forms
             this.panel7.Controls.Add(this.circularProgressBar1);
             this.panel7.Controls.Add(this.label8);
             this.panel7.Controls.Add(this.label9);
-            this.panel7.Location = new System.Drawing.Point(23, 200);
+            this.panel7.Location = new System.Drawing.Point(12, 185);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(327, 371);
+            this.panel7.Size = new System.Drawing.Size(338, 403);
             this.panel7.TabIndex = 6;
             // 
             // circularProgressBar1
@@ -127,7 +127,7 @@ namespace FrontEnd_Forms
             this.circularProgressBar1.ProgressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(126)))), ((int)(((byte)(249)))));
             this.circularProgressBar1.ProgressWidth = 7;
             this.circularProgressBar1.SecondaryFont = new System.Drawing.Font("Segoe UI", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.circularProgressBar1.Size = new System.Drawing.Size(270, 270);
+            this.circularProgressBar1.Size = new System.Drawing.Size(300, 300);
             this.circularProgressBar1.StartAngle = 270;
             this.circularProgressBar1.SubscriptColor = System.Drawing.Color.FromArgb(((int)(((byte)(166)))), ((int)(((byte)(166)))), ((int)(((byte)(166)))));
             this.circularProgressBar1.SubscriptMargin = new System.Windows.Forms.Padding(10, -35, 0, 0);
@@ -149,7 +149,7 @@ namespace FrontEnd_Forms
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(57, 32);
             this.label8.TabIndex = 1;
-            this.label8.Text = "5/5";
+            this.label8.Text = "3/5";
             // 
             // label9
             // 
@@ -158,16 +158,16 @@ namespace FrontEnd_Forms
             this.label9.ForeColor = System.Drawing.Color.White;
             this.label9.Location = new System.Drawing.Point(19, 14);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(230, 25);
+            this.label9.Size = new System.Drawing.Size(150, 25);
             this.label9.TabIndex = 0;
-            this.label9.Text = "Snittbetyg från användare";
+            this.label9.Text = "Hamster reviews";
             // 
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
             this.panel6.Controls.Add(this.label6);
             this.panel6.Controls.Add(this.label7);
-            this.panel6.Location = new System.Drawing.Point(704, 29);
+            this.panel6.Location = new System.Drawing.Point(715, 12);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(334, 148);
             this.panel6.TabIndex = 7;
@@ -175,11 +175,11 @@ namespace FrontEnd_Forms
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 50F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(226)))), ((int)(((byte)(178)))));
             this.label6.Location = new System.Drawing.Point(19, 48);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(57, 32);
+            this.label6.Size = new System.Drawing.Size(128, 76);
             this.label6.TabIndex = 1;
             this.label6.Text = "5/5";
             // 
@@ -190,16 +190,16 @@ namespace FrontEnd_Forms
             this.label7.ForeColor = System.Drawing.Color.White;
             this.label7.Location = new System.Drawing.Point(19, 14);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(230, 25);
+            this.label7.Size = new System.Drawing.Size(118, 25);
             this.label7.TabIndex = 0;
-            this.label7.Text = "Snittbetyg från användare";
+            this.label7.Text = "User reviews";
             // 
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
             this.panel5.Controls.Add(this.label4);
             this.panel5.Controls.Add(this.label5);
-            this.panel5.Location = new System.Drawing.Point(370, 29);
+            this.panel5.Location = new System.Drawing.Point(370, 12);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(328, 148);
             this.panel5.TabIndex = 8;
@@ -207,11 +207,11 @@ namespace FrontEnd_Forms
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 50F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(226)))), ((int)(((byte)(178)))));
             this.label4.Location = new System.Drawing.Point(19, 48);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(31, 32);
+            this.label4.Size = new System.Drawing.Size(70, 76);
             this.label4.TabIndex = 1;
             this.label4.Text = "0";
             // 
@@ -222,28 +222,28 @@ namespace FrontEnd_Forms
             this.label5.ForeColor = System.Drawing.Color.White;
             this.label5.Location = new System.Drawing.Point(19, 14);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(223, 25);
+            this.label5.Size = new System.Drawing.Size(210, 25);
             this.label5.TabIndex = 0;
-            this.label5.Text = "Dagar sen senaste olycka";
+            this.label5.Text = "Days since last accident";
             // 
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
             this.panel4.Controls.Add(this.Label_NumberOfSimulations);
             this.panel4.Controls.Add(this.label2);
-            this.panel4.Location = new System.Drawing.Point(23, 29);
+            this.panel4.Location = new System.Drawing.Point(12, 12);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(327, 148);
+            this.panel4.Size = new System.Drawing.Size(338, 148);
             this.panel4.TabIndex = 9;
             // 
             // Label_NumberOfSimulations
             // 
             this.Label_NumberOfSimulations.AutoSize = true;
-            this.Label_NumberOfSimulations.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Label_NumberOfSimulations.Font = new System.Drawing.Font("Microsoft Sans Serif", 50F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Label_NumberOfSimulations.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(146)))), ((int)(((byte)(249)))));
             this.Label_NumberOfSimulations.Location = new System.Drawing.Point(19, 48);
             this.Label_NumberOfSimulations.Name = "Label_NumberOfSimulations";
-            this.Label_NumberOfSimulations.Size = new System.Drawing.Size(31, 32);
+            this.Label_NumberOfSimulations.Size = new System.Drawing.Size(70, 76);
             this.Label_NumberOfSimulations.TabIndex = 1;
             this.Label_NumberOfSimulations.Text = "2";
             // 
@@ -254,9 +254,9 @@ namespace FrontEnd_Forms
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(19, 14);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(219, 25);
+            this.label2.Size = new System.Drawing.Size(152, 25);
             this.label2.TabIndex = 0;
-            this.label2.Text = "Antal körda simulationer";
+            this.label2.Text = "Simulations runs";
             // 
             // FrmDashBoard
             // 

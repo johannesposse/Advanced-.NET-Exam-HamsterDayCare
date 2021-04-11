@@ -72,7 +72,6 @@ namespace FrontEnd_Forms
             
             data = "";
             threadOne = null;
-
         }
 
         private void FrmSimulation_Load(object sender, EventArgs e)

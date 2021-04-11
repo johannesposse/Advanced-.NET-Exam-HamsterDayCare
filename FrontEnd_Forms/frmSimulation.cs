@@ -31,7 +31,6 @@ namespace FrontEnd_Forms
             MessageBox.Show("A new report has been created. Go to the reports tab to check it out");
             
             data = "";
-            //TimerGetData.Stop();
         }
 
         private void ReceiveData(object sender, PrintEventArgs e)

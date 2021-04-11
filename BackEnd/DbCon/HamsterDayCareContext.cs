@@ -19,6 +19,12 @@ namespace BackEnd
         protected override void OnConfiguring(DbContextOptionsBuilder dBContextbuilder)
         {
             dBContextbuilder.UseSqlServer(@"Server=.\SQLExpress;Database=advJohannesPosse;Trusted_Connection=True;MultipleActiveResultSets=True;").UseLazyLoadingProxies();
+            
+        }
+
+        public HamsterDayCareContext()
+        {
+            this.Database.EnsureCreated();
         }
     }
 }

@@ -7,12 +7,6 @@ För G
 För VG
 
 
-
-
--Windows forms
--Inställningar 
--Visa statestik
-
 Pågående
 -
 
@@ -38,3 +32,6 @@ Färdiga
 -[FIXAD] Programmet stängs av efter en simulation är klar
 -[FIXAD] Snygga till UI
 -[FIXAD] La till ett menysystem man navigerar med tangenterna
+-[FIXAD] Windows forms
+-[FIXAD] Inställningar 
+-[FIXAD] Visa statestik

@@ -20,7 +20,7 @@ namespace BackEnd
         private HamsterDayCareContext HDCon = new HamsterDayCareContext();
         private DateTime Date;
 
-       
+
         public bool InitilizeDatabase(out bool dbHasData)
         {
             dbHasData = true;
@@ -97,13 +97,13 @@ namespace BackEnd
                 e.Date = e.Date.AddHours(13.9);
                 e.IsPaused = false;
 
-                
+
             }
             else if (e.Date.Hour >= 7 & e.Date.TimeOfDay <= TimeSpan.Parse("17:00:00"))
             {
                 Date = e.Date;
 
-                if(e.Date.TimeOfDay == TimeSpan.Parse("07:00:00"))
+                if (e.Date.TimeOfDay == TimeSpan.Parse("07:00:00"))
                 {
                     var addToCageTask = AddHamstersToCages();
                     await addToCageTask;
@@ -127,7 +127,7 @@ namespace BackEnd
 
             for (int i = 0; i < hamsters.Count; i++)
             {
-                if(hamsters[i].Name == "Starlight" & Date.Hour == 13)
+                if (hamsters[i].Name == "Starlight" & Date.Hour == 13)
                 {
 
                 }
@@ -139,7 +139,7 @@ namespace BackEnd
                         if (cage.Hamsters.Count == 1)
                             cage.HasFemale = false;
 
-                        var log = logs.Where(x => x.ActivityName == "Cage: " + hamsters[i].CageID.ToString() &  x.HamsterID == hamsters[i].ID & x.EndDate == null).FirstOrDefault();
+                        var log = logs.Where(x => x.ActivityName == "Cage: " + hamsters[i].CageID.ToString() & x.HamsterID == hamsters[i].ID & x.EndDate == null).FirstOrDefault();
                         log.EndDate = Date;
                         hamsters[i].LastExercise = Date;
                         hamsters[i].CageID = null;
@@ -241,9 +241,9 @@ namespace BackEnd
 
         private void Reset()
         {
-            
+
             HDCon.ActivityLogs.RemoveRange(HDCon.ActivityLogs);
-            HDCon.SaveChanges(); 
+            HDCon.SaveChanges();
 
             foreach (var ham in HDCon.Hamsters)
             {
@@ -255,10 +255,8 @@ namespace BackEnd
 
             foreach (var c in HDCon.Cages)
             {
-                if(c.Hamsters != null)
-                {
-                    c.Hamsters.Clear();
-                }
+
+                c.Hamsters.Clear();
                 c.HasFemale = false;
             }
 
@@ -289,7 +287,7 @@ namespace BackEnd
                 //print.Append($"{"",-4}{cageID}{ExID,5}{h.Name,30}{h.Age,30}{female,30}{h.Ownername,50}{h.CheckedInTime,50}{h.LastExercise,50}" + Environment.NewLine);
             }
 
-            PrintEvent?.Invoke(this, new PrintEventArgs(print.ToString(),Date));
+            PrintEvent?.Invoke(this, new PrintEventArgs(print.ToString(), Date));
             return print.ToString();
         }
 

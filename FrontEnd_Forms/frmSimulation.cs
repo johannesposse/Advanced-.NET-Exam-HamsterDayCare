@@ -65,8 +65,8 @@ namespace FrontEnd_Forms
                 numSpeed = 10;
             }
 
-            bool hasData;
-            hamsterDayCare.InitilizeDatabase(out hasData);
+            //bool hasData;
+            //hamsterDayCare.InitilizeDatabase(out hasData);
             hamsterDayCare.StartSimulation(numDays, numSpeed);
 
             

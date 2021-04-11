@@ -11,7 +11,7 @@ namespace BackEnd
         public int ID { get; internal set; }
         public int Number { get; internal set; }
         public int MaxSize { get; internal set; } = 3;
-        public bool HasFemale { get; set; } = false;
+        public bool HasFemale { get; internal set; } = false;
         public virtual IList<Hamster> Hamsters { get; internal set; }
 
         public Cage()

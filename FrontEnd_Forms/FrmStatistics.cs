@@ -29,7 +29,7 @@ namespace FrontEnd_Forms
         {
             var d = reports.GroupBy(x => x.Acticity).OrderByDescending(id => id.Count()).Select(g => new { Id = g.Key, Count = g.Count() });
             var b = d.Where(x => x.Id.Contains("Cage")).FirstOrDefault();
-            lbl_MostPopularCage.Text = b.Id;
+            lbl_MostPopularCage.Text = b.Id.Trim();
             lbl_MostPopularCageID.Text = b.Count.ToString() + " visits";
         }
 
@@ -42,6 +42,11 @@ namespace FrontEnd_Forms
             var mostExercised = hamsters.FirstOrDefault();
             lbl_MosteExercisedTimes.Text = "Has exercised " + mostExercised.Count.ToString() + " times";
             lbl_MostExercisedName.Text = mostExercised.Name;
+        }
+
+        private void AverageWaitingTimeToExercise(List<BackEnd.Report> reports)
+        {
+
         }
 
         private void FrmStatistics_Load(object sender, EventArgs e)
@@ -61,6 +66,7 @@ namespace FrontEnd_Forms
 
                 MostPopularCage(reports);
                 MosteExercisedHamster(reports);
+                AverageWaitingTimeToExercise(reports);
             }
             else
             {
@@ -68,6 +74,7 @@ namespace FrontEnd_Forms
                 lbl_MostPopularCageID.Text = "N/A";
                 lbl_MosteExercisedTimes.Text = "N/A";
                 lbl_MostExercisedName.Text = "N/A";
+                lbl_AverageWatingToExercise.Text = "N/A";
 
             }
 

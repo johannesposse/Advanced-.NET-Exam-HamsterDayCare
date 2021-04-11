@@ -32,6 +32,7 @@ namespace BackEnd
                 {
                     var tempCage = new Cage(i);
                     HDCon.Cages.Add(tempCage);
+                    HDCon.SaveChanges();
                 }
             }
 
@@ -39,6 +40,7 @@ namespace BackEnd
             {
                 var tempExerciseArea = new ExerciseArea();
                 HDCon.ExerciseArea.Add(tempExerciseArea);
+                HDCon.SaveChanges();
             }
 
             if (!HDCon.Hamsters.Any())
@@ -55,6 +57,7 @@ namespace BackEnd
                     }
                     var tempHamster = new Hamster(data[0], data[3], Math.Round(decimal.Parse(data[1]) / 12, 1), isFemale);
                     HDCon.Hamsters.Add(tempHamster);
+                    HDCon.SaveChanges();
                 }
             }
 
@@ -252,7 +255,10 @@ namespace BackEnd
 
             foreach (var c in HDCon.Cages)
             {
-                c.Hamsters.Clear();
+                if(c.Hamsters != null)
+                {
+                    c.Hamsters.Clear();
+                }
                 c.HasFemale = false;
             }
 

@@ -35,7 +35,7 @@ namespace FrontEnd_Forms
             this.ExercisedHamster = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.lbl_MosteExercisedTimes = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lbl_AverageWatingToExercise = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.circularProgressBar1 = new CircularProgressBar.CircularProgressBar();
             this.label8 = new System.Windows.Forms.Label();
@@ -112,16 +112,16 @@ namespace FrontEnd_Forms
             this.lbl_MosteExercisedTimes.TabIndex = 0;
             this.lbl_MosteExercisedTimes.Text = "Most popular cage";
             // 
-            // label6
+            // lbl_AverageWatingToExercise
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(226)))), ((int)(((byte)(178)))));
-            this.label6.Location = new System.Drawing.Point(19, 48);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(57, 32);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "5/5";
+            this.lbl_AverageWatingToExercise.AutoSize = true;
+            this.lbl_AverageWatingToExercise.Font = new System.Drawing.Font("Microsoft Sans Serif", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lbl_AverageWatingToExercise.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(226)))), ((int)(((byte)(178)))));
+            this.lbl_AverageWatingToExercise.Location = new System.Drawing.Point(19, 48);
+            this.lbl_AverageWatingToExercise.Name = "lbl_AverageWatingToExercise";
+            this.lbl_AverageWatingToExercise.Size = new System.Drawing.Size(57, 32);
+            this.lbl_AverageWatingToExercise.TabIndex = 1;
+            this.lbl_AverageWatingToExercise.Text = "5/5";
             // 
             // label7
             // 
@@ -130,9 +130,9 @@ namespace FrontEnd_Forms
             this.label7.ForeColor = System.Drawing.Color.White;
             this.label7.Location = new System.Drawing.Point(19, 14);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(230, 25);
+            this.label7.Size = new System.Drawing.Size(285, 25);
             this.label7.TabIndex = 0;
-            this.label7.Text = "Snittbetyg från användare";
+            this.label7.Text = "Average waiting time to exercise";
             // 
             // circularProgressBar1
             // 
@@ -179,7 +179,7 @@ namespace FrontEnd_Forms
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(42)))), ((int)(((byte)(64)))));
-            this.panel6.Controls.Add(this.label6);
+            this.panel6.Controls.Add(this.lbl_AverageWatingToExercise);
             this.panel6.Controls.Add(this.label7);
             this.panel6.Location = new System.Drawing.Point(715, 12);
             this.panel6.Name = "panel6";
@@ -321,7 +321,7 @@ namespace FrontEnd_Forms
         private System.Windows.Forms.Label lbl_MostExercisedName;
         private System.Windows.Forms.Label ExercisedHamster;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lbl_AverageWatingToExercise;
         private System.Windows.Forms.Label label7;
         private CircularProgressBar.CircularProgressBar circularProgressBar1;
         private System.Windows.Forms.Label label8;

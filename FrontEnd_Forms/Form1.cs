@@ -36,6 +36,18 @@ namespace FrontEnd_Forms
             
 
             InitializeComponent();
+
+            bool hasData;
+            hamsterDay.InitilizeDatabase(out hasData);
+
+            string path = @"..\..\..\..\config.txt";
+            if (!File.Exists(path))
+            {
+                using (File.Create(path)) { }
+                string[] data = { "#Simulation", "days,1", "speed,10" };
+                File.WriteAllLines(path, data);
+            }
+
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
 
 

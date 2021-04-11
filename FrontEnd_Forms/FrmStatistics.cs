@@ -75,17 +75,6 @@ namespace FrontEnd_Forms
             }  
         }
 
-        //private void HamsterStatestic(List<BackEnd.Report> reports)
-        //{
-        //    StringBuilder info = new StringBuilder();
-
-        //    var Exersice = reports.Where(x => x.Acticity == " Exercise").GroupBy(x => x.Name).Select(x => new { Name = x.Key, Count = x.Count() });
-        //    var Cage = reports.Where(x => x.Acticity.Contains(" Cage:")).GroupBy(x => x.Name);
-
-            
-
-        //    txt_HamsterStatic.Text = info.ToString();
-        //}
 
         private void AverageTimesExercisedPerDay(List<BackEnd.Report> reports) //metod för att visa i snitt hur många gånger de tränar per dag
         {
@@ -94,9 +83,13 @@ namespace FrontEnd_Forms
 
             if (exercise.Any()) //om det inte är tomt
             {
-                var exCount = exercise.Count(); //räknar ihop hur många exercise det finns
-                double times = Convert.ToDouble(exCount) / 30; //delar på 30 (finns 30 hamstrar)
-                lbl_AverageTimesExercisedPerDayNum.Text = times.ToString(); //skriver ut snittvärdet
+                if (options.Any())
+                {
+                    var exCount = exercise.Count(); //räknar ihop hur många exercise det finns
+                    double times = Convert.ToDouble(exCount) / 30; //delar på 30 (finns 30 hamstrar)
+                    times = times / (options.Length - 1); //delar på antal gjorda simuleringar - 1(ska inte räkna med total)
+                    lbl_AverageTimesExercisedPerDayNum.Text = times.ToString(); //skriver ut snittvärdet
+                }
             }
             else //om det inte finns några tidigare simuleringar
             {

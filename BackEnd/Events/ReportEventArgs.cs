@@ -91,7 +91,7 @@ namespace BackEnd
 
                 foreach (var r in rep.OrderBy(x => x.Name)) //sorterar hamstarna på namn
                 {
-                    print.Append($"{r.Name,-20}{r.Acticity,-55}{r.Start,-30}{r.End,-30}" + Environment.NewLine); //skriver ut information om hamstern
+                    print.Append($"{r.Name,-20}{r.Acticity,-50}{r.Start,-30}{r.End,-30}" + Environment.NewLine); //skriver ut information om hamstern
                 }
                 print.Append("" + Environment.NewLine); //lägger till en ny rad
             }

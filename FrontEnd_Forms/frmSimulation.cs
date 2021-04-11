@@ -80,7 +80,7 @@ namespace FrontEnd_Forms
         {
             //en timer som ligger och tickar och sätter textbox och label till data(string) och date(datum)
             textBox1.Text = data;
-            Label_Date.Text = Date.ToString("yyyy:MM:dd hh:mm:ss");
+            Label_Date.Text = Date.ToString("yyyy:MM:dd HH:mm:ss");
         }
 
         private void button1_Click_1(object sender, EventArgs e) //knapp för att starta simulering

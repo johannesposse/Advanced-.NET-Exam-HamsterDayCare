@@ -88,6 +88,7 @@ namespace BackEnd
                 var checkOutTask = CheckOutHamstersForTheDay(); //skapar en task som skickar hem hamstrarna för dagen
                 await checkOutTask; //awaitar tasken
 
+                PrintEvent?.Invoke(this, new PrintEventArgs(Print(), e.Date)); //invokar ett event som skriver ut vad som hänt detta tick
                 ReportEvent?.Invoke(this, new ReportEventArgs(HDCon.Hamsters.ToList(), HDCon.ActivityLogs.ToList())); //invokar ett event som genererar och skriver ut rapport för dagen
 
                 var logs = HDCon.ActivityLogs;
@@ -109,13 +110,13 @@ namespace BackEnd
                     await addToCageTask; //awaitar tasken
                 }
 
-                PrintEvent?.Invoke(this, new PrintEventArgs(Print(), e.Date)); //invokar ett event som skriver ut vad som hänt detta tick
 
                 var retrieveFromExerciseTask = RetreiveHamstersFromExtersiceArea(); //skapar en task som plockar ut hamstrar från träningsområdet
                 var addToExerciseTask = AddHamstersToExerciseArea(); //skapar en task som lägger till hamstrar till träningsområdet
 
                 await retrieveFromExerciseTask; //awaitar tasken
                 await addToExerciseTask; //awaitar tasken
+                PrintEvent?.Invoke(this, new PrintEventArgs(Print(), e.Date)); //invokar ett event som skriver ut vad som hänt detta tick
             }
         }
         private async Task AddHamstersToExerciseArea() //async metod för att lägga till hamstrar till träningsområdet
@@ -268,7 +269,7 @@ namespace BackEnd
             var hamsters = HDCon.Hamsters.OrderBy(x => x.CageID); //hämtar ut alla hamstrar och sorterar dom efter vilken bur dom är i 
 
             //lägger till column name
-            print.Append($"{"CageID",-3}{"ExerID",-3}{"Name",-15}\t{"Age",-10}\t{"Sex",-10}\t{"Owner",-30}   \t\t{"CheckedIn",-40}\t{"Exersiced",-40}" + Environment.NewLine + Environment.NewLine);
+            print.Append($"{"CID",-7}{"EID",-10}{"Name",-15}\t{"Age",-10}\t{"Sex",-10}\t\t{"Owner",-30}   \t\t{"CheckedIn",-40}\t{"Exersiced",-40}" + Environment.NewLine + Environment.NewLine);
 
             foreach (var h in hamsters) //loopar igenom alla hamstrar
             {
@@ -283,7 +284,8 @@ namespace BackEnd
                     ExID = "";
 
                 //lägger till införmation om hamstern
-                print.Append($"{cageID,-3}{ExID,-3}{h.Name,-15}\t{h.Age,-10}\t{female,-20}\t{h.Ownername,-25}   \t\t{h.CheckedInTime,-40}\t{h.LastExercise,-40}" + Environment.NewLine);
+                //print.Append($"{cageID,-3}{ExID,-3}{h.Name,-15}\t{h.Age,-10}\t{female,-20}\t{h.Ownername,-25}   \t\t{h.CheckedInTime,-40}\t{h.LastExercise,-40}" + Environment.NewLine);
+                print.Append($"{cageID,-10}{ExID,-10}{h.Name,-15}\t{h.Age,-10}\t{female,-20}\t{h.Ownername,-25}   \t\t{h.CheckedInTime,-40}\t{h.LastExercise,-40}" + Environment.NewLine);
             }
 
             PrintEvent?.Invoke(this, new PrintEventArgs(print.ToString(), Date)); //invokar ett event som skriver ut vad som hänt detta tick

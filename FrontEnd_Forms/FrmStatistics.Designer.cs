@@ -56,9 +56,9 @@ namespace FrontEnd_Forms
             this.PopularCage.ForeColor = System.Drawing.Color.White;
             this.PopularCage.Location = new System.Drawing.Point(19, 14);
             this.PopularCage.Name = "PopularCage";
-            this.PopularCage.Size = new System.Drawing.Size(170, 25);
+            this.PopularCage.Size = new System.Drawing.Size(172, 25);
             this.PopularCage.TabIndex = 0;
-            this.PopularCage.Text = "Most popular cage";
+            this.PopularCage.Text = "Most Popular Cage";
             // 
             // lbl_MostExercisedName
             // 
@@ -78,9 +78,9 @@ namespace FrontEnd_Forms
             this.ExercisedHamster.ForeColor = System.Drawing.Color.White;
             this.ExercisedHamster.Location = new System.Drawing.Point(19, 14);
             this.ExercisedHamster.Name = "ExercisedHamster";
-            this.ExercisedHamster.Size = new System.Drawing.Size(211, 25);
+            this.ExercisedHamster.Size = new System.Drawing.Size(213, 25);
             this.ExercisedHamster.TabIndex = 0;
-            this.ExercisedHamster.Text = "Most exercised hamster";
+            this.ExercisedHamster.Text = "Most Exercised Hamster";
             // 
             // panel5
             // 
@@ -122,9 +122,9 @@ namespace FrontEnd_Forms
             this.label7.ForeColor = System.Drawing.Color.White;
             this.label7.Location = new System.Drawing.Point(19, 14);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(285, 25);
+            this.label7.Size = new System.Drawing.Size(294, 25);
             this.label7.TabIndex = 0;
-            this.label7.Text = "Average waiting time to exercise";
+            this.label7.Text = "Average Waiting Time To Exercise";
             // 
             // lbl_AverageTimesExercisedPerDayNum
             // 
@@ -154,9 +154,9 @@ namespace FrontEnd_Forms
             this.lbl_AverageTimesExercisedPerDay.ForeColor = System.Drawing.Color.White;
             this.lbl_AverageTimesExercisedPerDay.Location = new System.Drawing.Point(19, 14);
             this.lbl_AverageTimesExercisedPerDay.Name = "lbl_AverageTimesExercisedPerDay";
-            this.lbl_AverageTimesExercisedPerDay.Size = new System.Drawing.Size(224, 25);
+            this.lbl_AverageTimesExercisedPerDay.Size = new System.Drawing.Size(288, 25);
             this.lbl_AverageTimesExercisedPerDay.TabIndex = 0;
-            this.lbl_AverageTimesExercisedPerDay.Text = "Average Times Exercised ";
+            this.lbl_AverageTimesExercisedPerDay.Text = "Average Times Exercised Per Day";
             // 
             // panel7
             // 

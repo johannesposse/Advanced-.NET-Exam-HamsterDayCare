@@ -34,6 +34,7 @@ namespace FrontEnd_Forms
             this.lbl_MostExercisedName = new System.Windows.Forms.Label();
             this.ExercisedHamster = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.lbl_MosteExercisedTimes = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.circularProgressBar1 = new CircularProgressBar.CircularProgressBar();
@@ -48,7 +49,6 @@ namespace FrontEnd_Forms
             this.lbl_MostPopularCage = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.lbl_MostPopularCageID = new System.Windows.Forms.Label();
-            this.lbl_MosteExercisedTimes = new System.Windows.Forms.Label();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -100,6 +100,17 @@ namespace FrontEnd_Forms
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(328, 148);
             this.panel5.TabIndex = 13;
+            // 
+            // lbl_MosteExercisedTimes
+            // 
+            this.lbl_MosteExercisedTimes.AutoSize = true;
+            this.lbl_MosteExercisedTimes.Font = new System.Drawing.Font("Nirmala UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lbl_MosteExercisedTimes.ForeColor = System.Drawing.Color.White;
+            this.lbl_MosteExercisedTimes.Location = new System.Drawing.Point(19, 100);
+            this.lbl_MosteExercisedTimes.Name = "lbl_MosteExercisedTimes";
+            this.lbl_MosteExercisedTimes.Size = new System.Drawing.Size(124, 19);
+            this.lbl_MosteExercisedTimes.TabIndex = 0;
+            this.lbl_MosteExercisedTimes.Text = "Most popular cage";
             // 
             // label6
             // 
@@ -273,17 +284,6 @@ namespace FrontEnd_Forms
             this.lbl_MostPopularCageID.Size = new System.Drawing.Size(124, 19);
             this.lbl_MostPopularCageID.TabIndex = 0;
             this.lbl_MostPopularCageID.Text = "Most popular cage";
-            // 
-            // lbl_MosteExercisedTimes
-            // 
-            this.lbl_MosteExercisedTimes.AutoSize = true;
-            this.lbl_MosteExercisedTimes.Font = new System.Drawing.Font("Nirmala UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lbl_MosteExercisedTimes.ForeColor = System.Drawing.Color.White;
-            this.lbl_MosteExercisedTimes.Location = new System.Drawing.Point(19, 100);
-            this.lbl_MosteExercisedTimes.Name = "lbl_MosteExercisedTimes";
-            this.lbl_MosteExercisedTimes.Size = new System.Drawing.Size(124, 19);
-            this.lbl_MosteExercisedTimes.TabIndex = 0;
-            this.lbl_MosteExercisedTimes.Text = "Most popular cage";
             // 
             // FrmStatistics
             // 

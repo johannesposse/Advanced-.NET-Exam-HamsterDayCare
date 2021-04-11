@@ -73,179 +73,177 @@ namespace BackEnd
         public void StartSimulation(int days, int ticksPerSecond) //metod som startar igång hela simuleringen, tar emot antal dagar och hastigheten till simuleringen
         {
             Reset(); //nollställer alla värden, ifall en simulering skulle ha avbrutits så sätter den rätt värden för att kunna skapa en ny simulering utan problem
-            ticksPerSecond = 1000 / ticksPerSecond; //
-            ticker.Tick += StartThreads;
-            ticker.StartTick(ticksPerSecond, days);
+            ticksPerSecond = 1000 / ticksPerSecond; //delar ticksperSecond på 1000 för att kunna få fram hur många millesekunder ett tick ska vara
+            ticker.Tick += StartThreads; //sätter StartThreads som lyssnarna för varje gång ett tick körs i simuleringen
+            ticker.StartTick(ticksPerSecond, days); //startar whileloopen som driver simuleringen, skickar in hastighet och antal dagar
         }
-        private async void StartThreads(object sender, TickEventArgs e)
+        private async void StartThreads(object sender, TickEventArgs e) //async metod som anropas på varje tick
         {
 
-            if (e.Date.TimeOfDay == TimeSpan.Parse("17:00:00"))
+            if (e.Date.TimeOfDay == TimeSpan.Parse("17:00:00")) //kollar om kl är 17, då är dagen över
             {
-                e.IsPaused = true;
-                Date = e.Date;
+                e.IsPaused = true; //simuleringen pausas
+                Date = e.Date; //date sätts till datumet simuleringen är på
 
-                var checkOutTask = CheckOutHamstersForTheDay();
-                await checkOutTask;
+                var checkOutTask = CheckOutHamstersForTheDay(); //skapar en task som skickar hem hamstrarna för dagen
+                await checkOutTask; //awaitar tasken
 
-                ReportEvent?.Invoke(this, new ReportEventArgs(HDCon.Hamsters.ToList(), HDCon.ActivityLogs.ToList()));
+                ReportEvent?.Invoke(this, new ReportEventArgs(HDCon.Hamsters.ToList(), HDCon.ActivityLogs.ToList())); //invokar ett event som genererar och skriver ut rapport för dagen
 
                 var logs = HDCon.ActivityLogs;
-                HDCon.ActivityLogs.RemoveRange(logs);
-                HDCon.SaveChanges();
+                HDCon.ActivityLogs.RemoveRange(logs); //tömmer logs i databasen
+                HDCon.SaveChanges(); //sparar ändringar
 
-                e.Date = e.Date.AddHours(13.9);
-                e.IsPaused = false;
+                e.Date = e.Date.AddHours(13.9); //lägger till 13.9h på simuleringen för att starta en ny dag
+                e.IsPaused = false; //startar simuleringen igen
 
 
             }
-            else if (e.Date.Hour >= 7 & e.Date.TimeOfDay <= TimeSpan.Parse("17:00:00"))
+            else if (e.Date.Hour >= 7 & e.Date.TimeOfDay <= TimeSpan.Parse("17:00:00")) //om kl är mellan 07.00 och 17.00
             {
-                Date = e.Date;
+                Date = e.Date; //date sätts till datumet simuleringen är på
 
-                if (e.Date.TimeOfDay == TimeSpan.Parse("07:00:00"))
+                if (e.Date.TimeOfDay == TimeSpan.Parse("07:00:00")) //om kl är 07.00
                 {
-                    var addToCageTask = AddHamstersToCages();
-                    await addToCageTask;
+                    var addToCageTask = AddHamstersToCages(); //skapar en task för att checka in hamstrarna för dagen, behöver endast göras en gång per dag
+                    await addToCageTask; //awaitar tasken
                 }
 
-                PrintEvent?.Invoke(this, new PrintEventArgs(Print(), e.Date));
+                PrintEvent?.Invoke(this, new PrintEventArgs(Print(), e.Date)); //invokar ett event som skriver ut vad som hänt detta tick
 
-                var retrieveFromExerciseTask = RetreiveHamstersFromExtersiceArea();
-                var addToExerciseTask = AddHamstersToExerciseArea();
+                var retrieveFromExerciseTask = RetreiveHamstersFromExtersiceArea(); //skapar en task som plockar ut hamstrar från träningsområdet
+                var addToExerciseTask = AddHamstersToExerciseArea(); //skapar en task som lägger till hamstrar till träningsområdet
 
-                await retrieveFromExerciseTask;
-                await addToExerciseTask;
+                await retrieveFromExerciseTask; //awaitar tasken
+                await addToExerciseTask; //awaitar tasken
             }
         }
-        private async Task AddHamstersToExerciseArea()
+        private async Task AddHamstersToExerciseArea() //async metod för att lägga till hamstrar till träningsområdet
         {
-            var hamsters = HDCon.Hamsters.Where(x => x.CageID != null).OrderBy(x => x.LastExercise).ToList();
-            var exerciseArea = HDCon.ExerciseArea.First();
+            var hamsters = HDCon.Hamsters.Where(x => x.CageID != null).OrderBy(x => x.LastExercise).ToList(); //hämtar hamstrar som är i en bur, och sorterar dom på den som väntat längs på träning kommer först
+            var exerciseArea = HDCon.ExerciseArea.First(); //hämtar ut det träningsområdet (finns bara ett)
             var cages = HDCon.Cages;
             var logs = HDCon.ActivityLogs;
 
-            for (int i = 0; i < hamsters.Count; i++)
+            for (int i = 0; i < hamsters.Count; i++) //loopar igenom alla hamstrar
             {
-                if (hamsters[i].Name == "Starlight" & Date.Hour == 13)
+                if (exerciseArea.Hamsters.Count < exerciseArea.MaxSize) //kollar om det finns plats att lägga till en hamster
                 {
-
-                }
-                if (exerciseArea.Hamsters.Count < exerciseArea.MaxSize)
-                {
-                    if (!exerciseArea.Hamsters.Any() | exerciseArea.Hamsters.Select(x => x.IsFemale).FirstOrDefault() == hamsters[i].IsFemale)
+                    if (!exerciseArea.Hamsters.Any() | exerciseArea.Hamsters.Select(x => x.IsFemale).FirstOrDefault() == hamsters[i].IsFemale) //kollar om det antingen är tommt eller om det finns hamstrar av samma kön
                     {
-                        var cage = cages.Where(x => x.Hamsters.Contains(hamsters[i])).FirstOrDefault();
-                        if (cage.Hamsters.Count == 1)
+                        var cage = cages.Where(x => x.Hamsters.Contains(hamsters[i])).FirstOrDefault(); //hämtar ut den buren som hamstern var i
+                        if (cage.Hamsters.Count == 1) //om det var den sista hamster i buren så nollställs hasFemale boolen till sitt default värde
                             cage.HasFemale = false;
 
-                        var log = logs.Where(x => x.ActivityName == "Cage: " + hamsters[i].CageID.ToString() & x.HamsterID == hamsters[i].ID & x.EndDate == null).FirstOrDefault();
-                        log.EndDate = Date;
-                        hamsters[i].LastExercise = Date;
-                        hamsters[i].CageID = null;
-                        exerciseArea.Hamsters.Add(hamsters[i]);
-                        logs.Add(new ActivityLog("Exercise", Date, hamsters[i].ID));
-                        HDCon.SaveChanges();
+                        var log = logs.Where(x => x.ActivityName == "Cage: " + hamsters[i].CageID.ToString() & x.HamsterID == hamsters[i].ID & x.EndDate == null).FirstOrDefault(); //uppdaterar loggen att hamstern blev utplockad från sin bur
+                        log.EndDate = Date; //sätter slutdatum i loggen
+                        hamsters[i].LastExercise = Date; //sätter att hamstern började träna vid denna tid
+                        hamsters[i].CageID = null; //tar ut hamstern ur buren
+                        exerciseArea.Hamsters.Add(hamsters[i]); //lägger till hamstern i träningsområdet
+                        logs.Add(new ActivityLog("Exercise", Date, hamsters[i].ID)); //gör ett nytt inlägg i loggen att hamstern har börjat träna
+                        HDCon.SaveChanges(); //sparar ändringar
                     }
                 }
-                else
+                else //om träningsområdet är fullt avbryts loopen
                 {
                     break;
                 }
             }
-            await Task.CompletedTask;
+            await Task.CompletedTask; //awaitar tasken
         }
-        private async Task RetreiveHamstersFromExtersiceArea()
+        private async Task RetreiveHamstersFromExtersiceArea() //async metod för att hämta hamstrar från träningsområde
         {
 
-            var exerciseArea = HDCon.ExerciseArea.First();
-            var hamsters = exerciseArea.Hamsters.Where(x => x.LastExercise.Value.Hour + 1 == Date.Hour).ToList();
+            var exerciseArea = HDCon.ExerciseArea.First(); // hämtar ut det träningsområdet(finns bara ett)
+            var hamsters = exerciseArea.Hamsters.Where(x => x.LastExercise.Value.Hour + 1 == Date.Hour).ToList(); //hämtar ut de hamstrar som tränat i en timma
             var cages = HDCon.Cages;
             var logs = HDCon.ActivityLogs;
 
-            for (int i = 0; i < hamsters.Count; i++)
+            for (int i = 0; i < hamsters.Count; i++) //loopar igenom alla hamstrar
             {
-                var cage = cages.AsEnumerable().FirstOrDefault(x => x.Hamsters.Count < x.MaxSize & ((x.HasFemale == hamsters[i].IsFemale) | (x.Hamsters.Count < 1)));
+                //hittar en bur där hamstern kan stoppas in, som har plats, har samma kön eller är tom
+                var cage = cages.AsEnumerable().FirstOrDefault(x => x.Hamsters.Count < x.MaxSize & ((x.HasFemale == hamsters[i].IsFemale) | (x.Hamsters.Count < 1))); 
 
-                if (cage != null)
+                if (cage != null) //om buren finns
                 {
-                    cage.Hamsters.Add(hamsters[i]);
-                    cage.HasFemale = hamsters[i].IsFemale;
-                    hamsters[i].ExerciseAreaID = null;
-                    var log = logs.Where(x => x.HamsterID == hamsters[i].ID & x.ActivityName == "Exercise" & x.EndDate == null).FirstOrDefault();
-                    log.EndDate = Date;
-                    logs.Add(new ActivityLog("Cage: " + cage.ID.ToString(), Date, hamsters[i].ID));
-                    HDCon.SaveChanges();
+                    cage.Hamsters.Add(hamsters[i]); //lägger till hamstern i buren
+                    cage.HasFemale = hamsters[i].IsFemale; //sätter hasFemaleBoolen till hamsterns kön
+                    hamsters[i].ExerciseAreaID = null; //plockar ut hamstern ur träningsområdet
+                    var log = logs.Where(x => x.HamsterID == hamsters[i].ID & x.ActivityName == "Exercise" & x.EndDate == null).FirstOrDefault(); //hittar i loggen där hamstern började träna
+                    log.EndDate = Date; //uppdaterar loggen att hamstern slutat träna
+                    logs.Add(new ActivityLog("Cage: " + cage.ID.ToString(), Date, hamsters[i].ID)); //gör ett nytt inlägg i loggen att hamstern las in i en bur
+                    HDCon.SaveChanges(); //sparar ändringar
                 }
             }
 
-            await Task.CompletedTask;
+            await Task.CompletedTask; //awaitar tasken
         }
-        private async Task AddHamstersToCages()
+        private async Task AddHamstersToCages() //async metod för att lägga till hamstrar i burar i börhan på dagen
         {
-            var hamsters = HDCon.Hamsters.Shuffle().ToList();
+            var hamsters = HDCon.Hamsters.Shuffle().ToList(); //blandar alla hamstrar, för att få olika resultat 
             var cages = HDCon.Cages;
             var logs = HDCon.ActivityLogs;
 
-            for (int i = 0; i < hamsters.Count; i++)
+            for (int i = 0; i < hamsters.Count; i++) //loopar igenom alla hamstrar
             {
-                if (hamsters[i].ExerciseAreaID == null & hamsters[i].CageID == null)
+                if (hamsters[i].ExerciseAreaID == null & hamsters[i].CageID == null) //kollar så att dom inte redan är i en bur eller tränar
                 {
+                    //hittar en bur där hamstern kan stoppas in, som har plats, har samma kön eller är tom
                     var cage = cages.AsEnumerable().FirstOrDefault(x => x.Hamsters.Count < x.MaxSize & ((x.HasFemale == hamsters[i].IsFemale) | (x.Hamsters.Count < 1)));
 
-                    if (cage != null)
+                    if (cage != null) //om buren finns
                     {
-                        cage.Hamsters.Add(hamsters[i]);
-                        cage.HasFemale = hamsters[i].IsFemale;
-                        logs.Add(new ActivityLog("Checked In for The Day", Date, hamsters[i].ID));
-                        logs.Add(new ActivityLog("Cage: " + cage.ID.ToString(), Date, hamsters[i].ID));
+                        cage.Hamsters.Add(hamsters[i]); //lägger till hamstern i buren
+                        cage.HasFemale = hamsters[i].IsFemale; //sätter hasFemaleBoolen till hamsterns kön
+                        logs.Add(new ActivityLog("Checked In for The Day", Date, hamsters[i].ID)); //gör ett nytt inlägg i loggen om att hamstern checkat in för dagen
+                        logs.Add(new ActivityLog("Cage: " + cage.ID.ToString(), Date, hamsters[i].ID)); //gör ett nytt inlägg i loggen att hamstern las in i en bur
 
-                        hamsters[i].CheckedInTime = Date;
+                        hamsters[i].CheckedInTime = Date; //sätter att hamstern checkades in vid denna tid
 
-                        HDCon.SaveChanges();
+                        HDCon.SaveChanges(); //sparar ändringar
                     }
                 }
             }
 
-            await Task.CompletedTask;
+            await Task.CompletedTask; //awaitar taksen
         }
-        public async Task CheckOutHamstersForTheDay()
+        public async Task CheckOutHamstersForTheDay() //async metod för att skicka hem hamstrarna när dagen är slut
         {
             var logs = HDCon.ActivityLogs;
 
-            foreach (var ham in HDCon.Hamsters)
+            foreach (var ham in HDCon.Hamsters) //går igenom alla hamstrar
             {
-                var log = logs.Where(x => x.HamsterID == ham.ID & x.EndDate == null);
-                if (log != null)
+                var log = logs.Where(x => x.HamsterID == ham.ID & x.EndDate == null); //hittar alla loggar för hamstern som inte har ett slutdatum
+                if (log != null) //kollar så att det finns loggar
                 {
-                    foreach (var l in log)
+                    foreach (var l in log) //går igenom alla loggar
                     {
-                        l.EndDate = Date;
+                        l.EndDate = Date; //sätter slutdatumet
                     }
                 }
-                ham.CageID = null;
-                ham.ExerciseAreaID = null;
-                ham.CheckedInTime = null;
-                ham.LastExercise = null;
+                ham.CageID = null; //plockar ut hamster ur buren
+                ham.ExerciseAreaID = null; //plockar ut hamstern ur träningsområdet
+                ham.CheckedInTime = null; //nollställer incheckad tid
+                ham.LastExercise = null; //nollställer senaste tid den tränat
             }
 
-            foreach (var c in HDCon.Cages)
+            foreach (var c in HDCon.Cages) //loopar igenom och nollställer alla burar
             {
                 c.Hamsters.Clear();
-                c.HasFemale = false;
+                c.HasFemale = false; //sätter hasFemale bool till sitt default värde
             }
 
-            HDCon.SaveChanges();
-            await Task.CompletedTask;
+            HDCon.SaveChanges(); //sparar ändringar
+            await Task.CompletedTask; //awaitar task
         }
 
-        private void Reset()
+        private void Reset() //metod för att nollställa databasen vid uppstart av ny simulering vid eventuell krash
         {
 
-            HDCon.ActivityLogs.RemoveRange(HDCon.ActivityLogs);
-            HDCon.SaveChanges();
+            HDCon.ActivityLogs.RemoveRange(HDCon.ActivityLogs); //tar bort alla activitylogs
+            HDCon.SaveChanges(); //sparar ändringar
 
-            foreach (var ham in HDCon.Hamsters)
+            foreach (var ham in HDCon.Hamsters) //loopar igenom alla hamstrar och nollställer dom
             {
                 ham.CageID = null;
                 ham.ExerciseAreaID = null;
@@ -253,62 +251,63 @@ namespace BackEnd
                 ham.LastExercise = null;
             }
 
-            foreach (var c in HDCon.Cages)
+            foreach (var c in HDCon.Cages) //loopar igenom alla burar och nollställer dom
             {
 
                 c.Hamsters.Clear();
                 c.HasFemale = false;
             }
 
-            HDCon.SaveChanges();
+            HDCon.SaveChanges(); //sparar ändringar
         }
         private string Print()
         {
             var print = new StringBuilder();
 
 
-            var hamsters = HDCon.Hamsters.OrderBy(x => x.CageID);
+            var hamsters = HDCon.Hamsters.OrderBy(x => x.CageID); //hämtar ut alla hamstrar och sorterar dom efter vilken bur dom är i 
 
+            //lägger till column name
             print.Append($"{"CageID",-3}{"ExerID",-3}{"Name",-15}\t{"Age",-10}\t{"Sex",-10}\t{"Owner",-30}   \t\t{"CheckedIn",-40}\t{"Exersiced",-40}" + Environment.NewLine + Environment.NewLine);
 
-            foreach (var h in hamsters)
+            foreach (var h in hamsters) //loopar igenom alla hamstrar
             {
-                string female = "Female";
+                string female = "Female"; //defualt värde
                 string cageID = h.CageID.ToString();
                 string ExID = h.ExerciseAreaID.ToString(); ;
-                if (!h.IsFemale)
-                    female = "Male";
-                if (h.CageID == null)
+                if (!h.IsFemale) //kollar om det är en hane
+                    female = "Male"; 
+                if (h.CageID == null) //om den inte är i en bur
                     cageID = "";
-                if (h.ExerciseAreaID == null)
+                if (h.ExerciseAreaID == null) //om den inte är och tränar
                     ExID = "";
 
+                //lägger till införmation om hamstern
                 print.Append($"{cageID,-3}{ExID,-3}{h.Name,-15}\t{h.Age,-10}\t{female,-20}\t{h.Ownername,-25}   \t\t{h.CheckedInTime,-40}\t{h.LastExercise,-40}" + Environment.NewLine);
-                //print.Append($"{"",-4}{cageID}{ExID,5}{h.Name,30}{h.Age,30}{female,30}{h.Ownername,50}{h.CheckedInTime,50}{h.LastExercise,50}" + Environment.NewLine);
             }
 
-            PrintEvent?.Invoke(this, new PrintEventArgs(print.ToString(), Date));
-            return print.ToString();
+            PrintEvent?.Invoke(this, new PrintEventArgs(print.ToString(), Date)); //invokar ett event som skriver ut vad som hänt detta tick
+            return print.ToString(); //retunerar stringbuildern som en string
         }
 
-        public string[] ShowPreviousResults()
+        public string[] ShowPreviousResults() //metod för att kolla på föregående rapporter
         {
 
-            if (!Directory.Exists(@"..\..\..\..\Logs"))
+            if (!Directory.Exists(@"..\..\..\..\Logs")) //kollar om Logs foldern finns
             {
-                throw new Exception("The path does not exist, please run the simulation once to create it...");
+                throw new Exception("The path does not exist, please run the simulation once to create it..."); //gör den inte det skapas ett felmeddelande
             }
 
-            string[] documents = System.IO.Directory.GetFiles("../../../../Logs/");
+            string[] documents = System.IO.Directory.GetFiles("../../../../Logs/"); //läser in alla filnamn som finns till en string array
 
 
-            for (int i = 0; i < documents.Length; i++)
+            for (int i = 0; i < documents.Length; i++) //loopar igenom arrayen
             {
-                documents[i] = documents[i].Replace("../../../../Logs/", "");
+                documents[i] = documents[i].Replace("../../../../Logs/", ""); //snyggar till filnamnet
             }
 
 
-            return documents;
+            return documents; //retunerar arrayen med alla filnamn
         }
 
     }
